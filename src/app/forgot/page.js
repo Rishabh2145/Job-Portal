@@ -5,7 +5,7 @@ export default function Login() {
   return (
     <main className="flex bg-white">
       <div className="h-screen basis-1/2 text-black flex flex-col items-center justify-center gap-4 max-md:basis-1/1" >
-        <a href="/" className="flex items-center gap-2 w-2/3">
+        <a href="/" className="flex items-center gap-2 w-2/3 absolute top-0 left-5 mt-5 max-md:w-9/10 ">
           <Image
             src="/images/briefcase1.svg"
             alt="Logo"
@@ -14,7 +14,7 @@ export default function Login() {
           />
           <p className="font-bold">MyJob</p>
         </a>
-        <div className="w-2/3 gap-4 flex flex-col text-[14px]">
+        <div className="w-2/3 gap-4 flex flex-col text-[14px] max-md:w-9/10 ">
           <div className="flex justify-between items-center gap-4">
             <div className="flex flex-col gap-2">
               <div className="text-[24px] font-bold">Forgot Password</div>

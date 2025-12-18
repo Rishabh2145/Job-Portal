@@ -12,7 +12,7 @@ export default function Verify() {
                       />
                       <p className="font-bold">MyJob</p>
                     </a>
-            <div className="h-screen absolute w-1/4 flex flex-col items-center justify-center gap-4 max-md:w-4/5">
+            <div className="h-screen absolute w-1/4 flex flex-col items-center justify-center gap-4 max-md:w-9/10">
                 <div className="text-[24px] font-bold mt-10">Reset Password</div>
                 <div className="text-gray-600  text-center text-[14px]">Duis luctus interdum metus, ut consectetur ante consectetur sed. Suspendisse euismod viverra massa sit amet mollis.</div>
                 <input

@@ -208,7 +208,7 @@ export default function HomePage() {
                     ))}
                 </div>
             </div>
-            <div className="w-screen flex flex-col items-center p-12 text-black gap-4 max-md:px-0 max-md:m-0">
+            <div className="w-screen flex flex-col items-center p-12 text-black gap-4 max-md:px-0 max-md:pb-0 max-md:m-0">
                 <div className="flex w-10/10 flex-col">
                     <div className="flex flex-col w-1/1 gap-4">
                         <h1 className="text-5xl font-bold max-md:text-3xl max-md:text-center">News and Blogs</h1>

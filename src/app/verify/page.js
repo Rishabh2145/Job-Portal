@@ -13,7 +13,7 @@ export default function Verify() {
                 />
                 <p className="font-bold">MyJob</p>
             </a>
-            <div className="basis-1/1 w-1/4 flex flex-col items-center justify-center gap-4 max-md:w-4/5">
+            <div className="basis-1/1 w-1/4 flex flex-col items-center justify-center gap-4 max-md:w-9/10">
                 <div className="text-[24px] font-bold mt-10">Email Verification</div>
                 <div className="text-gray-600 mt-4 text-center text-[14px]">We've sent an verification to <span className="text-black">emailaddress@gmail.com</span> to verify your email address and activate your account.</div>
                 <input

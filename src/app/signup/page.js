@@ -1,4 +1,3 @@
-import {redirect} from "next/navigation";
 import Image from "next/image";
 
 export default function HomePage() {
@@ -28,7 +27,7 @@ export default function HomePage() {
               </select>
             </div>
           </div>
-          <div className="flex gap-2 max-md:flex-col">
+          <div className="flex gap-2 max-md:flex-col max-md:text-black">
             <input
               type="text"
               placeholder="Full Name"
