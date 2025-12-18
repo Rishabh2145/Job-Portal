@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Login() {
   return (
     <main className="flex bg-white">
-      <div className="h-screen basis-1/2 text-black flex flex-col items-center justify-center gap-4">
+      <div className="h-screen basis-1/2 text-black flex flex-col items-center justify-center gap-4 max-md:basis-1/1">
         <a href="/" className="flex items-center gap-2 w-2/3">
           <Image
             src="/images/briefcase1.svg"
@@ -18,7 +18,7 @@ export default function Login() {
           <div className="flex justify-between items-center gap-4">
             <div className="flex flex-col gap-2">
               <div className="text-[24px] font-bold">Sign In</div>
-              <div className="text-[12px] text-gray-600 gap-1 flex">Don't have account?<a href="/" className="text-indigo-500 font-bold">Create Account</a></div>
+              <div className="text-[12px] text-gray-600 gap-1 flex">Don't have account?<a href="/signup" className="text-indigo-500 font-bold">Create Account</a></div>
             </div>
           </div>
 
@@ -44,7 +44,7 @@ export default function Login() {
             Sign In <Image src="/images/fi_arrow-right.png" alt="Arrow Side" width={20} height={10} className="ml-2" />
           </div>
           <p className="self-center text-gray-500">or</p>
-          <div className="flex gap-2 text-gray-700">
+          <div className="flex gap-2 text-gray-700 max-md:flex-col">
             <div className="flex basis-1/2 items-center justify-center gap-2 border-1 border-gray-300 border-solid rounded-lg p-2 cursor-pointer hover:bg-gray-100">
               <Image
                 src="/images/Vector.svg"
@@ -69,7 +69,7 @@ export default function Login() {
       </div>
 
 
-      <div className="flex bg-[url('/images/bglogin.png')] bg-cover h-screen basis-1/2" style={{
+      <div className="flex bg-[url('/images/bglogin.png')] bg-cover h-screen basis-1/2 max-md:hidden" style={{
         clipPath: "polygon(2% 0, 100% 0, 100% 100%, 0 100%)"
       }}>
         <div className="w-full h-full bg-gradient-to-b from-[#041A3C80] to-[#041A3C] justify-end items-center flex flex-col text-white gap-6">
