@@ -4,8 +4,8 @@ import Image from "next/image";
 export default function Login() {
   return (
     <main className="flex bg-white">
-      <div className="h-screen basis-1/2 text-black flex flex-col items-center justify-center gap-4 max-md:basis-1/1" >
-        <a href="/" className="flex items-center gap-2 w-2/3 absolute top-0 left-5 mt-5 max-md:w-9/10 ">
+      <div className="h-screen basis-1/2 text-black flex flex-col items-center justify-between gap-4 max-md:basis-1/1" >
+        <a href="/" className="flex items-center gap-2 w-2/3 mt-5 max-md:w-9/10 ">
           <Image
             src="/images/briefcase1.svg"
             alt="Logo"
@@ -55,6 +55,7 @@ export default function Login() {
           </div>
 
         </div>
+        <br/>
       </div>
 
 

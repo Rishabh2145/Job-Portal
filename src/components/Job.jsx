@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Job(props) {
     return (
-        <div className="flex flex-col justify-between mt-8 gap-6 shadow-lg p-6 rounded-xl hover:shadow-xl hover:scale-105 transition-all cursor-pointer ">
+        <div className="flex flex-col justify-between mt-8 gap-6 shadow-lg p-6 rounded-xl hover:shadow-xl hover:scale-105 transition-all cursor-pointer bg-white">
             <div className="flex w-full justify-between">
                 <p className="bg-[#309689]/20 text-[#309689] px-2 py-1 rounded-lg text-sm">
                     {props.time} min ago
@@ -17,7 +17,7 @@ export default function Job(props) {
                 </div>
             </div>
             <div className="flex w-full justify-between max-md:flex-col gap-2">
-                <div className="flex gap-4 w-1/2 justify-around max-md:flex-col max-md:w-1/1 max-md:items-start">
+                <div className="flex gap-4 justify-around max-md:flex-col max-md:w-1/1 max-md:items-start">
                     <div className="flex gap-2 items-center justify-center">
                         <Image src="/images/jobs/briefcase(2) 2 (1).svg" alt="Category" width={20} height={20} />
                         <span className="text-gray-700">{props.category}</span>

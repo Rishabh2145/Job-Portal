@@ -3,6 +3,7 @@ import Job from "@/components/Job";
 import Category from "@/components/Category";
 import Review from "@/components/Review";
 import News from "@/components/News";
+import Header from "@/components/Header";
 
 const cat = [
     { image: "agriculture 2.svg", name: "Agriculture", job: "1254" },
@@ -15,7 +16,7 @@ const cat = [
     { image: "agriculture 2 (5).svg", name: "Transport", job: "1244" },
 ]
 
-const jobs = [
+export const jobs = [
     { time: "10", logo: "Logo (4).svg", title: "Forward Security Director", company: "Bauch, Schuppe and Schulist Co", category: "Hotels & Tourism", type: "Full Time", salary: "$40000 - $42000", location: "New York, USA" },
     { time: "12", logo: "Logo (5).svg", title: "Regional Creative Facilitator", company: "Wisozk - Becker Co", category: "Media", type: "Part Time", salary: "$28000-$32000", location: "Los- Angeles, USA" },
     { time: "15", logo: "Logo.svg", title: "Internal Integration Planner", company: "Mraz, Quigley and Feest Inc.", category: "Construction", type: "Full Time", salary: "$48000-$50000", location: "Texas, USA" },
@@ -23,7 +24,7 @@ const jobs = [
     { time: "26", logo: "Logo (8).svg", title: "Corporate Tactics Facilitator", company: "Cormier, Turner and Flatley Inc", category: "Commerce", type: "Full Time", salary: "$38000-$40000", location: "Boston, USA" },
 ]
 
-const sample = "At eu lobortis pretium tincidunt amet lacus ut aenean aliquet. Blandit a massa elementumid scelerisque rhoncus. Lectus dolor blandit massa pretium id ultrices phasellus tortor. Risus risus lectus augue justo lacus viverra sit. Ultricies purus dolor viverra mi laoreet at cursus justo. Ultrices purus diam egestas amet faucibus tempor blandit. Elit velit mauris aliquam est diam. Leo sagittis consectetur diam morbi erat aenean. Vulputate praesent congue faucibus in euismod feugiat euismod volutpat. Adipiscing risus amet phasellus imperdiet eget vel pulvinar. Risus in felis faucibus sit. Scelerisque consequat iaculis mauris amet vel felis id tincidunt nunc."
+export const sample = "At eu lobortis pretium tincidunt amet lacus ut aenean aliquet. Blandit a massa elementumid scelerisque rhoncus. Lectus dolor blandit massa pretium id ultrices phasellus tortor. Risus risus lectus augue justo lacus viverra sit. Ultricies purus dolor viverra mi laoreet at cursus justo. Ultrices purus diam egestas amet faucibus tempor blandit. Elit velit mauris aliquam est diam. Leo sagittis consectetur diam morbi erat aenean. Vulputate praesent congue faucibus in euismod feugiat euismod volutpat. Adipiscing risus amet phasellus imperdiet eget vel pulvinar. Risus in felis faucibus sit. Scelerisque consequat iaculis mauris amet vel felis id tincidunt nunc."
 
 
 const testimony = [
@@ -45,27 +46,7 @@ export default function HomePage() {
             <div className="h-screen w-screen">
                 <div className="bg-[url('/images/home/bg.png')] bg-cover h-5/6 flex flex-col text-white items-center w-full" >
                     <div className="h-full w-full flex flex-col items-center bg-black/70">
-                        <div className="flex justify-between p-6 w-4/5 items-center max-md:w-full">
-                            <div className="flex items-center gap-2 cursor-pointer justify-center">
-                                <Image
-                                    src="/images/home/check(1) 1.svg"
-                                    alt="Logo"
-                                    width={30}
-                                    height={30}
-                                />
-                                <span className="font-bold ml-2 text-lg">Job <span className="max-md:hidden">Portal</span></span>
-                            </div>
-                            <div className="flex gap-12 text-white/70 max-md:hidden">
-                                <a className="text-white hover:scale-105 transition-all" href="/home">Home</a>
-                                <a className="hover:scale-105 transition-all" href="/job">Jobs</a>
-                                <a className="hover:scale-105 transition-all" href="/about">About Us</a>
-                                <a className="hover:scale-105 transition-all" href="/contact">Contact Us</a>
-                            </div>
-                            <div className="flex gap-6 items-center">
-                                <a href="/login" className="hover:scale-105 transition-all">Login</a>
-                                <a className="bg-[#309689] p-2 rounded-lg px-4 hover:scale-105 transition-all" href="/signup">Register</a>
-                            </div>
-                        </div>
+                        <Header theme='dark'/>
                         <div className="basis-1/1 flex flex-col justify-center items-center max-md:mt-6">
                             <h1 className="text-6xl font-bold max-md:text-4xl max-md:text-wrap max-md:text-center">
                                 Find Your Dream Job Today!

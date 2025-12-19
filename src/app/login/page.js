@@ -41,9 +41,9 @@ export default function Login() {
                 <a href="/forgot" className="text-indigo-500 text-sm">Forgot Password</a>
               </div>
             </div>
-            <div className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700">
+            <a href="/dashboard" className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700">
               Sign In <Image src="/images/fi_arrow-right.png" alt="Arrow Side" width={20} height={10} className="ml-2" />
-            </div>
+            </a>
             <p className="self-center text-gray-500">or</p>
             <div className="flex gap-2 text-gray-700 max-md:flex-col">
               <div className="flex basis-1/2 items-center justify-center gap-2 border-1 border-gray-300 border-solid rounded-lg p-2 cursor-pointer hover:bg-gray-100">
