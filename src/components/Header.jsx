@@ -15,25 +15,32 @@ export default function Header(props) {
                     width={30}
                     height={30}
                 />
-                <span className="font-bold ml-2 text-lg">Job <span className="max-md:hidden">Portal</span></span>
+                <span className={`font-bold ml-2 text-lg ${props.theme == 'dark' ? "text-white" : "text-black"}`}>Job <span className="max-md:hidden">Portal</span></span>
             </div>
             <div className={`flex gap-12 max-md:hidden ${props.theme == 'dark' ? "text-white/70" : "text-black/70"}`}>
-                <a className={`hover:scale-105 transition-all ${props.theme == 'dark' ? "text-white" : "text-black"}`} href="/">Home</a>
-                <a className="hover:scale-105 transition-all" href="/job">Jobs</a>
-                <a className="hover:scale-105 transition-all" href="/about">About Us</a>
-                <a className="hover:scale-105 transition-all" href="/contact">Contact Us</a>
+                <a className={`hover:scale-105 transition-all ${props.page == 'home' ? "text-white" : "text-white/70"}`} href="/">Home</a>
+                <a className={`hover:scale-105 transition-all ${props.page == 'job' ? "text-white" : "text-white/70"}`} href="/job">Jobs</a>
+                <a className={`hover:scale-105 transition-all ${props.page == 'about' ? "text-white" : "text-white/70"}`} href="/about">About Us</a>
+                <a className={`hover:scale-105 transition-all ${props.page == 'contact' ? "text-white" : "text-white/70"}`} href="/contact">Contact Us</a>
             </div>
             <div className={`flex gap-6 items-center `}>
-                <a href="/login" className="hover:scale-105 transition-all">Login</a>
+                <a href="/login" className={`hover:scale-105 transition-all ${props.theme == 'dark' ? "text-white/70" : "text-black/70"}`}>Login</a>
                 <a className="bg-[#309689] p-2 rounded-lg px-4 hover:scale-105 transition-all text-white" href="/signup">Register</a>
             </div>
         </div>
     )
 }
 
+export function MenuExpand() {
+    document.getElementById('menu').onclick = () => {
+        document.getElementById('sidebar').classList.toggle('hidden')
+    }
+}
+
 export function Dashboard() {
     return (
         <div className='flex justify-between gap-5 sticky top-2 backdrop-blur-sm bg-white/5 z-100 m-2 rounded-full p-4 shadow-sm'>
+
             <input
                 type='text'
                 placeholder='Search your job'

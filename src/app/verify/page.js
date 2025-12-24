@@ -22,9 +22,9 @@ export default function Verify() {
                     className="border-1 border-solid border-gray-400 rounded-lg text-black-400 p-2 w-full pl-4"
                     required
                 />
-                <div className="flex bg-indigo-600 text-white justify-center text-center p-2 rounded-sm cursor-pointer hover:bg-indigo-700 w-full text-[14px]">
+                <a href="/login" className="flex bg-indigo-600 text-white justify-center text-center p-2 rounded-sm cursor-pointer hover:bg-indigo-700 w-full text-[14px]">
                     Verify My Account <Image src="/images/fi_arrow-right.png" alt="Arrow Side" width={14} height={7} className="ml-2" />
-                </div>
+                </a>
                 <p className="text-gray-600 text-[14px]">Didn't receive any code? <a href="#" className="text-indigo-500 font-bold">Resends</a></p>
 
             </div>

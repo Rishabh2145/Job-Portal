@@ -1,9 +1,35 @@
+"use client"
 import Image from "next/image";
+import { useFormik } from "formik";
+import axios from "axios";
+
+
 
 export default function HomePage() {
+  const details = useFormik({
+    initialValues: {
+      role: "Employee",
+      fullName: "",
+      username: "",
+      email: "",
+      password: ""
+    }
+    ,
+    onSubmit: async (values) => {
+      console.log(values)
+      const response = await axios.post("http://localhost:8000/signup", values, { method: 'POST' })
+      if (response.status === 200) {
+        alert("Account Created Successfully")
+        console.log(response)
+      } else {
+        alert("Error in creating account")
+      }
+    }
+  })
+
   return (
     <main className="flex bg-white">
-      <div className="h-screen w-full basis-1/2 flex flex-col items-center justify-between text-black">
+      <div className="h-screen w-full basis-1/2 flex flex-col items-center justify-between text-black max-md:basis-1/1 ">
         <a href="/" className="flex items-center gap-2 w-2/3 m-4">
           <Image
             src="/images/briefcase1.svg"
@@ -16,17 +42,17 @@ export default function HomePage() {
 
         <div className="max-h-screen text-black flex flex-col items-start justify-center gap-4 max-md:basis-1/1 w-2/3">
 
-          <div className="gap-4 flex flex-col text-[14px] w-1/1">
+          <form action='/verify' onSubmit={details.handleSubmit} className="gap-4 flex flex-col text-[14px] w-1/1">
             <div className="flex justify-between items-center gap-4">
               <div className="flex flex-col gap-2">
                 <div className="text-[24px] max-md:text-lg font-bold">Create account.</div>
                 <div className="text-[12px] text-gray-600">Already have an account? <a href="/login" className="text-indigo-500 font-bold">Log in</a></div>
               </div>
               <div className="border-1 border-solid rounded-lg p-2 border-gray-400 text-gray-700 flex">
-                <select id="user" name="user">
-                  <option value="em">Employee</option>
-                  <option value="ad">Admin</option>
-                  <option value="cd">Candidate</option>
+                <select id="user" name="role" onChange={details.handleChange}>
+                  <option value="Employee">Employee</option>
+                  <option value="Admin">Admin</option>
+                  <option value="Candidate">Candidate</option>
                 </select>
               </div>
             </div>
@@ -34,36 +60,51 @@ export default function HomePage() {
               <input
                 type="text"
                 placeholder="Full Name"
+                name="fullName"
+                onChange={details.handleChange}
                 className="basis-1/2 border-1 border-solid border-gray-400 rounded-lg text-black-400 p-2"
+                required
               />
               <input
                 type="text"
                 placeholder="Username"
+                name="username"
+                onChange={details.handleChange}
                 className="basis-1/2 border-1 border-solid border-gray-400 rounded-lg text-black-400 p-2"
+                required
               />
             </div>
             <input
               type="email"
               placeholder="Email Address"
+              name="email"
+              onChange={details.handleChange}
               className="border-1 border-solid border-gray-400 rounded-lg text-black-400 p-2"
+              required
             />
             <input
               type="password"
               placeholder="Password"
+              name="password"
+              onChange={details.handleChange}
               className="border-1 border-solid border-gray-400 rounded-lg text-black-400 p-2"
+              required
             />
             <input
               type="password"
               placeholder="Confirm Password"
+              id="confirm"
               className="border-1 border-solid border-gray-400 rounded-lg text-black-400 p-2"
+              
+              required
             />
             <div className="flex">
               <input type="checkbox" className="mr-2" />
               <span className="text-gray-500 text-sm">I've read and agree with your <span className="text-indigo-500 ">Terms of Service</span></span>
             </div>
-            <a href="/verify" className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700">
-              Create Account <Image src="/images/fi_arrow-right.png" alt="Arrow Side" width={20} height={10} className="ml-2" />
-            </a>
+            <input type="submit" id='signup' value='Create Account' className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700" />
+            {/* Create Account <Image src="/images/fi_arrow-right.png" alt="Arrow Side" width={20} height={10} className="ml-2" />
+            </input> */}
             <p className="self-center text-gray-500">or</p>
             <div className="flex gap-2 text-gray-700 max-md:flex-col">
               <div className="flex basis-1/2 items-center justify-center gap-2 border-1 border-gray-300 border-solid rounded-lg p-2 cursor-pointer hover:bg-gray-100">
@@ -86,9 +127,9 @@ export default function HomePage() {
               </div>
             </div>
 
-          </div>
+          </form>
         </div>
-        <br/>
+        <br />
       </div>
 
       <div className="flex bg-[url('/images/bglogin.png')] bg-cover h-screen basis-1/2 max-md:hidden" style={{

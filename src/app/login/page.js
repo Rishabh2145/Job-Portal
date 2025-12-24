@@ -1,7 +1,25 @@
+"use client";
 
-import { redirect } from "next/navigation";
 import Image from "next/image";
+import { useFormik } from "formik";
+// import navigate from "next/navigation";
+import axios from "axios";
 export default function Login() {
+  const cred = useFormik({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+
+    onSubmit: async (values) => {
+      await axios.post("http://localhost:8000/signin", values, { method: 'POST' }).then((res) => {
+        alert("Logged In")
+      }).catch((err) => {
+        alert("Invalid Credentials")
+      })
+    }
+  })
+
   return (
     <main className="flex bg-white">
       <div className="h-screen basis-1/2 w-2/3 max-md:basis-1/1 flex flex-col justify-between items-center">
@@ -15,7 +33,7 @@ export default function Login() {
           <p className="font-bold">MyJob</p>
         </a>
         <div className="w-full text-black flex flex-col items-center justify-center gap-4 ">
-          <div className="gap-4 flex flex-col text-[14px] w-2/3 max-md:w-9/10">
+          <form  method="POST" onSubmit={cred.handleSubmit} className="gap-4 flex flex-col text-[14px] w-2/3 max-md:w-9/10">
             <div className="flex justify-between items-center gap-4">
               <div className="flex flex-col gap-2">
                 <div className="text-[24px] font-bold">Sign In</div>
@@ -26,11 +44,15 @@ export default function Login() {
             <input
               type="email"
               placeholder="Email Address"
+              name="email"
+              onChange={cred.handleChange}
               className="border-1 border-solid border-gray-400 rounded-lg text-black-400 p-2"
             />
             <input
               type="password"
               placeholder="Password"
+              name="password"
+              onChange={cred.handleChange}
               className="border-1 border-solid border-gray-400 rounded-lg text-black-400 p-2"
             />
 
@@ -41,9 +63,8 @@ export default function Login() {
                 <a href="/forgot" className="text-indigo-500 text-sm">Forgot Password</a>
               </div>
             </div>
-            <a href="/dashboard" className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700">
-              Sign In <Image src="/images/fi_arrow-right.png" alt="Arrow Side" width={20} height={10} className="ml-2" />
-            </a>
+            <input type="submit" value='Sign In' href="/dashboard" className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700" />
+
             <p className="self-center text-gray-500">or</p>
             <div className="flex gap-2 text-gray-700 max-md:flex-col">
               <div className="flex basis-1/2 items-center justify-center gap-2 border-1 border-gray-300 border-solid rounded-lg p-2 cursor-pointer hover:bg-gray-100">
@@ -66,7 +87,7 @@ export default function Login() {
               </div>
             </div>
 
-          </div>
+          </form>
         </div>
         <br />
       </div>
