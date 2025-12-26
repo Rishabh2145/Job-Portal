@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useFormik } from "formik";
-// import navigate from "next/navigation";
+import navigate from "next/navigation";
 import axios from "axios";
 export default function Login() {
   const cred = useFormik({
@@ -14,6 +14,7 @@ export default function Login() {
     onSubmit: async (values) => {
       await axios.post("http://localhost:8000/signin", values, { method: 'POST' }).then((res) => {
         alert("Logged In")
+        window.location.href = "/dashboard"
       }).catch((err) => {
         alert("Invalid Credentials")
       })

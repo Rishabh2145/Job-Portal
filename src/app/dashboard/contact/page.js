@@ -13,6 +13,22 @@ export default async function Contact() {
         console.log(err)
     })
 
+    // const deleteMsg = useFormik({
+    //     initialValues: {
+    //         id: ""
+    //     }
+    //     ,
+    //     onSubmit: async (e) => {
+    //         e.preventDefault()
+    //         console.log(deleteMsg.values.id)
+    //         await axios.post("http://localhost:8000/contact", { id: deleteMsg.values.id }, { method: 'POST' }).then(() => {
+    //             alert("Message deleted successfully")
+    //         }).catch((err) => {
+    //             alert("Message not deleted: ", err)
+    //         })
+    //     }
+    // })
+
 
     return (
         <main className="bg-white shadow-md m-4 rounded-xl p-8 flex flex-col gap-6">
@@ -28,6 +44,7 @@ export default async function Contact() {
                         <th className=" p-2 text-left">Last Name</th>
                         <th className=" p-2 text-left">Email</th>
                         <th className="p-2 text-left">Message</th>
+                        {/* <th className=" p-2 text-left">Action</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +54,9 @@ export default async function Contact() {
                             <td className=" p-2">{msg.lastName}</td>
                             <td className=" p-2">{msg.email}</td>
                             <td className=" p-2">{msg.message}</td>
+                            {/* <td className=" p-2"><form onSubmit={deleteMsg.handleSubmit} method="POST">
+                                <input type="submit" value="Delete" className="text-sm bg-red-500 text-white p-2 m-2 rounded-lg cursor-pointer hover:bg-red-600 w-fit p-3 transition-all duration-300" onClick={deleteMsg.values.id = msg._id} />
+                            </form></td> */}
                         </tr>
                     ))}
                 </tbody>

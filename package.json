@@ -12,6 +12,7 @@
     "axios": "^1.13.2",
     "formik": "^2.4.9",
     "next": "16.0.10",
+    "next-navigation": "^1.0.6",
     "react": "19.2.1",
     "react-dom": "19.2.1"
   },
