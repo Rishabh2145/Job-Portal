@@ -1,5 +1,6 @@
 "use client"
 import axios from "axios"
+import { useFormik } from "formik"
 
 
 let message = [
@@ -8,26 +9,32 @@ let message = [
 export default async function Contact() {
     await axios.get("http://localhost:8000/message", { method: 'GET' }).then((res) => {
         message = res.data.data
-        console.log(res.data.data)
+        // console.log(res.data.data)
+        return
     }).catch((err) => {
         console.log(err)
     })
 
-    // const deleteMsg = useFormik({
-    //     initialValues: {
-    //         id: ""
-    //     }
-    //     ,
-    //     onSubmit: async (e) => {
-    //         e.preventDefault()
-    //         console.log(deleteMsg.values.id)
-    //         await axios.post("http://localhost:8000/contact", { id: deleteMsg.values.id }, { method: 'POST' }).then(() => {
+    // const delMessage = useFormik({
+    //     initialValues : {
+    //         id : ""
+    //     },
+
+    //     onClick : async (values) => {
+    //         const responce = await axios.post(`http://localhost:8000/contact/delete/${values.id}`, values, {method  : "POST"}).then(() => {
     //             alert("Message deleted successfully")
-    //         }).catch((err) => {
-    //             alert("Message not deleted: ", err)
+    //         }).catch((err)=>{
+    //             alert("Message not deleted : ", err)
     //         })
     //     }
     // })
+
+    const hello = async (id) =>
+    {
+        alert("Message Deleted")
+        console.log(id)
+        return
+    }
 
 
     return (
@@ -44,7 +51,7 @@ export default async function Contact() {
                         <th className=" p-2 text-left">Last Name</th>
                         <th className=" p-2 text-left">Email</th>
                         <th className="p-2 text-left">Message</th>
-                        {/* <th className=" p-2 text-left">Action</th> */}
+                        <th className=" p-2 text-left">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,9 +61,9 @@ export default async function Contact() {
                             <td className=" p-2">{msg.lastName}</td>
                             <td className=" p-2">{msg.email}</td>
                             <td className=" p-2">{msg.message}</td>
-                            {/* <td className=" p-2"><form onSubmit={deleteMsg.handleSubmit} method="POST">
-                                <input type="submit" value="Delete" className="text-sm bg-red-500 text-white p-2 m-2 rounded-lg cursor-pointer hover:bg-red-600 w-fit p-3 transition-all duration-300" onClick={deleteMsg.values.id = msg._id} />
-                            </form></td> */}
+                            <td className=" p-2">
+                                <input type="button" value="Delete" className="text-sm bg-red-500 text-white p-1 m-1 rounded-lg cursor-pointer hover:bg-red-600 w-fit p-3 transition-all duration-300" onClick={() => hello(msg._id)}/>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

@@ -3,9 +3,16 @@ import Image from "next/image"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import { useFormik } from "formik"
-import axios from "axios"
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { addMessage, getMessage } from "@/store/api/contact"
+
 
 export default function Contact() {
+
+    useEffect(()=> {
+        dispatch(getMessage())
+    }, [])
 
     const contactForm = useFormik({
         initialValues: {
@@ -14,18 +21,15 @@ export default function Contact() {
             email: "",
             message: ""
         },
-        onSubmit: async (values) => {
-
-            const response = await axios.post('http://localhost:8000/contact', values, { method: 'POST' })
-            if (response.status === 200) {
-                alert("Message Sent Successfully")
-                console.log(response)
-            }else {
-                alert("Error in sending message")
-            }
+        onSubmit: async (values, {resetForm}) => {
             console.log(values)
+            dispatch(addMessage(values))
+            alert("Message Sent!")
+            resetForm();
         }
     })
+
+    const dispatch = useDispatch();
 
 
     return (
@@ -80,7 +84,7 @@ export default function Contact() {
                             <input type="email" id="email" name="email" value={contactForm.values.email} onChange={contactForm.handleChange} placeholder="Your Email Address" className="text-sm p-2 m-2 rounded-lg bg-white" />
                             <label htmlFor="msg" className="px-2 mx-2 font-bold text-sm">Message</label>
                             <textarea type="text" id="msg" name="message" value={contactForm.values.message} onChange={contactForm.handleChange} placeholder="Your Message ..." className="text-sm p-2 m-2 rounded-lg bg-white" />
-                            <input type="submit" value="Send Message" className="text-sm bg-[#309689] text-white p-2 m-2 rounded-lg cursor-pointer hover:bg-[#2a8a7d] w-1/2 transition-all duration-300" />
+                            <input type="submit" value="Send Message" className="text-sm bg-[#309689] text-white p-2 m-2 rounded-lg cursor-pointer hover:bg-[#2a8a7d] w-1/2 transition-all duration-300"/>
                         </div>
                     </form>
 

@@ -9,12 +9,16 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.11.2",
     "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
     "formik": "^2.4.9",
     "next": "16.0.10",
     "next-navigation": "^1.0.6",
     "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "react-dom": "19.2.1",
+    "react-redux": "^9.2.0",
+    "redux": "^5.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
