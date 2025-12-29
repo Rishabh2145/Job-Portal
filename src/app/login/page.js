@@ -4,7 +4,11 @@ import Image from "next/image";
 import { useFormik } from "formik";
 import navigate from "next/navigation";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { loginUser } from "@/store/api/login";
+
 export default function Login() {
+  const dispatch = useDispatch()
   const cred = useFormik({
     initialValues: {
       email: "",
@@ -12,12 +16,8 @@ export default function Login() {
     },
 
     onSubmit: async (values) => {
-      await axios.post("http://localhost:8000/signin", values, { method: 'POST' }).then((res) => {
-        alert("Logged In")
-        window.location.href = "/dashboard"
-      }).catch((err) => {
-        alert("Invalid Credentials")
-      })
+      dispatch(loginUser(values))
+      // console.log(user)
     }
   })
 
@@ -34,7 +34,7 @@ export default function Login() {
           <p className="font-bold">MyJob</p>
         </a>
         <div className="w-full text-black flex flex-col items-center justify-center gap-4 ">
-          <form  method="POST" onSubmit={cred.handleSubmit} className="gap-4 flex flex-col text-[14px] w-2/3 max-md:w-9/10">
+          <form method="POST" onSubmit={cred.handleSubmit} className="gap-4 flex flex-col text-[14px] w-2/3 max-md:w-9/10">
             <div className="flex justify-between items-center gap-4">
               <div className="flex flex-col gap-2">
                 <div className="text-[24px] font-bold">Sign In</div>

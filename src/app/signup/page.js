@@ -2,10 +2,13 @@
 import Image from "next/image";
 import { useFormik } from "formik";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { userSignup } from "@/store/api/signup";
 
 
 
 export default function HomePage() {
+  const dispatch = useDispatch()
   const details = useFormik({
     initialValues: {
       role: "Employee",
@@ -16,14 +19,7 @@ export default function HomePage() {
     }
     ,
     onSubmit: async (values) => {
-      console.log(values)
-      const response = await axios.post("http://localhost:8000/signup", values, { method: 'POST' })
-      if (response.status === 200) {
-        alert("Account Created Successfully")
-        console.log(response)
-      } else {
-        alert("Error in creating account")
-      }
+      dispatch(userSignup(values))
     }
   })
 

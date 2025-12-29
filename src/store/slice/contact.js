@@ -7,7 +7,6 @@ const initialState = {
     email: "",
     message: "",
     contacts: [],
-    messages : [],
     loading : false
 }
 
@@ -26,8 +25,7 @@ const Contact = createSlice({
             state.loading = true
         })
         builders.addCase(getMessage.fulfilled, (state, action) => {
-            state.messages = action.payload
-            console.log(state.messages)
+            console.log(state.payload)
             state.loading = false
         })
         builders.addCase(addMessage.pending, (state, action)=> {
