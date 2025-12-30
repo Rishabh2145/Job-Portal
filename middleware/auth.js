@@ -3,13 +3,13 @@ const jwt = require("jsonwebtoken")
 
 const Authorization = (req, res, next) => {
     try {
-        const authHeader = req.headers.authorization
+        // const authHeader = req.headers.authorization
 
-        if (!authHeader || !authHeader.startsWith('Bearer ')) {
-            return res.status(401).json({
-                message: "Token Not Provided!"
-            })
-        }
+        // if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        //     return res.status(401).json({
+        //         message: "Token Not Provided!"
+        //     })
+        // }
 
         const token = req.cookie.access_token
         if (!token) {
@@ -21,7 +21,7 @@ const Authorization = (req, res, next) => {
         next()
     } catch (err) {
         return res.status(401).json({
-            message: "Invalid or expired Token!"
+            message: "Invalid or expired Token!",
         })
     }
 }

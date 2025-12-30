@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 
 router.post('/signup', user.signUp)
 router.post('/signin', signIn.signIn)
-router.get('/message',auth ,contact.getMessages)
+router.get('/message', contact.getMessages)
 router.post('/contact', contact.contact)
 router.use('/dashboard',auth, dashboard)
 router.use('/user',auth, userRoutes)
