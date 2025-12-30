@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import reducer from "./contact";
 import { userSignup } from "../api/signup";
 
 const initialState = {
