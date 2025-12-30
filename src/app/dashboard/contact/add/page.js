@@ -3,6 +3,8 @@
 import { useFormik } from "formik"
 import axios from "axios"
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+
 export default function Contact() {
 
     const contact = useFormik({
@@ -14,7 +16,7 @@ export default function Contact() {
         },
 
         onSubmit: async (values) => {
-            await axios.post("http://localhost:8000/contact", values, {method : "POST"}).then(
+            await axios.post(`${API_URL}/contact`, values, {method : "POST"}).then(
                 () => {
                     alert("Message sent successfully")
                 }
