@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './.env.local' });
+require('dotenv').config({ path: './.env' });
 const express = require('express');
 const connectDB = require('./connection');
 const bodyParser = require('body-parser');

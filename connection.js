@@ -1,4 +1,4 @@
-require('dotenv').config({path : './.env.local'});
+require('dotenv').config({path : './.env'});
 const mongoose = require('mongoose');
 const { DATABASE_NAME } = require('./utils/constant');
 
