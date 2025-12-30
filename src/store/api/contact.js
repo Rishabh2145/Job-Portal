@@ -1,13 +1,29 @@
-import 'dotenv/config.js'
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { baseApi } from "./baseApi";
 
-export const addMessage = createAsyncThunk('contact/addMessage', async (data) => {
-    const res = await axios.post(`${process.env.NEXT_PUBLIC_API}/contact`, data, {method: "POST"})
-    return res.data
+export const contactApi = baseApi.injectEndpoints({
+    endpoints: (builder) => ({
+        contact: builder.mutation({
+            query: ({ firstName, lastName, email, message }) => ({
+                url: '/contact',
+                method: "POST",
+                body: {
+                    firstName,
+                    lastName,
+                    email,
+                    message
+                }
+            })
+        })
+    })
 })
 
-export const getMessage = createAsyncThunk('contect/getMessage', async () => {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API}/message`)
-    return res.data.data
+const getContactApi = baseApi.injectEndpoints({
+    endpoints: (builder) => ({
+        getContact: builder.query({
+            query: () => '/message'
+        })
+    })
 })
+
+export const { useContactMutation } = contactApi
+export const { useGetContactQuery } = getContactApi

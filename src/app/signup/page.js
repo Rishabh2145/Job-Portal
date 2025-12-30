@@ -25,7 +25,7 @@ export default function HomePage() {
         const res = await signup(values).unwrap()
         console.log("Signup Success : ", res)
         alert("Signup Success! Please login with same credentials.")
-        // resetForm()
+        resetForm()
       } catch (err) {
         alert("Signup failed!")
         console.log(err)

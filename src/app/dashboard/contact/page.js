@@ -1,42 +1,12 @@
 "use client"
-import axios from "axios"
-import { useFormik } from "formik"
+import { useGetContactQuery } from "@/store/api/contact"
 
+let data = []
 
-let message = [
-]
-
-export default async function Contact() {
-    await axios.get("http://localhost:8000/message", { method: 'GET' }).then((res) => {
-        message = res.data.data
-        // console.log(res.data.data)
-        return
-    }).catch((err) => {
-        console.log(err)
-    })
-
-    // const delMessage = useFormik({
-    //     initialValues : {
-    //         id : ""
-    //     },
-
-    //     onClick : async (values) => {
-    //         const responce = await axios.post(`http://localhost:8000/contact/delete/${values.id}`, values, {method  : "POST"}).then(() => {
-    //             alert("Message deleted successfully")
-    //         }).catch((err)=>{
-    //             alert("Message not deleted : ", err)
-    //         })
-    //     }
-    // })
-
-    const hello = async (id) =>
-    {
-        alert("Message Deleted")
-        console.log(id)
-        return
-    }
-
-
+export default function Contact() {
+    const message = useGetContactQuery()
+    console.log(message)
+    
     return (
         <main className="bg-white shadow-md m-4 rounded-xl p-8 flex flex-col gap-6">
             <div className="flex justify-between">
@@ -55,7 +25,7 @@ export default async function Contact() {
                     </tr>
                 </thead>
                 <tbody>
-                    {message.map((msg, index) => (
+                    { (message.data == null) ? <tr><td colSpan={4} className="text-center text-xl">Loading...</td></tr> : message.data.data.map((msg, index) => (
                         <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                             <td className=" p-2">{msg.firstName}</td>
                             <td className=" p-2">{msg.lastName}</td>

@@ -3,17 +3,12 @@ import Image from "next/image"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import { useFormik } from "formik"
-import { useEffect } from "react"
-import { useDispatch } from "react-redux"
-import { addMessage, getMessage } from "@/store/api/contact"
+import { useContactMutation } from "@/store/api/contact"
 
 
 export default function Contact() {
 
-    useEffect(()=> {
-        dispatch(getMessage())
-    }, [])
-
+    const [contact, {isLoading}] = useContactMutation()
     const contactForm = useFormik({
         initialValues: {
             firstName: "",
@@ -22,14 +17,17 @@ export default function Contact() {
             message: ""
         },
         onSubmit: async (values, {resetForm}) => {
-            console.log(values)
-            dispatch(addMessage(values))
-            alert("Message Sent!")
-            resetForm();
+            try{
+                const res = await contact(values).unwrap()
+                console.log("Message sent : ", res)
+                alert("Message sent !")
+                resetForm()
+            } catch(err){
+                console.log(err)
+                alert("Failed to send message at this time. Please try again later.")
+            }
         }
     })
-
-    const dispatch = useDispatch();
 
 
     return (

@@ -17,17 +17,16 @@ export default function Login() {
       password: ""
     },
 
-    onSubmit: async (values) => {
-      // dispatch(loginUser(values))
+    onSubmit: async (values , {resetForm}) => {
       try{
         const res = await signin(values).unwrap()
         console.log(res)
         alert("Logged In")
+        resetForm()
       } catch(err){
         alert("Invalid Credentials")
         console.log(err)
       }
-      // console.log(user)
     }
   })
 
