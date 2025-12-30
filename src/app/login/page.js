@@ -23,6 +23,7 @@ export default function Login() {
         console.log(res)
         alert("Logged In")
         resetForm()
+        window.location.href = '/dashboard'
       } catch(err){
         alert("Invalid Credentials")
         console.log(err)
