@@ -1,28 +1,33 @@
 "use client"
 import axios from "axios"
-import { useState, useEffect } from "react"
+import { useFormik } from "formik"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
-export default function Contact() {
-    const [message, setMessage] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
+let message = [
+]
 
-    useEffect(() => {
-        const fetchMessages = async () => {
-            try {
-                const res = await axios.get(`${API_URL}/message`, { method: 'GET' })
-                setMessage(res.data.data || [])
-            } catch (err) {
-                console.log(err)
-                setError("Failed to load messages")
-            } finally {
-                setLoading(false)
-            }
-        }
-        fetchMessages()
-    }, [])
+export default async function Contact() {
+    await axios.get("http://localhost:8000/message", { method: 'GET' }).then((res) => {
+        message = res.data.data
+        // console.log(res.data.data)
+        return
+    }).catch((err) => {
+        console.log(err)
+    })
+
+    // const delMessage = useFormik({
+    //     initialValues : {
+    //         id : ""
+    //     },
+
+    //     onClick : async (values) => {
+    //         const responce = await axios.post(`http://localhost:8000/contact/delete/${values.id}`, values, {method  : "POST"}).then(() => {
+    //             alert("Message deleted successfully")
+    //         }).catch((err)=>{
+    //             alert("Message not deleted : ", err)
+    //         })
+    //     }
+    // })
 
     const hello = async (id) =>
     {
@@ -31,22 +36,6 @@ export default function Contact() {
         return
     }
 
-
-    if (loading) {
-        return (
-            <main className="bg-white shadow-md m-4 rounded-xl p-8 flex flex-col gap-6">
-                <p>Loading messages...</p>
-            </main>
-        )
-    }
-
-    if (error) {
-        return (
-            <main className="bg-white shadow-md m-4 rounded-xl p-8 flex flex-col gap-6">
-                <p className="text-red-500">{error}</p>
-            </main>
-        )
-    }
 
     return (
         <main className="bg-white shadow-md m-4 rounded-xl p-8 flex flex-col gap-6">
