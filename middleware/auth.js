@@ -1,4 +1,4 @@
-require('dotenv').config({path : './.env'});
+require('dotenv').config({ path: '../.env' });
 const jwt = require("jsonwebtoken")
 
 const Authorization = (req, res, next) => {
@@ -7,11 +7,14 @@ const Authorization = (req, res, next) => {
 
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
             return res.status(401).json({
-                message : "Token Not Provided!"
+                message: "Token Not Provided!"
             })
         }
 
-        const token = authHeader.split(" ")[1]
+        const token = req.cookie.access_token
+        if (!token) {
+            return res.status(401).json({message: "Unauthorized"})
+        }
 
         const decoded = jwt.verify(token, process.env.SECRET_KEY)
         req.user = decoded
