@@ -4,11 +4,13 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { userSignup } from "@/store/api/signup";
+import { useSignupMutation } from "@/store/api/auth";
 
 
 
 export default function HomePage() {
   const dispatch = useDispatch()
+  const [signup, { isLoading }] = useSignupMutation()
   const details = useFormik({
     initialValues: {
       role: "Employee",
@@ -18,8 +20,18 @@ export default function HomePage() {
       password: ""
     }
     ,
-    onSubmit: async (values) => {
-      dispatch(userSignup(values))
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      try {
+        const res = await signup(values).unwrap()
+        console.log("Signup Success : ", res)
+        alert("Signup Success! Please login with same credentials.")
+        // resetForm()
+      } catch (err) {
+        alert("Signup failed!")
+        console.log(err)
+      } finally {
+        setSubmitting(false)
+      }
     }
   })
 
@@ -91,7 +103,7 @@ export default function HomePage() {
               placeholder="Confirm Password"
               id="confirm"
               className="border-1 border-solid border-gray-400 rounded-lg text-black-400 p-2"
-              
+
               required
             />
             <div className="flex">
@@ -99,8 +111,6 @@ export default function HomePage() {
               <span className="text-gray-500 text-sm">I've read and agree with your <span className="text-indigo-500 ">Terms of Service</span></span>
             </div>
             <input type="submit" id='signup' value='Create Account' className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700" />
-            {/* Create Account <Image src="/images/fi_arrow-right.png" alt="Arrow Side" width={20} height={10} className="ml-2" />
-            </input> */}
             <p className="self-center text-gray-500">or</p>
             <div className="flex gap-2 text-gray-700 max-md:flex-col">
               <div className="flex basis-1/2 items-center justify-center gap-2 border-1 border-gray-300 border-solid rounded-lg p-2 cursor-pointer hover:bg-gray-100">

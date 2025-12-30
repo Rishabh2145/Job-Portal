@@ -7,6 +7,7 @@ export const loginUser = createAsyncThunk("login/loginUser",async (data)=>{
         console.log(res.data.data)
         return res.data.data
     }).catch((err)=>{
+        console.log(err)
         alert("Invalid Credentials", err)
     })
     return res.data.data

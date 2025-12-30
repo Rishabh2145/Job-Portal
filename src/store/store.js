@@ -1,13 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
-import contactReducer from "./slice/contact";
+// import contactReducer from "./slice/contact";
+import { baseApi } from "./api/baseApi";
 
 export const store = configureStore({
     reducer: {
-        contact: contactReducer
+        [baseApi.reducerPath]: baseApi.reducer
     },
-    middleware : (getDefaultMiddleware) => getDefaultMiddleware({
-        serializableCheck : false
-    })
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    //     serializableCheck: false
+    // })
 })

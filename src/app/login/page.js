@@ -6,9 +6,11 @@ import navigate from "next/navigation";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { loginUser } from "@/store/api/login";
+import { useSigninMutation } from "@/store/api/auth";
 
 export default function Login() {
   const dispatch = useDispatch()
+  const [signin, {isLoading}] = useSigninMutation()
   const cred = useFormik({
     initialValues: {
       email: "",
@@ -16,7 +18,15 @@ export default function Login() {
     },
 
     onSubmit: async (values) => {
-      dispatch(loginUser(values))
+      // dispatch(loginUser(values))
+      try{
+        const res = await signin(values).unwrap()
+        console.log(res)
+        alert("Logged In")
+      } catch(err){
+        alert("Invalid Credentials")
+        console.log(err)
+      }
       // console.log(user)
     }
   })
