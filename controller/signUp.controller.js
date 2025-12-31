@@ -1,3 +1,4 @@
+const { generateToken } = require('../middleware/auth');
 const model = require('../models/userSchema');
 
 const signUp = async (req, res) => {
@@ -18,9 +19,11 @@ const signUp = async (req, res) => {
     })
     user.save().then(() => {
         console.log(user);
+        const token = generateToken({user})
         res.status(200).json({
             message: "User Data Inserted",
-            data: user
+            data: user,
+            token
         })
     }).catch((err) => {
         res.status(500).json({ error: err })

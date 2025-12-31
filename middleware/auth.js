@@ -3,21 +3,16 @@ const jwt = require("jsonwebtoken")
 
 const Authorization = (req, res, next) => {
     try {
-        // const authHeader = req.headers.authorization
-
-        // if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        //     return res.status(401).json({
-        //         message: "Token Not Provided!"
-        //     })
-        // }
-
-        const token = req.cookie.access_token
-        if (!token) {
-            return res.status(401).json({message: "Unauthorized"})
+        const auth = req.headers.authorization
+        const token = auth.split(" ")[1]
+        if(!token){
+            return res.status(404).json({
+                message : "Token not found!"
+            })
         }
-
         const decoded = jwt.verify(token, process.env.SECRET_KEY)
         req.user = decoded
+        console.log(decoded)
         next()
     } catch (err) {
         return res.status(401).json({
@@ -26,4 +21,8 @@ const Authorization = (req, res, next) => {
     }
 }
 
-module.exports = Authorization
+const generateToken = (payload) => {
+    return jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: '24h'})
+}
+
+module.exports = {Authorization, generateToken}
