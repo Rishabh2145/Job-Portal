@@ -1,4 +1,4 @@
-const user = require('../models/userDetails')
+const user = require('../models/userSchema')
 const details = async (req, res) => {
     const doc = new user({
         name: req.body.name,
@@ -32,18 +32,7 @@ const updateDetails = (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    const data = await user.aggregate([
-        {
-            $lookup: {
-                from: 'users',
-                localField: 'userRef',
-                foreignField: '_id',
-                as: 'userDetails'
-            }
-        }
-    ])
-
-    res.send(data)
+    res.status(202).json(req.user)
 }
 
 module.exports = { details, updateDetails, getUser };
