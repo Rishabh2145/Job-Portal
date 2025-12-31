@@ -2,10 +2,9 @@
 import Image from "next/image";
 import { useFormik } from "formik";
 import { useSignupMutation } from "@/store/api/auth";
-import { extractInfo, handleSuccess } from "../utils";
+import { extractInfo, handleSuccess, handleError } from "../utils";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { handleError } from "../utils";
 
 
 export default function HomePage() {
@@ -38,7 +37,7 @@ export default function HomePage() {
         resetForm()
         setTimeout(() => router.replace('/login'), 2000)
       } catch (err) {
-        alert("Signup failed!")
+        handleError("Signup failed!")
         console.log(err)
       } finally {
         setSubmitting(false)
