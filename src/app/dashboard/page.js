@@ -1,6 +1,9 @@
+"use client"
 import Image from "next/image";
 import { jobs, sample } from "../page";
 import Job from "@/components/Job";
+import { useRouter } from "next/navigation";
+import { handleError } from "../utils";
 import { useEffect, useState } from "react";
 export default function HomePage() {
     

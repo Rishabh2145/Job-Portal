@@ -6,16 +6,26 @@ import { useSigninMutation } from "@/store/api/auth";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { handleError, handleSuccess } from "../utils";
+import { useEffect, useState } from "react";
 
 export default function Login() {
+
   const router = useRouter()
   const [signin, { isLoading }] = useSigninMutation()
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      handleError("Already Logged In!")
+      router.replace('/dashboard')
+    }
+  }, [router])
+
   const cred = useFormik({
     initialValues: {
       email: "",
       password: ""
     },
-
     onSubmit: async (values, { resetForm }) => {
       try {
         const res = await signin(values).unwrap()
