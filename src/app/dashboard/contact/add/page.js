@@ -2,6 +2,7 @@
 
 import { useFormik } from "formik"
 import { useContactMutation } from "@/store/api/contact"
+import { handleSuccess, handleError } from "@/app/utils"
 
 export default function Contact() {
 
@@ -17,11 +18,11 @@ export default function Contact() {
             try {
                 const res = await contact(values).unwrap()
                 console.log("Message sent : ", res)
-                alert("Message sent !")
+                handleSuccess("Message sent !")
                 resetForm()
             } catch (err) {
                 console.log(err)
-                alert("Failed to send message at this time. Please try again later.")
+                handleError("Failed to send message at this time. Please try again later.")
             }
         }
     })
