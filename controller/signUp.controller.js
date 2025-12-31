@@ -22,7 +22,7 @@ const signUp = async (req, res) => {
         const token = generateToken({ user })
         res.status(200).json({
             message: "User Data Inserted",
-            data: user,
+            user,
             token,
             success: true
         })
