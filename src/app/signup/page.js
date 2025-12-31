@@ -1,15 +1,12 @@
 "use client"
 import Image from "next/image";
 import { useFormik } from "formik";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { userSignup } from "@/store/api/signup";
 import { useSignupMutation } from "@/store/api/auth";
 
 
 
 export default function HomePage() {
-  const dispatch = useDispatch()
+
   const [signup, { isLoading }] = useSignupMutation()
   const details = useFormik({
     initialValues: {
@@ -25,6 +22,8 @@ export default function HomePage() {
         const res = await signup(values).unwrap()
         console.log("Signup Success : ", res)
         alert("Signup Success! Please login with same credentials.")
+        localStorage.setItem("token", res.token)
+        localStorage.setItem('user', res.data.fullName)
         resetForm()
       } catch (err) {
         alert("Signup failed!")

@@ -1,5 +1,8 @@
+"use client"
+
 import Image from "next/image";
-import Option from "./Menu";
+import { ToastContainer } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const menu = [
     { name: 'Dashboard', link: '' },
@@ -9,6 +12,7 @@ const menu = [
     { name: 'Logout', link: '../' },
 ]
 export default function SideBar() {
+    const router = useRouter()
     return (
         <div id="sidebar" className="h-screen overflow-y-auto gap-5 flex flex-col p-5 px-7 py-8 shadow-lg">
             <div>
@@ -24,9 +28,27 @@ export default function SideBar() {
             </div>
             <div className="flex flex-col gap-2 mt-5">
                 <p className="text-xs text-gray-500">Overview</p>
-                {menu.map((item, index) => (
-                    <Option key={index} name={item.name} link={item.link} />
-                ))}
+                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all" onClick={() => router.push('/dashboard')}>
+                    Dashboard
+                </button>
+                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all" onClick={() => router.push('/dashboard/profile')}>
+                    My Profile
+                </button>
+                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all" onClick={() => router.push('/dashboard/job')}>
+                    Jobs Applied
+                </button>
+                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all" onClick={() => router.push('/dashboard/contact')}>
+                    Contact
+                </button>
+                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all" onClick={
+                    () => {
+                        localStorage.removeItem('token')
+                        localStorage.removeItem('user')
+                        router.push('/login')
+                    }
+                }>
+                    Logout
+                </button>
             </div>
         </div>
     )

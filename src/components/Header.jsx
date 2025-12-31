@@ -1,4 +1,6 @@
+"use client"
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 const theme = {
     light: { img: '/images/jobs/briefcase(2) 2 (1).svg' },
@@ -6,6 +8,7 @@ const theme = {
 }
 
 export default function Header(props) {
+    
     return (
         <div className="flex justify-between p-6 w-4/5 items-center max-md:w-full">
             <div className="flex items-center gap-2 cursor-pointer justify-center">
@@ -38,6 +41,7 @@ export function MenuExpand() {
 }
 
 export function Dashboard() {
+    const router = useRouter()
     return (
         <div className='flex justify-between gap-5 sticky top-2 backdrop-blur-sm bg-white/5 z-100 m-2 rounded-full p-4 shadow-sm'>
 
@@ -59,7 +63,15 @@ export function Dashboard() {
                     <div className='absolute flex flex-col justify-center rounded-3xl shadow-xl bg-white mt-7 p-2'>
                         <a href='/dashboard/profile' className='w-32 flex justify-center h-10 items-center'>My Profile</a>
                         <a href='/dashboard/contact' className='w-32 flex justify-center h-10 items-center'>Contacts</a>
-                        <a href='/' className='w-32 flex justify-center h-10 items-center'>Logout</a>
+                        <button className="w-32 flex justify-center h-10 items-center" onClick={
+                            () => {
+                                localStorage.removeItem('token')
+                                localStorage.removeItem('user')
+                                router.push('/login')
+                            }
+                        }>
+                            Logout
+                        </button>
                     </div>
                 </details></h2>
 

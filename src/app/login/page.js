@@ -2,30 +2,33 @@
 
 import Image from "next/image";
 import { useFormik } from "formik";
-import navigate from "next/navigation";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { loginUser } from "@/store/api/login";
 import { useSigninMutation } from "@/store/api/auth";
+import { ToastContainer } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { handleError, handleSuccess } from "../utils";
 
 export default function Login() {
-  const dispatch = useDispatch()
-  const [signin, {isLoading}] = useSigninMutation()
+  const router = useRouter()
+  const [signin, { isLoading }] = useSigninMutation()
   const cred = useFormik({
     initialValues: {
       email: "",
       password: ""
     },
 
-    onSubmit: async (values , {resetForm}) => {
-      try{
+    onSubmit: async (values, { resetForm }) => {
+      try {
         const res = await signin(values).unwrap()
         console.log(res)
-        alert("Logged In")
+        handleSuccess("User Logged In! Redirecting to Dashboard")
+        localStorage.setItem('token', res.token)
+        localStorage.setItem('user', res.data)
         resetForm()
-        window.location.href = '/dashboard'
-      } catch(err){
-        alert("Invalid Credentials")
+        setTimeout(() =>
+          router.push('/dashboard')
+          , 2000)
+      } catch (err) {
+        handleError(err.data.message)
         console.log(err)
       }
     }
@@ -148,6 +151,7 @@ export default function Login() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </main>
   );
 }

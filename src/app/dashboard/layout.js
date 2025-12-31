@@ -2,6 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Dashboard } from "@/components/Header";
 import SideBar from "@/components/Sidebar";
 import "../globals.css";
+import { ToastContainer } from "react-toastify";
+import { useEffect, useState } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,9 +21,12 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const [isAuth, setisAuth] = useState('')
+    useEffect(()=>{
+        setisAuth(localStorage.getItem('user'))
+    },[])
   return (
-    <html lang="en">
-      <body
+      <main
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <main className="grid grid-cols-5 w-screen text-black bg-white ">
@@ -31,7 +36,7 @@ export default function RootLayout({ children }) {
                         {children}
                     </div>
                 </main>
-      </body>
-    </html>
+      <ToastContainer/>
+      </main>
   );
 }

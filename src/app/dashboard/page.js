@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { jobs, sample } from "../page";
 import Job from "@/components/Job";
+import { useEffect, useState } from "react";
 export default function HomePage() {
+    
     return (
         <div className="p-5 px-7 py-6">
             <div className="bg-black h-76 w-full rounded-3xl flex justify-center items-center text-white max-md:flex-col-reverse max-md:w-1/1 max-md:h-126 max-md:text-center max-md:py-10">
