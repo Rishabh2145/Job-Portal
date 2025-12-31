@@ -1,6 +1,8 @@
 "use client"
+import { removeInfo } from '@/app/utils'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useEffect , useState} from 'react'
 
 const theme = {
     light: { img: '/images/jobs/briefcase(2) 2 (1).svg' },
@@ -42,8 +44,12 @@ export function MenuExpand() {
 
 export function Dashboard() {
     const router = useRouter()
+    const [name, setName] = useState('')
+    useEffect(()=>{
+        setName(localStorage.getItem('user'))
+    },[])
     return (
-        <div className='flex justify-between gap-5 sticky top-2 backdrop-blur-sm bg-white/5 z-100 m-2 rounded-full p-4 shadow-sm'>
+        <div className='flex justify-between gap-5 sticky top-2 backdrop-blur-sm bg-white/5 z-100 m-2 rounded-full p-4 shadow-sm '>
 
             <input
                 type='text'
@@ -59,14 +65,13 @@ export function Dashboard() {
                     width={45}
                 />
                 <h2 className='w-fit min-w-38 max-w-38 flex gap-4 cursor-pointer truncate max-md:min-w-0'><details className='dropdown'>
-                    <summary className='font-bold'><span className='max-md:hidden'>Rishabh Kumar</span></summary>
+                    <summary className='font-bold truncate'><span className='max-md:hidden truncate'>{name ? `${name}`: 'Guest'}</span></summary>
                     <div className='absolute flex flex-col justify-center rounded-3xl shadow-xl bg-white mt-7 p-2'>
                         <a href='/dashboard/profile' className='w-32 flex justify-center h-10 items-center'>My Profile</a>
                         <a href='/dashboard/contact' className='w-32 flex justify-center h-10 items-center'>Contacts</a>
                         <button className="w-32 flex justify-center h-10 items-center" onClick={
                             () => {
-                                localStorage.removeItem('token')
-                                localStorage.removeItem('user')
+                                removeInfo()
                                 router.push('/login')
                             }
                         }>

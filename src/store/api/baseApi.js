@@ -1,3 +1,4 @@
+import { removeInfo } from '@/app/utils'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const baseQuery = fetchBaseQuery({
@@ -15,8 +16,7 @@ const baseQueryWithAuth = async (agr, api, extraOptions) => {
     const result = await baseQuery(agr, api, extraOptions)
     console.log(result)
     if (result.error) {
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
+        removeInfo()
         window.location.href = '/login'
     }
     return result

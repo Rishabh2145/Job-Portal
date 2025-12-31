@@ -2,10 +2,22 @@
 import Image from "next/image";
 import { useFormik } from "formik";
 import { useSignupMutation } from "@/store/api/auth";
-
+import { extractInfo, handleSuccess } from "../utils";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { handleError } from "../utils";
 
 
 export default function HomePage() {
+  const router = useRouter()
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      handleError("Already Logged In!")
+      router.replace('/dashboard')
+    }
+  }, [router])
 
   const [signup, { isLoading }] = useSignupMutation()
   const details = useFormik({
@@ -21,10 +33,10 @@ export default function HomePage() {
       try {
         const res = await signup(values).unwrap()
         console.log("Signup Success : ", res)
-        alert("Signup Success! Please login with same credentials.")
-        localStorage.setItem("token", res.token)
-        localStorage.setItem('user', res.data.fullName)
+        handleSuccess("Signup Success! Please login with same credentials.")
+        extractInfo(res)
         resetForm()
+        setTimeout(() => router.replace('/login'), 2000)
       } catch (err) {
         alert("Signup failed!")
         console.log(err)

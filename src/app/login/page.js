@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import { useSigninMutation } from "@/store/api/auth";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { handleError, handleSuccess } from "../utils";
+import { extractInfo, handleError, handleSuccess } from "../utils";
 import { useEffect, useState } from "react";
 
 export default function Login() {
@@ -29,10 +29,8 @@ export default function Login() {
     onSubmit: async (values, { resetForm }) => {
       try {
         const res = await signin(values).unwrap()
-        console.log(res)
         handleSuccess("User Logged In! Redirecting to Dashboard")
-        localStorage.setItem('token', res.token)
-        localStorage.setItem('user', res.data)
+        extractInfo(res)
         resetForm()
         setTimeout(() =>
           router.push('/dashboard')

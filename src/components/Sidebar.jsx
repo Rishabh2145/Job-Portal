@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { removeInfo } from "@/app/utils";
 
 const menu = [
     { name: 'Dashboard', link: '' },
@@ -42,8 +43,7 @@ export default function SideBar() {
                 </button>
                 <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all" onClick={
                     () => {
-                        localStorage.removeItem('token')
-                        localStorage.removeItem('user')
+                        removeInfo()
                         router.push('/login')
                     }
                 }>

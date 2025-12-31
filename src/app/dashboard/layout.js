@@ -15,6 +15,7 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
+    
     if (!storedToken) {
       handleError("Please Login first!")
       setTimeout(() => router.replace('/login'), 1000)
