@@ -19,14 +19,18 @@ const signUp = async (req, res) => {
     })
     user.save().then(() => {
         console.log(user);
-        const token = generateToken({user})
+        const token = generateToken({ user })
         res.status(200).json({
             message: "User Data Inserted",
             data: user,
-            token
+            token,
+            success: true
         })
     }).catch((err) => {
-        res.status(500).json({ error: err })
+        res.status(500).json({
+            error: err,
+            success: false
+        })
     })
 }
 
@@ -36,12 +40,14 @@ const profile = async (req, res) => {
         const user = await model.findById(id)
         if (!user) {
             return res.status(404).json({
-                message: "User Not Found"
+                message: "User Not Found",
+                success: false
             })
         }
         await model.findByIdAndUpdate(userId, req.body, { upsert: true, runValidators: true, new: true }).then(() => {
             res.status(200).json({
-                message: "User Updated Successfully"
+                message: "User Updated Successfully",
+                success: true
             })
         })
     } catch (err) {
@@ -56,16 +62,19 @@ const delProfile = async (req, res) => {
         const user = await model.findById(id)
         if (!user) {
             return res.status(404).json({
-                message: "User Not Found"
+                message: "User Not Found",
+                success: false
             })
         }
         await model.findByIdAndDelete(id)
         res.status(200).json({
-            message: "User Account Deleted!"
+            message: "User Account Deleted!",
+            success: true
         })
     } catch (err) {
         res.status(400).json({
-            error: err
+            error: err,
+            success: false
         })
     }
 }
@@ -74,10 +83,14 @@ const getAccounts = async (req, res) => {
     try {
         const users = await model.find({})
         console.log(users)
-        res.status(200).json({ users })
+        res.status(200).json({
+            users,
+            success: true
+        })
     } catch (err) {
         res.status(500).json({
-            error: err
+            error: err,
+            success: false
         })
     }
 }
