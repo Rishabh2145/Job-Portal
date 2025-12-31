@@ -20,9 +20,9 @@ const signIn = async (req, res) => {
         const token = await generateToken({user})
         return res.status(200).json({
             message: "Logged In",
+            data: user,
             token
         })
-        // return res.send("Logged In")
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
