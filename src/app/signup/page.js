@@ -21,13 +21,12 @@ export default function HomePage() {
   const [signup, { isLoading }] = useSignupMutation()
   const details = useFormik({
     initialValues: {
-      role: "Employee",
+      role: "Candidate",
       fullName: "",
       username: "",
       email: "",
       password: ""
-    }
-    ,
+    },
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
         const res = await signup(values).unwrap()
@@ -68,9 +67,8 @@ export default function HomePage() {
               </div>
               <div className="border-1 border-solid rounded-lg p-2 border-gray-400 text-gray-700 flex">
                 <select id="user" name="role" onChange={details.handleChange}>
-                  <option value="Employee">Employee</option>
-                  <option value="Admin">Admin</option>
                   <option value="Candidate">Candidate</option>
+                  <option value="Employee">Employer</option>
                 </select>
               </div>
             </div>

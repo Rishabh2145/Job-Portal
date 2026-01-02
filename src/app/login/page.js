@@ -36,7 +36,8 @@ export default function Login() {
           router.push('/dashboard')
           , 2000)
       } catch (err) {
-        handleError(err.data.message)
+        alert("Invalid Credentials! Please check it and try again")
+        setTimeout(() => {}, 2000)
         console.log(err)
       }
     }

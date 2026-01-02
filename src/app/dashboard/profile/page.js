@@ -1,56 +1,60 @@
 "use client"
 
 import Image from "next/image"
-// import { details } from "../edit/page"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { useUserQuery } from "@/store/api/user"
 
 export default function Profile() {
-    const router = useRouter()
+    
     const [edit, setEdit] = useState(true);
     const toggleEdit = () => {
         setEdit(!edit);
     }
-    
+    const users = useUserQuery( undefined,{
+        refetchOnMountOrArgChange: true
+    })
+    console.log(users)
+    const profile = users?.data?.user
+    console.log(profile)
+
     return (
         <main className="grid grid-cols-2 p-5 m-5 bg-white rounded-xl shadow-sm max-md:grid-cols-1">
             <div className="flex flex-col w-full p-4 justify-around">
                 <h1 className="text-2xl font-bold">My Profile</h1>
                 <table className="h-3/4 max-md:mt-4">
                     <tbody className="p-4 w-full">
+                        <tr>
+                            <th>Role: </th>
+                            <td colSpan={3}>{profile?.role}</td>
+                        </tr>
                         <tr className="max-md:grid max-md:grid-cols-2 max-md:gap-2 ">
                             <th>Name:</th>
-                            <td>Sample Name</td>
+                            <td>{profile?.fullName}</td>
                             <th>Contact:</th>
-                            <td>Sample Contact</td>
+                            <td>{profile?.contact ? profile.contact : 'N/A'}</td>
                         </tr>
                         <tr className="max-md:grid max-md:grid-cols-2 max-md:gap-2 ">
                             <th>Email Address:</th>
-                            <td>Sample Email</td>
+                            <td>{profile?.email}</td>
                             <th>Mobile:</th>
-                            <td>Sample mobile</td>
+                            <td>{profile?.mobile ? profile.mobile : 'N/A'}</td>
                         </tr>
                         <tr className="max-md:grid max-md:grid-cols-2 max-md:gap-2 ">
                             <th>College:</th>
-                            <td>Institute</td>
+                            <td>{profile?.institute ? profile.institute : 'N/A'}</td>
                             <th>Grade:</th>
-                            <td>A+</td>
+                            <td>{profile?.instituteGrade ? profile.instituteGrade : 'N/A'}</td>
                         </tr>
                         <tr className="max-md:grid max-md:grid-cols-2 max-md:gap-2 ">
                             <th>School:</th>
-                            <td>School</td>
+                            <td>{profile?.school ? profile.school : 'N/A'}</td>
                             <th>Grade:</th>
-                            <td>A++</td>
+                            <td>{profile?.schoolGrade ? profile.schoolGrade : 'N/A'}</td>
                         </tr>
-                        <tr className="max-md:grid max-md:grid-cols-2 max-md:gap-2 ">
-                            <th>Name:</th>
-                            <td>Rishabh Kumar</td>
-                            <th>Contact:</th>
-                            <td>123456789</td>
-                        </tr>
+
                         <tr className="max-md:grid max-md:grid-cols-2 max-md:gap-2 ">
                             <th>Address:</th>
-                            <td colSpan={3}>Sample Address, City, State, Country - 123456</td>
+                            <td colSpan={3}>{profile?.address ? profile.address : 'N/A'}</td>
                         </tr>
                     </tbody>
                 </table>
