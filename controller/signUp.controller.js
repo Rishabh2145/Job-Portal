@@ -35,9 +35,9 @@ const signUp = async (req, res) => {
 }
 
 const profile = async (req, res) => {
-    const userId = req.query.id
+    const userId = req.body.id
     try {
-        const user = await model.findById(id)
+        const user = await model.findById(userId)
         if (!user) {
             return res.status(404).json({
                 message: "User Not Found",
@@ -47,7 +47,8 @@ const profile = async (req, res) => {
         await model.findByIdAndUpdate(userId, req.body, { upsert: true, runValidators: true, new: true }).then(() => {
             res.status(200).json({
                 message: "User Updated Successfully",
-                success: true
+                success: true,
+                data: req.body
             })
         })
     } catch (err) {
