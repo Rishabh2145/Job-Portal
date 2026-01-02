@@ -32,7 +32,9 @@ const updateDetails = (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    res.status(202).json(req.user)
+    const userId = req.user.id
+    const detail = await user.findById(userId)
+    res.status(200).json({ user : detail })
 }
 
 module.exports = { details, updateDetails, getUser };

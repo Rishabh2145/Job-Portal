@@ -67,6 +67,7 @@ const signUp = new mongoose.Schema({
     },
     address: {
         type: String,
+        // select: false
     }
 },
     { timestamps: true }
