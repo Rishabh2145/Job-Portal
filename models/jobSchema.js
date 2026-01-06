@@ -7,7 +7,7 @@ const jobSchema = mongoose.Schema({
     },
     title: {
         type: String,
-        required: [true,'Title of the job is required']
+        required: [true, 'Title of the job is required']
     },
     company: {
         type: String,
@@ -20,8 +20,8 @@ const jobSchema = mongoose.Schema({
     jobType: {
         type: String,
         enum: {
-            values: ['Part-Time', 'Full-Time', 'Remote', 'Hybrid'],
-            message:  '{VALUE} is not a valid Job Type'
+            values: ['Part-Time', 'Full-Time', 'Remote', 'Internship', 'Hybrid'],
+            message: '{VALUE} is not a valid Job Type'
         },
         required: [true, 'Job Type is Required!']
     },
