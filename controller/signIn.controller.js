@@ -10,18 +10,21 @@ const signIn = async (req, res) => {
         const user = await model.findOne({ email });
 
         if (!user) {
-            return res.status(400).json({ message: "Account Not Registered Please Sign Up First", success: false});
+            return res.status(400).json({ message: "Account Not Registered Please Sign Up First", success: false });
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: "Invalid Credentials", success: false});
+            return res.status(400).json({ message: "Invalid Credentials", success: false });
         }
-        console.log(user)
-        const token = await generateToken({ 
-            id: user._id,
-            email: user.email,
-            role: user.role
-         })
+        const token = await generateToken({ user })
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            sameSite: 'lax',
+            path: '/',
+            maxAge: 24 * 60 * 60 * 1000
+        })
+
         return res.status(200).json({
             message: "Logged In",
             user,

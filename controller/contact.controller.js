@@ -1,7 +1,6 @@
 const model = require('../models/contactSchema')
 
 const contact = async (req , res) => {
-    console.log(req.body)
     const msg = new model({
         firstName : req.body.firstName,
         lastName : req.body.lastName,

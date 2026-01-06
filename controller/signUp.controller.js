@@ -2,7 +2,6 @@ const { generateToken } = require('../middleware/auth');
 const model = require('../models/userSchema');
 
 const signUp = async (req, res) => {
-    console.log(req.body);
     const user = new model({
         role: req.body.role,
         fullName: req.body.fullName,
@@ -18,7 +17,6 @@ const signUp = async (req, res) => {
         address: req.body.address
     })
     user.save().then(() => {
-        console.log(user);
         const token = generateToken({ user })
         res.status(200).json({
             message: "User Data Inserted",
@@ -83,7 +81,6 @@ const delProfile = async (req, res) => {
 const getAccounts = async (req, res) => {
     try {
         const users = await model.find({})
-        console.log(users)
         res.status(200).json({
             users,
             success: true

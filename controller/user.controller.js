@@ -1,4 +1,5 @@
 const user = require('../models/userSchema')
+const jwt = require('jsonwebtoken')
 const details = async (req, res) => {
     const doc = new user({
         name: req.body.name,
@@ -32,9 +33,22 @@ const updateDetails = (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    const userId = req.user.id
-    const detail = await user.findById(userId)
-    res.status(200).json({ user : detail })
+    try {
+        
+        const token = req.cookies.token
+
+        if (!token) {
+            return res.status(404).json({
+                message: "Token not found!"
+            })
+        }
+        const decoded = await jwt.verify(token, process.env.SECRET_KEY)
+        res.status(200).json({ user: decoded })
+    } catch (err) {
+        res.status(401).json({
+            message: 'Unauthorized'
+        })
+    }
 }
 
 module.exports = { details, updateDetails, getUser };
