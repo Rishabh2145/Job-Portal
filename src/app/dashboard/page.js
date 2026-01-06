@@ -1,12 +1,15 @@
 "use client"
-import Image from "next/image";
+import { useGetJobQuery } from "@/store/api/job";
 import { jobs, sample } from "../page";
 import Job from "@/components/Job";
-import { useRouter } from "next/navigation";
-import { handleError } from "../utils";
-import { useEffect, useState } from "react";
 export default function HomePage() {
-    
+    const jobData = useGetJobQuery( undefined,{
+        refetchOnMountOrArgChange: true,
+        refetchOnFocus: true
+    })
+    let data = []
+    data = jobData?.data?.jobs || []
+    const jobs = [...data].reverse();
     return (
         <div className="p-5 px-7 py-6">
             <div className="bg-black h-76 w-full rounded-3xl flex justify-center items-center text-white max-md:flex-col-reverse max-md:w-1/1 max-md:h-126 max-md:text-center max-md:py-10">
@@ -20,9 +23,9 @@ export default function HomePage() {
                 <div className="bg-[url('/images/Imgs.svg')] h-full bg-contain bg-no-repeat w-full"></div>
             </div>
             <div className="px-1">
-                {jobs.map((item, index) => (
-                    <Job key={index} time={item.time} logo={item.logo} title={item.title} company={item.company} category={item.category} type={item.type} salary={item.salary} location={item.location} />
-                ))}
+                {jobs ? jobs.map((item, index) => (
+                    <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} />
+                )) : <>Loading...</>}
             </div>
         </div>
     )

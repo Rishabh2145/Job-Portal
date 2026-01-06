@@ -1,11 +1,30 @@
 "use client"
 import { useGetContactQuery } from "@/store/api/contact"
+import { useUserQuery } from "@/store/api/user"
 
 let data = []
 
 export default function Contact() {
-    const message = useGetContactQuery()
-    console.log(message)
+    const message = useGetContactQuery(
+         undefined,{
+        refetchOnMountOrArgChange: true,
+        refetchOnFocus: true
+    }
+    )
+    const user = useUserQuery()
+
+    if (!user?.data) {
+        return (
+            <div>Loading...</div>
+        )
+    }
+
+    if (user?.data?.user?.user?.role !== 'Admin') {
+        return(
+            <div>Access Denied!</div>
+        )
+    }
+
     
     return (
         <main className="bg-white shadow-md m-4 rounded-xl p-8 flex flex-col gap-6">

@@ -5,21 +5,17 @@ import { useFormik } from "formik";
 import { useSigninMutation } from "@/store/api/auth";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { extractInfo, handleError, handleSuccess } from "../utils";
-import { useEffect, useState } from "react";
+import {handleError, handleSuccess } from "../utils";
+import { useEffect } from "react";
+import { useUserQuery } from "@/store/api/user";
 
 export default function Login() {
 
   const router = useRouter()
+  const user = useUserQuery()
   const [signin, { isLoading }] = useSigninMutation()
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      handleError("Already Logged In!")
-      router.replace('/dashboard')
-    }
-  }, [router])
+  
 
   const cred = useFormik({
     initialValues: {
@@ -30,14 +26,12 @@ export default function Login() {
       try {
         const res = await signin(values).unwrap()
         handleSuccess("User Logged In! Redirecting to Dashboard")
-        extractInfo(res)
         resetForm()
-        setTimeout(() =>
+        if (res) {
           router.push('/dashboard')
-          , 2000)
+        }
       } catch (err) {
-        alert("Invalid Credentials! Please check it and try again")
-        setTimeout(() => {}, 2000)
+        handleError("Invalid Credentials. Please try again Later.")
         console.log(err)
       }
     }

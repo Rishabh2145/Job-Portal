@@ -5,14 +5,15 @@ import { useSignupMutation } from "@/store/api/auth";
 import { extractInfo, handleSuccess, handleError } from "../utils";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useUserQuery } from "@/store/api/user";
 
 
 export default function HomePage() {
   const router = useRouter()
+  const user = useUserQuery()
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
+    if (!user?.data) {
       handleError("Already Logged In!")
       router.replace('/dashboard')
     }
@@ -30,11 +31,10 @@ export default function HomePage() {
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
         const res = await signup(values).unwrap()
-        console.log("Signup Success : ", res)
         handleSuccess("Signup Success! Please login with same credentials.")
         extractInfo(res)
         resetForm()
-        setTimeout(() => router.replace('/login'), 2000)
+        router.replace('/login')
       } catch (err) {
         handleError("Signup failed!")
         console.log(err)

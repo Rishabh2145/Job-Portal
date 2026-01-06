@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import Job from "@/components/Job";
 import Category from "@/components/Category";
@@ -5,6 +7,9 @@ import Review from "@/components/Review";
 import News from "@/components/News";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useGetJobQuery } from "@/store/api/job";
 
 const cat = [
     { image: "agriculture 2.svg", name: "Agriculture", job: "1254" },
@@ -42,12 +47,23 @@ const newsBlog = [
 
 
 export default function HomePage() {
+    const router = useRouter()
+    const jobData = useGetJobQuery(
+        undefined, {
+        refetchOnMountOrArgChange: true,
+        refetchOnFocus: true
+    }
+    )
+    let data = []
+    data = jobData?.data?.jobs || []
+    const jobs = [...data].reverse();
+
     return (
         <main className="bg-white w-screen max-w-screen flex flex-col items-center">
             <div className="h-screen w-screen">
                 <div className="bg-[url('/images/home/bg.png')] bg-cover h-5/6 flex flex-col text-white items-center w-full" >
                     <div className="h-full w-full flex flex-col items-center bg-black/70">
-                        <Header theme='dark' page='home'/>
+                        <Header theme='dark' page='home' />
                         <div className="basis-1/1 flex flex-col justify-center items-center max-md:mt-6">
                             <h1 className="text-6xl font-bold max-md:text-4xl max-md:text-wrap max-md:text-center">
                                 Find Your Dream Job Today!
@@ -112,9 +128,9 @@ export default function HomePage() {
                     <a href="/job" className="basis-1/2 flex justify-end text-[#309689] underline max-md:hidden">View All</a>
                 </div>
 
-                {jobs.map((item, index) => (
-                    <Job key={index} time={item.time} logo={item.logo} title={item.title} company={item.company} category={item.category} type={item.type} salary={item.salary} location={item.location} />
-                ))}
+                {jobs ? jobs.map((item, index) => (
+                    <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} />
+                )) : <>Loading...</>}
             </div>
 
             <div className="w-screen bg-[#309689]/10 flex flex-col items-center p-12 text-black gap-6 max-md:px-4">

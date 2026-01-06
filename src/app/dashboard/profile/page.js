@@ -11,11 +11,10 @@ export default function Profile() {
         setEdit(!edit);
     }
     const users = useUserQuery( undefined,{
-        refetchOnMountOrArgChange: true
+        refetchOnMountOrArgChange: true,
+        refetchOnFocus: true
     })
-    console.log(users)
-    const profile = users?.data?.user
-    console.log(profile)
+    const profile = users?.data?.user?.user
 
     return (
         <main className="grid grid-cols-2 p-5 m-5 bg-white rounded-xl shadow-sm max-md:grid-cols-1">

@@ -4,12 +4,12 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import { useFormik } from "formik"
 import { useContactMutation } from "@/store/api/contact"
-import { handleSuccess, handleError } from "../utils"
+import { handleSuccess, handleError, contactValidation } from "../utils"
 
 
 export default function Contact() {
 
-    const [contact, {isLoading}] = useContactMutation()
+    const [contact, { isLoading }] = useContactMutation()
     const contactForm = useFormik({
         initialValues: {
             firstName: "",
@@ -17,19 +17,20 @@ export default function Contact() {
             email: "",
             message: ""
         },
-        onSubmit: async (values, {resetForm}) => {
-            try{
+        validationSchema: contactValidation
+        ,
+        onSubmit: async (values, { resetForm }) => {
+            try {
                 const res = await contact(values).unwrap()
-                console.log("Message sent : ", res)
                 handleSuccess("Message sent !")
                 resetForm()
-            } catch(err){
+            } catch (err) {
                 console.log(err)
                 handleError("Failed to send message at this time. Please try again later.")
             }
         }
     })
-
+    // console.log(contactForm.errors)
 
     return (
         <main className="w-full flex h-full bg-white flex-col text-black">
@@ -75,15 +76,27 @@ export default function Contact() {
                                 <label htmlFor="firstName" className="px-2 mx-2 font-bold text-sm">First Name</label>
                                 <label htmlFor="lastName" className="px-2 mx-2 font-bold text-sm">Last Name</label>
                             </div>
-                            <div className="grid grid-cols-2">
-                                <input type="text" id="firstName" name="firstName" value={contactForm.values.firstName} onChange={contactForm.handleChange} placeholder="Your Name" className="text-sm p-2 m-2 rounded-lg bg-white" />
-                                <input type="text" id="lastName" name="lastName" value={contactForm.values.lastName} onChange={contactForm.handleChange} placeholder="Your Last Name" className="text-sm p-2 m-2 rounded-lg bg-white" />
+                            <div className={`grid ${contactForm.errors?.firstName || contactForm.errors?.lastName ? 'grid-cols-4' : 'grid-cols-2'}`}>
+                                <input type="text" id="firstName" name="firstName" onBlur={contactForm.handleBlur} value={contactForm.values.firstName} onChange={contactForm.handleChange} placeholder="Your Name" className="text-sm p-2 m-2 rounded-lg bg-white" />
+                                {contactForm.touched.firstName && contactForm.errors.firstName && (
+                                    <p className="text-red-500 text-sm px-2 mx-2">{contactForm.errors.firstName}</p>
+                                )}
+                                <input type="text" id="lastName" name="lastName" onBlur={contactForm.handleBlur} value={contactForm.values.lastName} onChange={contactForm.handleChange} placeholder="Your Last Name" className="text-sm p-2 m-2 rounded-lg bg-white" />
+                                {contactForm.touched.lastName && contactForm.errors.lastName && (
+                                    <p className="text-red-500 text-sm px-2 mx-2">{contactForm.errors.lastName}</p>
+                                )}
                             </div>
                             <label htmlFor="email" className="px-2 mx-2 font-bold text-sm">Email Address</label>
-                            <input type="email" id="email" name="email" value={contactForm.values.email} onChange={contactForm.handleChange} placeholder="Your Email Address" className="text-sm p-2 m-2 rounded-lg bg-white" />
+                            <input type="email" id="email" name="email" onBlur={contactForm.handleBlur} value={contactForm.values.email} onChange={contactForm.handleChange} placeholder="Your Email Address" className="text-sm p-2 m-2 rounded-lg bg-white" />
+                            {contactForm.touched.email && contactForm.errors.email && (
+                                <p className="text-red-500 text-sm px-2 mx-2">{contactForm.errors.email}</p>
+                            )}
                             <label htmlFor="msg" className="px-2 mx-2 font-bold text-sm">Message</label>
-                            <textarea type="text" id="msg" name="message" value={contactForm.values.message} onChange={contactForm.handleChange} placeholder="Your Message ..." className="text-sm p-2 m-2 rounded-lg bg-white" />
-                            <input type="submit" value="Send Message" className="text-sm bg-[#309689] text-white p-2 m-2 rounded-lg cursor-pointer hover:bg-[#2a8a7d] w-1/2 transition-all duration-300"/>
+                            <textarea type="text" id="msg" name="message" onBlur={contactForm.handleBlur} value={contactForm.values.message} onChange={contactForm.handleChange} placeholder="Your Message ..." className="text-sm p-2 m-2 rounded-lg bg-white" />
+                                {contactForm.touched.message && contactForm.errors.message && (
+                                    <p className="text-red-500 text-sm px-2 mx-2">{contactForm.errors.message}</p>
+                                )}
+                            <input type="submit" value="Send Message" className="text-sm bg-[#309689] text-white p-2 m-2 rounded-lg cursor-pointer hover:bg-[#2a8a7d] w-1/2 transition-all duration-300" />
                         </div>
                     </form>
 

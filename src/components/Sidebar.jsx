@@ -1,9 +1,8 @@
 "use client"
 
 import Image from "next/image";
-import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { removeInfo } from "@/app/utils";
+import { useUserQuery } from "@/store/api/user";
 
 const menu = [
     { name: 'Dashboard', link: '' },
@@ -13,6 +12,12 @@ const menu = [
     { name: 'Logout', link: '../' },
 ]
 export default function SideBar() {
+
+    const user = useUserQuery(
+        undefined, {
+        refetchOnMountOrArgChange: true,
+        refetchOnFocus: true
+    })
     const router = useRouter()
     return (
         <div id="sidebar" className="h-screen overflow-y-auto gap-5 flex flex-col p-5 px-7 py-8 shadow-lg">
@@ -29,22 +34,24 @@ export default function SideBar() {
             </div>
             <div className="flex flex-col gap-2 mt-5">
                 <p className="text-xs text-gray-500">Overview</p>
-                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all" onClick={() => router.push('/dashboard')}>
+                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={() => router.push('/dashboard')}>
                     Dashboard
                 </button>
-                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all" onClick={() => router.push('/dashboard/profile')}>
+                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={() => router.push('/dashboard/profile')}>
                     My Profile
                 </button>
-                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all" onClick={() => router.push('/dashboard/job')}>
+                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={() => router.push('/dashboard/job')}>
                     Jobs Applied
                 </button>
-                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all" onClick={() => router.push('/dashboard/contact')}>
+                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.user?.role !== 'Candidate' ? 'block' : 'hidden'}`} onClick={() => router.push('/dashboard/addjob')}>
+                    Add a New Job
+                </button>
+                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.user?.role === 'Admin' ? `block` : 'hidden'}`} onClick={() => router.push('/dashboard/contact')}>
                     Contact
                 </button>
-                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all" onClick={
+                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={
                     () => {
-                        removeInfo()
-                        router.push('/login')
+                        router.push('/logout')
                     }
                 }>
                     Logout

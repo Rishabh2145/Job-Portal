@@ -1,16 +1,27 @@
+"use client"
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function Job(props) {
+    const now = new Date()
+    const created = new Date(props.time)
+    let time = Math.floor((now - created)/ (1000 * 60))
+    let hour = false
+
+    if (time > 60) {
+        time = Math.floor(time / 60)
+        hour = true
+    }
     return (
         <div className="flex flex-col justify-between mt-8 gap-6 shadow-lg p-6 rounded-xl hover:shadow-xl hover:scale-105 transition-all cursor-pointer bg-white">
             <div className="flex w-full justify-between">
                 <p className="bg-[#309689]/20 text-[#309689] px-2 py-1 rounded-lg text-sm">
-                    {props.time} min ago
+                    {time} {hour ? 'hr' : 'min'} ago
                 </p>
                 <Image src="/images/jobs/icon.svg" alt="Job Logo" width={20} height={20} />
             </div>
             <div className="flex gap-6 max-md:flex-col">
-                <Image src={`/images/jobs/${props.logo}`} alt="Job Logo" width={50} height={50} />
+                <Image src={`/${props.logo}`} alt="Job Logo" width={50} height={50} />
                 <div>
                     <p className="font-bold text-xl">{props.title}</p>
                     <p>{props.company}</p>
