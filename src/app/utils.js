@@ -13,6 +13,7 @@ export const handleError = (msg) => {
     })
 }
 
+
 export const contactValidation = Yup.object({
     firstName: Yup.string().trim().min(3, "Name must Contain atleast 3 Characters.").max(30, "Name must not contain above 30 Characters.").matches(/^[A-Za-z ]+$/, 'Name can contain only letters and spaces').required("First Name is required"),
     lastName: Yup.string().trim().min(3, "Name must Contain atleast 3 Characters.").max(30, "Name must not contain above 30 Characters.").matches(/^[A-Za-z ]+$/, 'Name can contain only letters and spaces').required("Last Name is required"),
@@ -42,7 +43,8 @@ export const profileValidation = Yup.object({
 
   mobile: Yup.string()
     .trim()
-    .matches(/^[0-9]{10}$/, 'Mobile number must be 10 digits'),
+    .matches(/^[0-9]{10}$/, 'Mobile number must be 10 digits')
+    .required('Mobile number is required'),
 
   institute: Yup.string()
     .trim()

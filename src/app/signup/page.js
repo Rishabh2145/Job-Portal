@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useFormik } from "formik";
 import { useSignupMutation } from "@/store/api/auth";
-import { extractInfo, handleSuccess, handleError } from "../utils";
+import { handleSuccess, handleError } from "../utils";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useUserQuery } from "@/store/api/user";
@@ -32,7 +32,7 @@ export default function HomePage() {
       try {
         const res = await signup(values).unwrap()
         handleSuccess("Signup Success! Please login with same credentials.")
-        extractInfo(res)
+        
         resetForm()
         router.replace('/login')
       } catch (err) {
