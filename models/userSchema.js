@@ -67,8 +67,11 @@ const signUp = new mongoose.Schema({
     },
     address: {
         type: String,
-        // select: false
-    }
+    },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
 },
     { timestamps: true }
 )

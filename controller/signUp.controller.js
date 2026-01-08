@@ -1,5 +1,8 @@
 const { generateToken } = require('../middleware/auth');
 const model = require('../models/userSchema');
+const { sendMail } = require('../config/mail')
+const dotenv = require('dotenv').config()
+const verify = require('../models/verification')
 
 const signUp = async (req, res) => {
     const user = new model({
@@ -14,16 +17,45 @@ const signUp = async (req, res) => {
         instituteGrade: req.body.instituteGrade,
         school: req.body.school,
         schoolGrade: req.body.schoolGrade,
-        address: req.body.address
+        address: req.body.address,
     })
+    const token = generateToken({ user })
+
+    const verifyData = new verify({
+        email: req.body.email,
+        token,
+        expiry: new Date(Date.now() + 24 * 60 * 60 * 1000)
+    })
+
+    await verifyData.save()
+
+    await sendMail({
+        to: req.body.email,
+        subject: "Welcome to Job Portal!",
+        templateName: 'signup',
+        templateData: {
+            name: req.body.fullName,
+            portalName: 'Job Portal',
+            loginUrl: `${process.env.FRONTEND_URL}/auth/verify?token=${token}&email=${req.body.email}`,
+            year: 2026
+        }
+    })
+
     user.save().then(() => {
-        const token = generateToken({ user })
+        res.cookie('token', token, {
+            httpOnly: true,
+            sameSite: 'lax',
+            path: '/',
+            maxAge: 24 * 60 * 60 * 1000
+        })
         res.status(200).json({
             message: "User Data Inserted",
             user,
+            verifyData,
             token,
             success: true
         })
+
     }).catch((err) => {
         res.status(500).json({
             error: err,
