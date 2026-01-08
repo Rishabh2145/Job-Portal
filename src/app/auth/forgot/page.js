@@ -1,7 +1,25 @@
-
-import { redirect } from "next/navigation";
+"use client"
 import Image from "next/image";
+import { handleError, handleSuccess } from "../../utils";
+import { useFormik } from "formik";
+import { useForgotMutation } from "@/store/api/auth";
 export default function Login() {
+  const [forget, {isLoading}] = useForgotMutation()
+  const emailForgot = useFormik({
+    initialValues: {
+      email : ""
+    },
+    onSubmit: async (values) => {
+      try{
+        const res = await forget(values).unwrap()
+        handleSuccess(res.message)
+      } catch(err){
+        handleError(err?.data?.message)
+        console.log(err)
+      }
+    }
+  })
+
   return (
     <main className="flex bg-white">
       <div className="h-screen basis-1/2 text-black flex flex-col items-center justify-between gap-4 max-md:basis-1/1" >
@@ -14,24 +32,28 @@ export default function Login() {
           />
           <p className="font-bold">MyJob</p>
         </a>
-        <div className="w-2/3 gap-4 flex flex-col text-[14px] max-md:w-9/10 ">
+        <form onSubmit={emailForgot.handleSubmit} className="w-2/3 gap-4 flex flex-col text-[14px] max-md:w-9/10 ">
           <div className="flex justify-between items-center gap-4">
             <div className="flex flex-col gap-2">
               <div className="text-[24px] font-bold">Forgot Password</div>
-              <div className="text-[12px] text-gray-600 gap-1 flex">Go Back to<a href="/login" className="text-indigo-500 font-bold">Sign in</a></div>
-              <div className="text-[12px] text-gray-600 gap-1 flex">Don't have account?<a href="/signup" className="text-indigo-500 font-bold">Create Account</a></div>
+              <div className="text-[12px] text-gray-600 gap-1 flex">Go Back to<a href="/auth/login" className="text-indigo-500 font-bold">Sign in</a></div>
+              <div className="text-[12px] text-gray-600 gap-1 flex">Don't have account?<a href="/auth/signup" className="text-indigo-500 font-bold">Create Account</a></div>
             </div>
           </div>
 
           <input
             type="email"
+            id="email"
+            name="email"
             placeholder="Email Address"
+            value={emailForgot.values.email}
+            onChange={emailForgot.handleChange}
             className="border-1 border-solid border-gray-400 rounded-lg text-black-400 p-2"
           />
 
-          <a href="reset" className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700">
-            Reset Password <Image src="/images/fi_arrow-right.png" alt="Arrow Side" width={20} height={10} className="ml-2" />
-          </a>
+          <button type="submit" disabled={isLoading} className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700">
+            {isLoading ? "Loading..." : "Reset Password"} <Image src="/images/fi_arrow-right.png" alt="Arrow Side" width={20} height={10} className="ml-2" />
+          </button>
           <p className="self-center text-gray-500">or</p>
           <div className="flex gap-2 text-gray-700 max-md:flex-col">
             <div className="flex basis-1/2 items-center justify-center gap-2 border-1 border-gray-300 border-solid rounded-lg p-2 cursor-pointer hover:bg-gray-100">
@@ -54,8 +76,8 @@ export default function Login() {
             </div>
           </div>
 
-        </div>
-        <br/>
+        </form>
+        <br />
       </div>
 
 

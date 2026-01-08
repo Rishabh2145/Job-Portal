@@ -34,12 +34,13 @@ export default function Header(props) {
                 <a className={`hover:scale-105 transition-all ${props.page == 'contact' ? "text-white" : "text-white/70"} `} href="/contact">Contact Us</a>
             </div>
             <div className={`flex gap-6 items-center `}>
-                {(user?.status === 'rejected') ? <><a href="/login" className={`hover:scale-105 transition-all ${props.theme == 'dark' ? "text-white/70" : "text-black/70"}`}>Login</a>
-                    <a className="bg-[#309689] p-2 rounded-lg px-4 hover:scale-105 transition-all text-white" href="/signup">Register</a> </> : <div className={`flex justify-center items-center gap-4 font-bold ${props.theme == 'dark' ? "text-white" : "text-black"}`}>
+                {(user?.status === 'rejected') ? <><a href="/auth/login" className={`hover:scale-105 transition-all ${props.theme == 'dark' ? "text-white/70" : "text-black/70"}`}>Login</a>
+                    <a className="bg-[#309689] p-2 rounded-lg px-4 hover:scale-105 transition-all text-white" href="/auth/signup">Register</a> </> : <div className={`flex justify-center items-center gap-4  ${props.theme == 'dark' ? "text-white" : "text-black"}`}>
                         <p className='max-md:hidden'>Welcome! {user?.data?.user?.user?.fullName}</p> 
+                        <a href='/dashboard'>Dashboard</a>
                     <button className={`bg-[#309689] p-2 rounded-lg px-4 hover:scale-105 transition-all text-white`} onClick={
                         () => {
-                            router.push('/logout')
+                            router.replace('/logout')
                         }
                     }>Logout</button></div>}
             </div>
@@ -81,7 +82,7 @@ export function Dashboard() {
                         <a href='/dashboard/contact' className={`w-32 flex justify-center h-10 items-center cursor-pointer ${user?.data?.user?.user?.role === 'Admin' ? `block` : 'hidden'}`}>Contacts</a>
                         <button className="w-32 flex justify-center h-10 items-center cursor-pointer" onClick={
                             () => {
-                                router.push('/logout')
+                                router.replace('/logout')
                             }
                         }>
                             Logout

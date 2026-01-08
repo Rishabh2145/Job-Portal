@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useGetJobQuery } from "@/store/api/job";
 
-const cat = [
+export const cat = [
     { image: "agriculture 2.svg", name: "Agriculture", job: "1254" },
     { image: "Group.svg", name: "Media Production", job: "816" },
     { image: "agriculture 2 (1).svg", name: "Commerce", job: "2082" },

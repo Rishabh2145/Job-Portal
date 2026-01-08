@@ -1,5 +1,4 @@
 "use client"
-import { jobs } from "@/app/page"
 import Job from "@/components/Job"
 import { useGetJobQuery } from "@/store/api/job"
 

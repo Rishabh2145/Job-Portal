@@ -34,24 +34,24 @@ export default function SideBar() {
             </div>
             <div className="flex flex-col gap-2 mt-5">
                 <p className="text-xs text-gray-500">Overview</p>
-                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={() => router.push('/dashboard')}>
+                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={() => router.replace('/dashboard')}>
                     Dashboard
                 </button>
-                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={() => router.push('/dashboard/profile')}>
+                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={() => router.replace('/dashboard/profile')}>
                     My Profile
                 </button>
-                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={() => router.push('/dashboard/job')}>
+                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={() => router.replace('/dashboard/job')}>
                     Jobs Applied
                 </button>
-                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.user?.role !== 'Candidate' ? 'block' : 'hidden'}`} onClick={() => router.push('/dashboard/addjob')}>
+                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.user?.role !== 'Candidate' ? 'block' : 'hidden'}`} onClick={() => router.replace('/dashboard/addjob')}>
                     Add a New Job
                 </button>
-                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.user?.role === 'Admin' ? `block` : 'hidden'}`} onClick={() => router.push('/dashboard/contact')}>
+                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.user?.role === 'Admin' ? `block` : 'hidden'}`} onClick={() => router.replace('/dashboard/contact')}>
                     Contact
                 </button>
                 <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={
                     () => {
-                        router.push('/logout')
+                        router.replace('/logout')
                     }
                 }>
                     Logout

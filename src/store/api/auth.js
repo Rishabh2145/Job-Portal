@@ -1,3 +1,4 @@
+
 import { baseApi } from "./baseApi";
 
 export const authApi = baseApi.injectEndpoints({
@@ -30,9 +31,48 @@ export const signApi = baseApi.injectEndpoints({
                     password
                 }
             })
+        }),
+        verify : builder.mutation({
+            query: ({email, token}) => ({
+                url: '/auth/verify',
+                method: 'POST',
+                body: {
+                    email,
+                    token
+                }
+            })
+        }),
+        checkVerification: builder.mutation({
+            query: ({email}) => ({
+                url: '/auth/check',
+                method: "POST",
+                body: {
+                    email
+                }
+            })
+        }),
+        reset: builder.mutation({
+            query: ({email, token, password})=>({
+                url: '/auth/reset',
+                method: "POST",
+                body:{
+                    email,
+                    token,
+                    password
+                }
+            })
+        }),
+        forgot: builder.mutation({
+            query: ({email}) => ({
+                url: '/auth/forgot',
+                method: "POST",
+                body: {
+                    email
+                }
+            })
         })
     })
 })
 
 export const { useSignupMutation } = authApi
-export const { useSigninMutation } = signApi
+export const { useSigninMutation, useVerifyMutation, useCheckVerificationMutation, useResetMutation, useForgotMutation } = signApi

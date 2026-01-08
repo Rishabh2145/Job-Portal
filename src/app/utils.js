@@ -43,8 +43,7 @@ export const profileValidation = Yup.object({
 
   mobile: Yup.string()
     .trim()
-    .matches(/^[0-9]{10}$/, 'Mobile number must be 10 digits')
-    .required('Mobile number is required'),
+    .matches(/^[0-9]{10}$/, 'Mobile number must be 10 digits'),
 
   institute: Yup.string()
     .trim()
@@ -53,7 +52,6 @@ export const profileValidation = Yup.object({
 
   instituteGrade: Yup.string()
     .trim()
-    .matches(/^[A-F][+-]?$/, 'Enter a valid grade (A, B+, etc.)')
     .required('Institute grade is required'),
 
   school: Yup.string()
@@ -63,7 +61,6 @@ export const profileValidation = Yup.object({
 
   schoolGrade: Yup.string()
     .trim()
-    .matches(/^[A-F][+-]?$/, 'Enter a valid grade (A, B+, etc.)')
     .required('School grade is required'),
 
   address: Yup.string()
