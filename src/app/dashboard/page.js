@@ -24,7 +24,7 @@ export default function HomePage() {
             </div>
             <div className="px-1">
                 {jobs ? jobs.map((item, index) => (
-                    <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} />
+                    <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} id={item._id}/>
                 )) : <>Loading...</>}
             </div>
         </div>

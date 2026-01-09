@@ -25,7 +25,7 @@ export default function AddJob() {
                 resetForm()
             } catch (err) {
                 console.log(err)
-                handleError(err?.data?.err?.message)
+                handleError(err?.data?.message)
             }
         }
     })

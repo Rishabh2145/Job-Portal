@@ -17,7 +17,7 @@ export default function Course() {
     return (
         <div className="m-6 px-4">
             {jobs.map((item, index) => (
-                <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} />
+                <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} id={item._id}/>
             ))}
         </div>
     )

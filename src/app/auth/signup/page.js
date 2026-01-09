@@ -4,12 +4,19 @@ import { useFormik } from "formik";
 import { useSignupMutation } from "@/store/api/auth";
 import { handleSuccess, handleError } from "../../utils";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 
 export default function HomePage() {
   const router = useRouter()
+  const notMatch = (pass, conf) => {
+    if (pass !== conf) {
+      return true;
+    }
+    return false;
+  }
 
-
+  const [confirm, setConfirm] = useState('')
   const [signup, { isLoading }] = useSignupMutation()
   const details = useFormik({
     initialValues: {
@@ -21,16 +28,20 @@ export default function HomePage() {
     },
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
+        if (notMatch(values.password, confirm)) {
+          handleError("Password and Confirm Password Not Matched!")
+          return
+        }
         const res = await signup(values).unwrap()
         if (!res) {
           handleError("Cannot Signup at that time. Please try again later.")
           return
         }
-        handleSuccess("Signup Success! Please login with same credentials.")        
+        handleSuccess("Signup Success! Please login with same credentials.")
         resetForm()
         router.replace('/logout')
       } catch (err) {
-        handleError("Signup failed!")
+        handleError(`Signup Failed! ${err.data.message}`)
         console.log(err)
       } finally {
         setSubmitting(false)
@@ -104,15 +115,15 @@ export default function HomePage() {
               type="password"
               placeholder="Confirm Password"
               id="confirm"
+              onChange={(e) => setConfirm(e.target.value)}
               className="border-1 border-solid border-gray-400 rounded-lg text-black-400 p-2"
-
               required
             />
             <div className="flex">
               <input type="checkbox" className="mr-2" />
               <span className="text-gray-500 text-sm">I've read and agree with your <span className="text-indigo-500 ">Terms of Service</span></span>
             </div>
-            <input type="submit" id='signup' value='Create Account' className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700" />
+            <input type="submit" disabled={isLoading || notMatch(details.values.password, confirm)} id='signup' value={isLoading ? "Loading..." : 'Create Account'} className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700" />
             <p className="self-center text-gray-500">or</p>
             <div className="flex gap-2 text-gray-700 max-md:flex-col">
               <div className="flex basis-1/2 items-center justify-center gap-2 border-1 border-gray-300 border-solid rounded-lg p-2 cursor-pointer hover:bg-gray-100">

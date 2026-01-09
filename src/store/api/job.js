@@ -20,8 +20,17 @@ const jobadd = baseApi.injectEndpoints({
         }),
         getJob : builders.query({
             query : () => '/dashboard/jobData'
+        }),
+        jobDetail : builders.mutation({
+            query: ({id}) => ({
+                url: '/job',
+                method: 'POST',
+                body:{
+                    id
+                }
+            })
         })
     })
 })
 
-export const { useAddjobMutation, useGetJobQuery } = jobadd
+export const { useAddjobMutation, useGetJobQuery, useJobDetailMutation } = jobadd

@@ -36,7 +36,7 @@ export default function Header(props) {
             <div className={`flex gap-6 items-center `}>
                 {(user?.status === 'rejected') ? <><a href="/auth/login" className={`hover:scale-105 transition-all ${props.theme == 'dark' ? "text-white/70" : "text-black/70"}`}>Login</a>
                     <a className="bg-[#309689] p-2 rounded-lg px-4 hover:scale-105 transition-all text-white" href="/auth/signup">Register</a> </> : <div className={`flex justify-center items-center gap-4  ${props.theme == 'dark' ? "text-white" : "text-black"}`}>
-                        <p className='max-md:hidden'>Welcome! {user?.data?.user?.user?.fullName}</p> 
+                        
                         <a href='/dashboard'>Dashboard</a>
                     <button className={`bg-[#309689] p-2 rounded-lg px-4 hover:scale-105 transition-all text-white`} onClick={
                         () => {

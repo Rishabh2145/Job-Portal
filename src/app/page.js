@@ -40,7 +40,7 @@ const testimony = [
 ]
 
 
-const newsBlog = [
+export const newsBlog = [
     { type: "News", thumb: '/images/news/news1.png', date: "30 March 2024", title: "Revitalizing Workplace Morale: Innovative Tactics for Boosting Employee Engagement in 2024", height: 636, width: 540 },
     { type: "Blog", thumb: '/images/news/news2.png', date: "30 March 2024", title: "How to avoid the top six most common job interview mistakes", height: 836, width: 800 },
 ]
@@ -129,7 +129,7 @@ export default function HomePage() {
                 </div>
 
                 {jobs ? jobs.map((item, index) => (
-                    <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} />
+                    <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} id={item._id}/>
                 )) : <>Loading...</>}
             </div>
 

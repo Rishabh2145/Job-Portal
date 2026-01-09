@@ -1,7 +1,7 @@
 import Image from "next/image";
 export default function Footer(){
     return (
-        <div className="pt-12 bg-black w-screen flex flex-col justify-center items-center gap-6 ">
+        <div className="pt-12 bg-black w-screen flex flex-col justify-center items-center gap-6 text-white">
                 <div className="flex justify-between w-6/7 max-md:flex-col max-md:items-center max-md:gap-8">
                     <div className="flex flex-col gap-5 basis-1/4 max-md:items-center">
                         <div className="flex gap-2 items-center">
@@ -13,14 +13,14 @@ export default function Footer(){
                             />
                             <p className="font-bold text-white text-xl text-center">Job</p>
                         </div>
-                        <h3 className="line-clamp-3 font-bold max-md:text-center">
+                        <h3 className="line-clamp-3 text-white font-bold max-md:text-center">
                             Quis enim pellentesque viverra tellus eget malesuada facilisis. Congue nibh vivamus aliquet nunc mauris dui nullam et.
                         </h3>
                     </div>
                     <div className="flex flex-col gap-5 max-md:items-center">
                         <h2 className="font-bold text-xl">Company</h2>
                         <div className="flex flex-col cursor-pointer max-md:items-center">
-                            <a>About Us</a>
+                            <a href="/about">About Us</a>
                             <a href="/contact">Contact Us</a>
                             <a>Our Teams</a>
                             <a>Partners</a>

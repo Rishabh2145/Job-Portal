@@ -29,7 +29,7 @@ export default function Login() {
             router.replace('/dashboard')
           }
         } catch (err) {
-          handleError("Invalid Credentials. Please try again Later.")
+          handleError(err.data.message)
           console.log(err)
         }
       } catch (err) {
@@ -40,7 +40,7 @@ export default function Login() {
     }
   })
 
-  
+
 
   return (
     <main className="flex bg-white">
@@ -85,7 +85,7 @@ export default function Login() {
                 <a href="/auth/forgot" className="text-indigo-500 text-sm">Forgot Password</a>
               </div>
             </div>
-            <input type="submit" value='Sign In' href="/dashboard" className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700" />
+            <input type="submit" disabled={isLoading} value={isLoading ? " Loading ..." : 'Sign In'} href="/dashboard" className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700" />
 
             <p className="self-center text-gray-500">or</p>
             <div className="flex gap-2 text-gray-700 max-md:flex-col">

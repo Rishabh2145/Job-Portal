@@ -26,5 +26,89 @@ body {
 }
 
 .fadeBlue{
+  background-color: #30968930;
+  opacity: 10;
+}
+
+.buttonColor{
   background-color: #309689;
+  color: white;
+  border-radius: 5px;
+}
+
+.aboutTop{
+  background-image: url('/images/about/top.png');
+  height: 582px;
+  width: 1296px;
+  border-radius: 20px;
+  
+}
+
+.aboutMid {
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),url('/images/about/f0c95745209aac1189f71ff777d64f45d04f39c0.png');
+  height: 700px;
+  width: 1296px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.play {
+  background-color: #309689;
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.index {
+  height: 50px;
+  min-width: 50px;
+  background-color: #309689;
+  font-size: 25px;
+  text-align: center;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  justify-content: center;
+}
+
+.aboutLong1 {
+  background-image: url('/images/about/5f61a68b44bb1b6e63c5ac2ffd8d1d5d702c9ec2.png');
+  height: 560px;
+  width: 306px;
+  border-radius: 20px;
+  background-size: cover;
+}
+
+.aboutLong2{
+  background-image: url('/images/about/76d6e88b1521596018dc8f323e5b49d10c0f7508.png');
+  width: 306px;
+  height: 338px;
+  border-radius: 20px;
+}
+
+.aboutLong3{
+  background-image: url('/images/about/2644973c0550f5514ead3bd2a124c28a3ba34797.png');
+  width: 306px;
+  height: 200px;
+  border-radius: 20px;
+}
+
+.faq{
+  color: #309689;
+}
+
+@media screen and (max-width : 600px) {
+  .aboutTop{
+    width: 380px;
+    height: 400px;
+  }
+
+  .aboutMid{
+    width: 380px;
+    height: auto;
+  }
 }

@@ -1,6 +1,5 @@
 "use client"
 import Image from "next/image";
-import { useEffect } from "react";
 
 export default function Job(props) {
     const now = new Date()
@@ -13,7 +12,7 @@ export default function Job(props) {
         hour = true
     }
     return (
-        <div className="flex flex-col justify-between mt-8 gap-6 shadow-lg p-6 rounded-xl hover:shadow-xl hover:scale-105 transition-all cursor-pointer bg-white">
+        <div className="flex flex-col justify-between mt-8 gap-6 shadow-lg p-6 rounded-xl hover:shadow-xl hover:scale-105 transition-all cursor-pointer bg-white w-full">
             <div className="flex w-full justify-between">
                 <p className="bg-[#309689]/20 text-[#309689] px-2 py-1 rounded-lg text-sm">
                     {time} {hour ? 'hr' : 'min'} ago
@@ -46,7 +45,7 @@ export default function Job(props) {
                         <span className="text-gray-700">{props.location}</span>
                     </div>
                 </div>
-                <a href="/job" className="p-2 bg-[#309689] rounded-lg text-white px-4 hover:scale-105 transition-all shadow-xl max-md:text-center max-md:mt-4">
+                <a href={`/job/${props.id}`} className="p-2 bg-[#309689] rounded-lg text-white px-4 hover:scale-105 transition-all shadow-xl max-md:text-center max-md:mt-4">
                     Job Details
                 </a>
             </div>
