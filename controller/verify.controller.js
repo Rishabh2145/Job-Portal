@@ -22,41 +22,39 @@ const verifyToken = async (req, res) => {
                         isVerified: true
                     }
                 }).then(() => {
-                    res.status(200).json({
+                    return res.status(200).json({
                         message: 'Account Verified Successfully!'
                     })
                 })
             }
-            const user = await account.find({ email })
-            const newToken = generateToken({ user })
-            await account.updateOne({ email }, {
-                $set: {
-                    token: newToken,
-                    expiry: new Date(Date.now() + 24 * 60 * 60 * 1000)
-                }
-            })
+            else {
+                const user = await account.find({ email })
+                const newToken = generateToken({ user })
+                await account.updateOne({ email }, {
+                    $set: {
+                        token: newToken,
+                        expiry: new Date(Date.now() + 24 * 60 * 60 * 1000)
+                    }
+                })
 
-            await sendMail({
-                to: req.body.email,
-                subject: "Verification Link Expired! Please use the new Verification Link.",
-                templateName: 'signup',
-                templateData: {
-                    name: req.body.fullName,
-                    portalName: 'Job Portal',
-                    loginUrl: `${process.env.FRONTEND_URL}/auth/verify?token=${newToken}&email=${req.body.email}`,
-                    year: 2026
-                }
-            })
-
-            res.status(400).json({
-                message: "Verification Link Expired! Sent Again!",
-            })
+                await sendMail({
+                    to: req.body.email,
+                    subject: "Verification Link Expired! Please use the new Verification Link.",
+                    templateName: 'signup',
+                    templateData: {
+                        name: req.body.fullName,
+                        portalName: 'Job Portal',
+                        loginUrl: `${process.env.FRONTEND_URL}/auth/verify?token=${newToken}&email=${req.body.email}`,
+                        year: 2026
+                    }
+                })
+                return res.status(400).json({
+                    message: "Verification Link Expired! Sent Again!",
+                })
+            }
         }
-        res.status(400).json({
-            message: "Token is not Valid!"
-        })
     } catch (err) {
-        res.status(400).json({
+        return res.status(400).json({
             message: 'Link is not Correct!'
         })
     }

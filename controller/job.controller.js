@@ -36,4 +36,19 @@ const getJob = async (req, res) => {
     }
 }
 
-module.exports = { addJob, getJob }
+const jobData = async (req, res) => {
+    try{
+        const {id} = req.body;
+        
+        const jobs = await JobModel.findById(id)
+        return res.status(200).json({
+            jobs
+        })
+    } catch(err){
+        return res.status(400).json({
+            message: 'Job Not Found!'
+        })
+    }
+}
+
+module.exports = { addJob, getJob , jobData}

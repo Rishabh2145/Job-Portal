@@ -17,11 +17,13 @@ const signUp = new mongoose.Schema({
     },
     username: {
         type: String,
+        unique: true,
         minLength: [5, "Username must contain at least 5 characters"]
     },
     email: {
         type: String,
         required: true,
+        unique: true,
         validate: {
             validator: (v) => isValid.emailValidate(v),
             message: "Please enter a valid email address"
@@ -37,6 +39,7 @@ const signUp = new mongoose.Schema({
     },
     contact: {
         type: Number,
+        unique: true,
         validate: {
             validator: (v) => isValid.mobileValidate(v),
             message: "Please enter a valid 10-digit Indian mobile number starting with 6-9"
@@ -88,7 +91,6 @@ signUp.pre('save', async function (next) {
 });
 
 
-signUp.index({ username: 1, email: 1, contact: 1 }, { unique: true });
 
 
 

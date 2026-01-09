@@ -6,6 +6,7 @@ const contact = require('../controller/contact.controller')
 const dashboard = require('../routes/dashboard.routes')
 const userRoutes = require('../routes/user.routes')
 const authRoutes = require('./auth.routes')
+const jobRoutes = require('./job.routes')
 const { Authorization } = require('../middleware/auth')
 router.get('/', (req, res) => {
     return res.send("Hello World")
@@ -14,9 +15,10 @@ router.get('/', (req, res) => {
 router.post('/signup', user.signUp)
 router.post('/signin', signIn.signIn)
 router.get('/message', Authorization, contact.getMessages)
-router.post('/contact', Authorization, contact.contact)
-router.use('/dashboard', Authorization, dashboard)
+router.post('/contact', contact.contact)
+router.use('/dashboard', dashboard)
 router.use('/auth', authRoutes)
+router.use('/job', Authorization, jobRoutes)
 router.use('/user', Authorization, userRoutes)
 
 module.exports = router

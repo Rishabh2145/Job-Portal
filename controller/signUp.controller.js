@@ -5,6 +5,14 @@ const dotenv = require('dotenv').config()
 const verify = require('../models/verification')
 
 const signUp = async (req, res) => {
+    try {
+        const already = await model.findOne({ email: req.body.email })
+        if (already) {
+            return res.status(400).json({
+                message: 'User Already Registered!'
+            })
+        }
+    } catch {    }
     const user = new model({
         role: req.body.role,
         fullName: req.body.fullName,
@@ -31,7 +39,7 @@ const signUp = async (req, res) => {
 
     await sendMail({
         to: req.body.email,
-        subject: "Welcome to Job Portal!",
+        subject: "Welcome to Job Portal! Please Verify your Account!",
         templateName: 'signup',
         templateData: {
             name: req.body.fullName,
