@@ -1,24 +1,19 @@
 "use client"
 import { handleError, handleSuccess } from "@/app/utils"
-import { useDelContactMutation, useGetContactQuery } from "@/store/api/contact"
+import { useDelContactMutation, useJobMessageQuery } from "@/store/api/contact"
 import { useUserQuery } from "@/store/api/user"
-
+import { useEffect } from "react"
 
 
 export default function Contact() {
-    const message = useGetContactQuery(
-        undefined, {
-        refetchOnMountOrArgChange: true,
-        refetchOnFocus: true
-    }
-    )
+    const message = useJobMessageQuery()
     const user = useUserQuery()
-    const [deleteMessage, { isLoading, isSuccess }] = useDelContactMutation(
+    const [deleteMessage, { isLoading, isSuccess}] = useDelContactMutation(
         undefined, {
         refetchOnMountOrArgChange: true,
         refetchOnFocus: true
-    }
-    )
+    })
+    const data = message?.data?.data
 
     if (!user?.data) {
         return (
@@ -26,7 +21,7 @@ export default function Contact() {
         )
     }
 
-    if (user?.data?.user?.user?.role !== 'Admin') {
+    if (user?.data?.user?.user?.role === 'Candidate') {
         return (
             <div>Access Denied!</div>
         )
@@ -44,13 +39,14 @@ export default function Contact() {
     return (
         <main className="bg-white shadow-md m-4 rounded-xl p-8 flex flex-col gap-6">
             <div className="flex justify-between">
-                <h1 className="text-3xl font-bold">Contacts</h1>
-                <a href="/dashboard/contact/add" className="bg-[#309689] text-white p-2  rounded-xl"> + Add a message</a>
+                <h1 className="text-3xl font-bold">Queries for Job</h1>
             </div>
             <p>Messages Recieved:</p>
             <table className="w-full rounded-lg overflow-hidden">
                 <thead>
                     <tr className="bg-gray-200">
+                        <th className="p-2 text-left">Job Title</th>
+                        <th className="p-2 text-left">Company Name</th>
                         <th className="p-2 text-left">First Name</th>
                         <th className=" p-2 text-left">Last Name</th>
                         <th className=" p-2 text-left">Email</th>
@@ -59,8 +55,10 @@ export default function Contact() {
                     </tr>
                 </thead>
                 <tbody>
-                    {(message.data == null) ? <tr><td colSpan={4} className="text-center text-xl">Loading...</td></tr> : message.data.data.filter(u => u.sentTo === null).map((msg, index) => (
+                    {(data == undefined) ? <tr><td colSpan={4} className="text-center text-xl">Loading...</td></tr> : data.map((msg, index) => (
                         <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                            <td className=" p-2">{msg.Message[0].title}</td>
+                            <td className=" p-2">{msg.Message[0].company}</td>
                             <td className=" p-2">{msg.firstName}</td>
                             <td className=" p-2">{msg.lastName}</td>
                             <td className=" p-2">{msg.email}</td>

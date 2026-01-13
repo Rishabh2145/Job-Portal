@@ -70,10 +70,11 @@ export function Dashboard() {
             <p className='border-l border-gray-500' />
             <div className='flex justify-center items-center gap-4 ml-5'>
                 <Image
-                    src='/images/review/Avatar.svg'
+                    src={`${process.env.NEXT_PUBLIC_API}/${user?.data?.user?.user?.avatar}`}
                     alt='Profile'
                     height={45}
                     width={45}
+                    unoptimized
                 />
                 <h2 className='w-fit min-w-38 max-w-38 flex gap-4 cursor-pointer truncate max-md:min-w-0'><details className='dropdown'>
                     <summary className='font-bold truncate'><span className='max-md:hidden truncate'>{name ? `${name}` : 'Guest'}</span></summary>

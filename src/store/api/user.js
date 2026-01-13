@@ -3,7 +3,8 @@ import { baseApi } from "./baseApi";
 const userApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         user: builder.query({
-            query: () => '/user/profile'
+            query: () => '/user/profile',
+            providesTags: ['UPDATE_USER']
         })
     })
 })
@@ -26,7 +27,8 @@ const editUser = baseApi.injectEndpoints({
                     schoolGrade,
                     address
                 }
-            })
+            }),
+            invalidatesTags: ['UPDATE_USER']
         })
     })
 })

@@ -15,7 +15,8 @@ export default function Contact() {
             firstName: "",
             lastName: "",
             email: "",
-            message: ""
+            message: "",
+            messageTo: null
         },
         validationSchema: contactValidation
         ,

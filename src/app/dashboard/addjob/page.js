@@ -9,18 +9,30 @@ export default function AddJob() {
     const [job, { isLoading }] = useAddjobMutation()
     const jobData = useFormik({
         initialValues: {
-            companyImage: 'images/jobs/Logo (6).svg',
+            companyImage: null,
             title: '',
             company: '',
             category: 'Agriculture',
             jobType: 'Full-Time',
             salary: '',
             location: '',
-            description: ''
+            description: '',
+            degree: 'Bachelor',
+            experience: '',
+            responsibility: '',
+            skill: '',
+            addedBy: user?.data?.user?.user._id
         },
-        onSubmit: async (values, {resetForm}) => {
+        enableReinitialize: true,
+        onSubmit: async (values, { resetForm }) => {
             try {
-                const res = await job(values).unwrap()
+                const formData = new FormData()
+                Object.entries(values).forEach(([key, value]) => {
+                    if (value !== null && value !== "") {
+                        formData.append(key, value);
+                    }
+                });
+                const res = await job(formData).unwrap()
                 handleSuccess("Job Added Successfully!")
                 resetForm()
             } catch (err) {
@@ -40,6 +52,15 @@ export default function AddJob() {
         <div className="bg-white p-12 flex flex-col gap-8 m-4 rounded-xl items-center">
             <h1 className="text-3xl font-bold text-center">Add a Job</h1>
             <form onSubmit={jobData.handleSubmit} className="flex w-5/6 justify-center items-center gap-6 grid grid-cols-4">
+                <p>Company Logo: </p>
+                <input
+                    type="file"
+                    name='companyImage'
+                    accept="image/*"
+                    id="companyImage"
+                    className="border rounded-md h-10 px-2 col-span-3 flex justify-center items-center"
+                    onChange={(e) => jobData.setFieldValue('companyImage', e.target.files[0])}
+                />
                 <p>Job Title: </p>
                 <input
                     name='title'
@@ -81,6 +102,9 @@ export default function AddJob() {
                     <option value="Internship">Internship</option>
                     <option value="Remote">Remote</option>
                     <option value="Hybrid">Hybrid</option>
+                    <option value="Freelance">Freelance</option>
+                    <option value="Seasonal">Seasonal</option>
+                    <option value="Fixed-Price">Fixed-Price</option>
                 </select>
                 <p>Expected Salary: </p>
                 <input
@@ -100,6 +124,24 @@ export default function AddJob() {
                     onChange={jobData.handleChange}
                     value={jobData.values.location}
                 />
+                <p>Degree Required: </p>
+                <input
+                    name='degree'
+                    id="degree"
+                    placeholder="Degree required for job"
+                    className="border rounded-md h-10 px-2"
+                    onChange={jobData.handleChange}
+                    value={jobData.values.degree}
+                />
+                <p>Experience Required: </p>
+                <input
+                    name='experience'
+                    id="experience"
+                    placeholder="Experience Requied for this job"
+                    className="border rounded-md h-10 px-2"
+                    onChange={jobData.handleChange}
+                    value={jobData.values.experience}
+                />
                 <p>Job Description: </p>
                 <textarea
                     name='description'
@@ -108,6 +150,24 @@ export default function AddJob() {
                     className="border rounded-md h-10 px-2 col-span-3"
                     onChange={jobData.handleChange}
                     value={jobData.values.description}
+                />
+                <p>Key Responsibilities: </p>
+                <textarea
+                    name='responsibility'
+                    id="responsibility"
+                    placeholder="Enter Key Responsibility of the Job"
+                    className="border rounded-md h-10 px-2 col-span-3"
+                    onChange={jobData.handleChange}
+                    value={jobData.values.responsibility}
+                />
+                <p>Skills Required: </p>
+                <textarea
+                    name='skill'
+                    id="skill"
+                    placeholder="Enter Skill Required of the Job"
+                    className="border rounded-md h-10 px-2 col-span-3"
+                    onChange={jobData.handleChange}
+                    value={jobData.values.skill}
                 />
 
                 <div className="flex justify-center gap-6 w-full col-span-4">

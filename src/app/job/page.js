@@ -134,7 +134,7 @@ export default function Jobs() {
                 <div className="m-6 px-4 grid col-span-4 max-md:col-span-1">
                     <p className="text-gray-500 font-bold">Showing Jobs {jobs.length} - {jobs.length} of {jobs.length} results</p>
                     {jobs.map((item, index) => (
-                        <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} id={item._id}/>
+                        <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} id={item._id} isHome = {true}/>
                     ))}
                 </div>
             </div>
