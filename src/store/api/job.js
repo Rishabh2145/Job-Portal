@@ -3,30 +3,22 @@ import { baseApi } from "./baseApi";
 const jobadd = baseApi.injectEndpoints({
     endpoints: (builders) => ({
         addjob: builders.mutation({
-            query: (formData) => {
-                // const form = new FormData()
-                // form.append('jobs', companyImage)
-                // form.append('title', title)
-                // form.append('company', company)
-                // form.append('category', category)
-                // form.append('jobType', jobType)
-                // form.append('salary', salary)
-                // form.append('location', location)
-                // form.append('description', description)
-                // form.append('degree', degree)
-                // form.append('experience', experience)
-                // form.append('responsibility', responsibility)
-                // form.append('skill', skill)
-                // form.append('addedBy', addedBy)
-                return {
-                    url: '/dashboard/job',
-                    method: "POST",
-                    body: formData
-                }
-            }
+            query: (formData) => ({
+                url: '/dashboard/job',
+                method: "POST",
+                body: formData
+
+            })
         }),
         getJob: builders.query({
             query: () => '/dashboard/jobData'
+        }),
+        getAppliedJob: builders.query({
+            query: () => '/job/applied',
+        }),
+        getApplicant: builders.query({
+            query: () => '/job/applicant',
+            providesTags: ['APPLIED_JOB']
         }),
         jobDetail: builders.mutation({
             query: ({ id }) => ({
@@ -50,9 +42,27 @@ const jobadd = baseApi.injectEndpoints({
                 }
             }),
             invalidatesTags: ['JOB_UPDATE']
+        }),
+        filter: builders.query({
+            query: (params) => ({
+                url: '/dashboard/filter',
+                params
+            })
+        }),
+        updateStatus: builders.mutation({
+            query: ({ id, jobId, status }) => ({
+                url: '/job/status',
+                method: 'POST',
+                body: {
+                    id,
+                    jobId,
+                    status
+                }
+            }),
+            invalidatesTags: ['APPLIED_JOB']
         })
 
     })
 })
 
-export const { useAddjobMutation, useGetJobQuery, useJobDetailMutation, useGetBookmarkQuery, useBookmarkMutation } = jobadd
+export const { useAddjobMutation, useGetJobQuery, useGetApplicantQuery, useJobDetailMutation, useGetBookmarkQuery, useBookmarkMutation, useGetAppliedJobQuery, useFilterQuery, useLazyFilterQuery, useUpdateStatusMutation } = jobadd

@@ -7,7 +7,6 @@ import Review from "@/components/Review";
 import News from "@/components/News";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useGetJobQuery } from "@/store/api/job";
 

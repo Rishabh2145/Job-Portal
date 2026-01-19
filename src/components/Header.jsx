@@ -57,7 +57,7 @@ export function MenuExpand() {
 export function Dashboard() {
     const router = useRouter()
     const user = useUserQuery()
-    const name = user?.data?.user?.user?.fullName
+    const name = user?.data?.user?.fullName
     
     return (
         <div className='flex justify-between gap-5 sticky top-2 backdrop-blur-sm bg-white/5 z-100 m-2 rounded-full p-4 shadow-sm '>
@@ -70,7 +70,7 @@ export function Dashboard() {
             <p className='border-l border-gray-500' />
             <div className='flex justify-center items-center gap-4 ml-5'>
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_API}/${user?.data?.user?.user?.avatar}`}
+                    src={`${process.env.NEXT_PUBLIC_API}/${user?.data?.user?.avatar}`}
                     alt='Profile'
                     height={45}
                     width={45}
@@ -80,7 +80,7 @@ export function Dashboard() {
                     <summary className='font-bold truncate'><span className='max-md:hidden truncate'>{name ? `${name}` : 'Guest'}</span></summary>
                     <div className='absolute flex flex-col justify-center rounded-3xl shadow-xl bg-white mt-7 p-2'>
                         <a href='/dashboard/profile' className='w-32 flex justify-center h-10 items-center cursor-pointer'>My Profile</a>
-                        <a href='/dashboard/contact' className={`w-32 flex justify-center h-10 items-center cursor-pointer ${user?.data?.user?.user?.role === 'Admin' ? `block` : 'hidden'}`}>Contacts</a>
+                        <a href='/dashboard/contact' className={`w-32 flex justify-center h-10 items-center cursor-pointer ${user?.data?.user?.role === 'Admin' ? `block` : 'hidden'}`}>Contacts</a>
                         <button className="w-32 flex justify-center h-10 items-center cursor-pointer" onClick={
                             () => {
                                 router.replace('/logout')

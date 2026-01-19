@@ -26,7 +26,7 @@ export default function Contact() {
         )
     }
 
-    if (user?.data?.user?.user?.role !== 'Admin') {
+    if (user?.data?.user?.role !== 'Admin') {
         return (
             <div>Access Denied!</div>
         )

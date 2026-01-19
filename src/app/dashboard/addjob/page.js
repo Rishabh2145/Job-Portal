@@ -14,14 +14,14 @@ export default function AddJob() {
             company: '',
             category: 'Agriculture',
             jobType: 'Full-Time',
-            salary: '',
+            salary: undefined,
             location: '',
             description: '',
             degree: 'Bachelor',
-            experience: '',
+            experience: 'No-experience',
             responsibility: '',
             skill: '',
-            addedBy: user?.data?.user?.user._id
+            addedBy: user?.data?.user._id
         },
         enableReinitialize: true,
         onSubmit: async (values, { resetForm }) => {
@@ -44,7 +44,7 @@ export default function AddJob() {
     if (!user?.data) {
         return (<>Loading...</>)
     }
-    if (user?.data?.user?.user?.role === 'Candidate') {
+    if (user?.data?.user?.role === 'Candidate') {
         return (<>Access Denied</>)
     }
 
@@ -110,10 +110,13 @@ export default function AddJob() {
                 <input
                     name='salary'
                     id="salary"
+                    type="number"
+                    max={9999}
+                    min={0}
                     placeholder="Salary with Currency Symbol"
                     className="border rounded-md h-10 px-2"
                     onChange={jobData.handleChange}
-                    value={jobData.values.salary}
+                    value={jobData.values.salary || 0}
                 />
                 <p>Company Location: </p>
                 <input
@@ -134,14 +137,12 @@ export default function AddJob() {
                     value={jobData.values.degree}
                 />
                 <p>Experience Required: </p>
-                <input
-                    name='experience'
-                    id="experience"
-                    placeholder="Experience Requied for this job"
-                    className="border rounded-md h-10 px-2"
-                    onChange={jobData.handleChange}
-                    value={jobData.values.experience}
-                />
+                <select name="experience" id="experience" className="border rounded-md h-10 px-2" onChange={jobData.handleChange} value={jobData.values.experience}>
+                    <option value="No-experience">No-experience</option>
+                    <option value="Fresher">Fresher</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Expert">Expert</option>
+                </select>
                 <p>Job Description: </p>
                 <textarea
                     name='description'
@@ -171,7 +172,7 @@ export default function AddJob() {
                 />
 
                 <div className="flex justify-center gap-6 w-full col-span-4">
-                    <input type="submit" value="Add Job" className="border-green-500 border px-4 rounded-lg text-green-500 p-2 hover:bg-green-500 cursor-pointer hover:text-white transition-all" />
+                    <input type="submit" disabled={isLoading} value={isLoading ? "Loading..." : "Add Job"} className="border-green-500 border px-4 rounded-lg text-green-500 p-2 hover:bg-green-500 cursor-pointer hover:text-white transition-all" />
                     <button className="border-red-500 border px-4 rounded-lg text-red-500 p-2 hover:bg-red-500 cursor-pointer hover:text-white transition-all">Discard</button>
                 </div>
             </form>

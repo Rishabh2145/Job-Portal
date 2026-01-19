@@ -11,7 +11,7 @@ export default function Edit() {
     const router = useRouter()
     const [mutation, { isLoading }] = useEditUserMutation()
 
-    const userData = user?.data?.user?.user
+    const userData = user?.data?.user
     const editForm = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -31,7 +31,8 @@ export default function Edit() {
         onSubmit: async (values, {resetForm}) => {
             try {
                 const res = await mutation(values).unwrap()
-                handleSuccess("Details Updated successfully! Please Re-Login to Access Updated Details.")
+                handleSuccess(res.message)
+                router.replace('/dashboard/profile')
                 
             } catch (err) {
                 handleError("Unable to process your request! Please try again later")

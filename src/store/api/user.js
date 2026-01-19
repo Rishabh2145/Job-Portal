@@ -5,6 +5,15 @@ const userApi = baseApi.injectEndpoints({
         user: builder.query({
             query: () => '/user/profile',
             providesTags: ['UPDATE_USER']
+        }),
+        subscribe : builder.mutation({
+            query: ({email}) => ({
+                url: '/subscribe',
+                method: 'POST',
+                body: {
+                    email
+                }
+            })
         })
     })
 })
@@ -33,5 +42,5 @@ const editUser = baseApi.injectEndpoints({
     })
 })
 
-export const { useUserQuery } = userApi
+export const { useUserQuery, useSubscribeMutation } = userApi
 export const { useEditUserMutation } = editUser

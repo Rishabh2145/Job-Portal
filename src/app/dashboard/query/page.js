@@ -21,7 +21,7 @@ export default function Contact() {
         )
     }
 
-    if (user?.data?.user?.user?.role === 'Candidate') {
+    if (user?.data?.user?.role === 'Candidate') {
         return (
             <div>Access Denied!</div>
         )

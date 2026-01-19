@@ -1,6 +1,7 @@
 "use client"
 import { useGetBookmarkQuery, useGetJobQuery } from "@/store/api/job";
 import { jobs, sample } from "../page";
+import { useState } from "react";
 import Job from "@/components/Job";
 export default function HomePage() {
     const jobData = useGetJobQuery(undefined, {
@@ -19,6 +20,7 @@ export default function HomePage() {
         (job) => !bookmarkedIds.has(job._id.toString())
     );
 
+    const [filter, setFilter] = useState('All')
 
     return (
         <div className="p-5 px-7 py-6">
@@ -33,14 +35,26 @@ export default function HomePage() {
                 <div className="bg-[url('/images/Imgs.svg')] h-full bg-contain bg-no-repeat w-full"></div>
             </div>
             <div className="px-1">
-                <h1 className="text-2xl p-4 pb-0 font-bold">Bookmarks</h1>
-                {bookJobs ? bookJobs.bookmarks.bookmarks.map((item, index) => (
-                    <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} id={item._id} bookmark={true} isHome={false}/>
-                )) : <>Loading...</>}
-                <h1 className="text-2xl p-4 pb-0 font-bold">Jobs</h1>
-                {nonBookmarkedJobs ? nonBookmarkedJobs.map((item, index) => (
+                <div className="flex items-center justify-between mt-4">
+                    <h1 className="text-2xl p-4 font-bold self-center">{filter} Jobs</h1>
+                    <select className="p-4 rounded-xl border border-gray-600 bg-white" onChange={(e) => setFilter(e.target.value)}>
+                        <option value='All'>All</option>
+                        <option value='Bookmarked'>Bookmarks</option>
+                        <option value=''>Not Bookmarks</option>
+                    </select>
+                </div>
+
+                <div className={`${filter !== '' ? 'block' : 'hidden'}`}>
+                    {bookJobs ? bookJobs.bookmarks.bookmarks.map((item, index) => (
+                        <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} id={item._id} bookmark={true} isHome={false} />
+                    )) : <>Loading...</>}
+                </div>
+
+                <div className={`${filter !== 'Bookmarked' ? 'block' : 'hidden'}`}>
+                    {nonBookmarkedJobs ? nonBookmarkedJobs.map((item, index) => (
                     <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} isHome={false} id={item._id} bookmark={false} />
                 )) : <>Loading...</>}
+                </div>
             </div>
         </div>
     )

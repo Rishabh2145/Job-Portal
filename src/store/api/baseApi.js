@@ -6,13 +6,12 @@ export const baseApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.NEXT_PUBLIC_API,
         credentials: 'include',
-        
         prepareHeaders: (headers) => {
             headers.set('Content-Type', 'application/json')
             return headers
         },
     }),
-    tagTypes:["CONTACT_UPDATE", 'JOB_UPDATE', 'UPDATE_USER'],
+    tagTypes:["CONTACT_UPDATE", 'JOB_UPDATE', 'UPDATE_USER', 'APPLIED_JOB'],
     endpoints: () => ({})
 })
 

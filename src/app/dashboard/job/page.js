@@ -1,34 +1,25 @@
 "use client"
-import Job from "@/components/Job"
-import { useGetJobQuery, useGetBookmarkQuery } from "@/store/api/job"
-import { flightRouterStateSchema } from "next/dist/server/app-render/types"
+import Applied from "@/components/Applied"
+import { useGetAppliedJobQuery } from "@/store/api/job"
 
 export default function Course() {
-    const jobData = useGetJobQuery(undefined, {
+    const jobData = useGetAppliedJobQuery(undefined, {
         refetchOnMountOrArgChange: true,
         refetchOnFocus: true
     })
-    const bookmark = useGetBookmarkQuery()
+    
     let data = []
+    
     data = jobData?.data?.jobs || []
-    const jobs = [...data].reverse();
-    const bookJobs = bookmark?.data;
-    const bookmarkedIds = new Set(
-        (bookJobs?.bookmarks?.bookmarks || []).map((b) => b._id?.toString() ?? b.toString())
-    );
-    const nonBookmarkedJobs = jobs.filter(
-        (job) => !bookmarkedIds.has(job._id.toString())
-    );
+    const jobsData = [...data].reverse()
+    
+    
 
     return (
         <div className="m-6 px-4">
-            <h1 className="text-2xl p-4 pb-0 font-bold">Bookmarks</h1>
-            {bookJobs ? bookJobs.bookmarks.bookmarks.map((item, index) => (
-                <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} isHome={false} salary={item.salary} location={item.location} id={item._id} bookmark={true} />
-            )) : <>Loading...</>}
-            <h1 className="text-2xl p-4 pb-0 font-bold">Jobs</h1>
-            {nonBookmarkedJobs ? nonBookmarkedJobs.map((item, index) => (
-                <Job key={index} time={String(item.createdAt)} logo={item.companyImage} isHome={false} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} id={item._id} bookmark={false} />
+            <h1 className="text-2xl p-4 pb-0 font-bold">Applied Jobs</h1>
+            {jobsData ? jobsData.map((item, index) => (
+                <Applied key={index} companyImage={item?.Jobs[0].companyImage} title={item?.Jobs[0].title} company={item?.Jobs[0].company} category={item?.Jobs[0].category} jobType={item?.Jobs[0].jobType} salary={item?.Jobs[0].salary} location={item?.Jobs[0].location} _id={item?.Jobs[0]._id} status={item.status}/>
             )) : <>Loading...</>}
         </div>
     )

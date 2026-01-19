@@ -4,20 +4,27 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useFormik } from "formik"
 import { useUserQuery } from "@/store/api/user"
-import { useAvatarMutation } from "@/store/api/upload"
+import { useAvatarMutation, useResumeMutation } from "@/store/api/upload"
 import { handleError, handleSuccess } from "@/app/utils"
 
 export default function Profile() {
     const [profileUpdate, { isLoading, isSuccess }] = useAvatarMutation()
+    const [resumeUpload, ] = useResumeMutation()
     const [edit, setEdit] = useState(true);
+    const [editResume, setEditResume] = useState(true);
     const toggleEdit = () => {
         setEdit(!edit);
+    }
+    const toggleEditResume = () => {
+        setEditResume(!editResume);
     }
     const users = useUserQuery(undefined, {
         refetchOnMountOrArgChange: true,
         refetchOnFocus: true
     })
-    const profile = users?.data?.user?.user
+    
+    const profile = users?.data?.user
+    
 
     const file = useFormik({
         initialValues: {
@@ -28,6 +35,23 @@ export default function Profile() {
                 const res = await profileUpdate(values.avatar).unwrap()
                 handleSuccess(res.message)
                 resetForm()
+            } catch (err) {
+                handleError(err.data.message)
+                console.log(err)
+            }
+        }
+    })
+
+    const resume = useFormik({
+        initialValues: {
+            resume: null
+        },
+        onSubmit: async (values, {resetForm}) => {
+            try {
+                const res = await resumeUpload(values.resume).unwrap()
+                handleSuccess(res.message)
+                resetForm()
+                toggleEditResume()
             } catch (err) {
                 handleError(err.data.message)
                 console.log(err)
@@ -82,7 +106,7 @@ export default function Profile() {
             </div>
             <div className="flex flex-col justify-center items-center gap-6 p-4">
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_API}/${users?.data?.user?.user?.avatar}`}
+                    src={`${process.env.NEXT_PUBLIC_API}/${users?.data?.user?.avatar}`}
                     alt='Profile'
                     height={300}
                     width={300}
@@ -94,6 +118,16 @@ export default function Profile() {
                     <button type="submit" className="bg-green-400 text-white p-2 px-6 rounded-lg" disabled={isLoading || isSuccess}>{isLoading ? "Loading..." : "Submit"}</button>
                 </form>
                 <button className="h-12 flex border w-1/3 justify-center items-center rounded-xl border-gray-400 text-gray-700 cursor-pointer max-md:w-2/3" onClick={toggleEdit}>Edit Photo</button>
+            </div>
+            <div className="flex col-span-2 justify-between items-center gap-6 p-4">
+                <h1 className="text-xl font-bold ">Resume Upload</h1>
+                { users?.data?.user?.resume ? <a className="text-blue-700 underline cursor-pointer" href={`${process.env.NEXT_PUBLIC_API}/${users?.data?.user?.resume}`} target="_blank">View Resume</a> : <p>No resume uploaded</p>}
+                <form className={`flex gap-4 ${editResume ? 'hidden' : 'block'}`} onSubmit={resume.handleSubmit}>
+                    <input type="file" accept=".pdf" className={`border rounded-lg px-4 p-1 max-md:w-1/3`} id="resume" name='resume'
+                        onChange={(e) => resume.setFieldValue('resume', e.target.files[0])} required />
+                    <button type="submit" className="bg-green-400 text-white p-2 px-6 rounded-lg max-w-fit" disabled={isLoading || isSuccess}>{isLoading ? "Loading..." : "Submit"}</button>
+                </form>
+                <button className="h-12 flex border w-1/3 justify-center items-center rounded-xl border-gray-400 text-gray-700 cursor-pointer max-md:w-2/3" onClick={toggleEditResume}>Upload Resume</button>
             </div>
         </main>
     )

@@ -43,13 +43,16 @@ export default function SideBar() {
                 <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={() => router.replace('/dashboard/job')}>
                     Jobs Applied
                 </button>
-                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.user?.role !== 'Candidate' ? 'block' : 'hidden'}`} onClick={() => router.replace('/dashboard/addjob')}>
+                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.role !== 'Candidate' ? 'block' : 'hidden'}`} onClick={() => router.replace('/dashboard/applicant')}>
+                    Applicants
+                </button>
+                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.role !== 'Candidate' ? 'block' : 'hidden'}`} onClick={() => router.replace('/dashboard/addjob')}>
                     Add a New Job
                 </button>
-                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.user?.role === 'Admin' ? `block` : 'hidden'}`} onClick={() => router.replace('/dashboard/contact')}>
+                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.role === 'Admin' ? `block` : 'hidden'}`} onClick={() => router.replace('/dashboard/contact')}>
                     Contact
                 </button>
-                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.user?.role !== 'Candidate' ? `block` : 'hidden'}`} onClick={() => router.replace('/dashboard/query')}>
+                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.role !== 'Candidate' ? `block` : 'hidden'}`} onClick={() => router.replace('/dashboard/query')}>
                     Job Query
                 </button>
                 <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={

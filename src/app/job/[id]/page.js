@@ -1,7 +1,7 @@
 "use client"
 import { useGetBookmarkQuery, useJobDetailMutation, useBookmarkMutation } from "@/store/api/job"
 import { usePathname } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Header from "@/components/Header"
 import Image from "next/image"
 import Footer from "@/components/Footer"
@@ -14,9 +14,11 @@ import { contactValidation } from "@/app/utils"
 import { useUserQuery } from "@/store/api/user"
 import { handleSuccess, handleError } from "@/app/utils"
 import 'reactjs-popup/dist/index.css';
+import { useApplyJobMutation } from "@/store/api/upload"
 
 export default function Details() {
-    const [job, { isLoading, isSuccess, data }] = useJobDetailMutation()
+    const [job, { data }] = useJobDetailMutation()
+    const [jobApply, { isLoading, isSuccess }] = useApplyJobMutation()
     const [marks,] = useBookmarkMutation();
     const bookmark = useGetBookmarkQuery()
     const user = useUserQuery()
@@ -25,11 +27,12 @@ export default function Details() {
         refetchOnFocus: true
     })
     const [contact,] = useContactMutation()
+    const [mount, setMount] = useState(false)
     const contactForm = useFormik({
         initialValues: {
-            firstName: user?.data?.user.user.fullName || "",
+            firstName: user?.data?.user.fullName || "",
             lastName: "",
-            email: user?.data?.user.user.email || '',
+            email: user?.data?.user.email || '',
             message: "",
             messageTo: data?.jobs?._id
         },
@@ -46,6 +49,7 @@ export default function Details() {
             }
         }
     })
+
 
     const handleBookmark = async (jobId) => {
         try {
@@ -65,6 +69,7 @@ export default function Details() {
     const isBookmarked = bookmark?.data?.bookmarks?.bookmarks.find((u) => u._id === data?.jobs?._id) ? true : false;
 
     useEffect(() => {
+        setMount(true)
         job({ id }).unwrap()
     }, [])
 
@@ -77,6 +82,35 @@ export default function Details() {
         time = Math.floor(time / 60)
         hour = true
     }
+
+    const applyJob = useFormik({
+        initialValues: {
+            jobId: id,
+            ques: ''
+        },
+        enableReinitialize: true,
+        onSubmit: async (values, { resetForm }) => {
+            try {
+                const check = confirm("Do you really want to apply to this job?")
+                if (check) {
+                    const res = await jobApply(values).unwrap()
+                    handleSuccess(res.message)
+                    resetForm()
+                }
+
+            } catch (err) {
+                handleError(err?.data?.message);
+                console.log(err)
+            }
+        }
+    })
+
+    const isApplied = user?.data?.user?.appliedJobs.includes(id)
+
+    if (!mount) {
+        return null
+    }
+
     return (
         <main>
             <div className="flex w-full h-84 flex-col items-center bg-black justify-between pb-30">
@@ -110,34 +144,34 @@ export default function Details() {
                             </div>
                             <div className="flex gap-2 items-center justify-center">
                                 <Image src="/images/jobs/g135.svg" alt="Salary" width={20} height={20} />
-                                <span className="text-gray-700">{data?.jobs.salary}</span>
+                                <span className="text-gray-700">$ {data?.jobs.salary}</span>
                             </div>
                             <div className="flex gap-2 items-center justify-center">
                                 <Image src="/images/jobs/map-pin.svg" alt="Location Icon" width={20} height={20} />
                                 <span className="text-gray-700">{data?.jobs.location}</span>
                             </div>
                         </div>
-                        <Popup trigger={<button className="text-black buttonColor p-2 w-50 cursor-pointer max-md:self-center max-md:w-8/9 max-md:mt-4">Apply Job</button>}
-                            position='right center'
-                            modal nested className="text-black">
-                            {close => (
-                                <div className="modal text-black">
-                                    <button className="close" onClick={close}>
-                                        &times;
-                                    </button>
-                                    <div className="header"> GeeksforGeeks </div>
-                                    <div className="content">
-                                        This is a simple popup example.
+                        {isApplied ? <p className="text-lg text-black">Job Applied!</p> :
+                            <Popup trigger={<button className="text-black buttonColor p-2 w-50 cursor-pointer max-md:self-center max-md:w-8/9 max-md:mt-4">Apply Job</button>}
+                                position='right center'
+                                modal nested className="text-black rounded-lg">
+                                {close => (
+                                    <div className="text-black ">
+                                        <div className="flex justify-between p-4 items-center">
+                                            <h1 className="text-xl font-bold">Upload your Resume</h1>
+                                            <button className="text-black text-2xl" onClick={close}>
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <form className="flex flex-col gap-4 p-4" onSubmit={applyJob.handleSubmit}>
+                                            <p><strong>Disclaimer<span className="text-red-500">*</span>:</strong> Make sure you have uploaded your updated resume in the profile. <a href="/dashboard/profile" className="underline text-blue-600">Check Profile</a></p>
+                                            <label htmlFor="ques" className="font-bold">Why should we hire you?</label>
+                                            <textarea name="ques" id="ques" placeholder="Explain Why should we hire you?" className="border border-gray-500 rounded-lg p-2" onChange={applyJob.handleChange} value={applyJob.values.ques} required />
+                                            <button type="submit" className="buttonColor p-2" disabled={isLoading || isSuccess}>{isLoading ? 'Loading...' : isSuccess ? 'Applied' : "Apply"}</button>
+                                        </form>
                                     </div>
-                                    <div className="actions">
-                                        <button className="button" onClick={() => {
-                                            console.log('Button clicked');
-                                            close();
-                                        }}>Click here</button>
-                                    </div>
-                                </div>
-                            )}
-                        </Popup>
+                                )}
+                            </Popup>}
                     </div>
                 </div>
             </div>
@@ -171,7 +205,7 @@ export default function Details() {
                         <div className="mb-6">
                             {jobs.filter(item => item._id !== data?.jobs._id && (item.category === data?.jobs.category || item.location === data?.jobs.location || item.jobType === data?.jobs.jobType)).slice(0, 3).map((item, index) => (
 
-                                <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} id={item._id} />
+                                <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} id={item._id} isHome={true} />
                             ))}
                         </div>
                     </div>
@@ -218,7 +252,7 @@ export default function Details() {
                             <Image src='/images/jobs/g135.svg' height={25} width={25} alt="image" />
                             <div>
                                 <p className="font-bold">Offered Salary</p>
-                                <p className="text-gray-600">{data?.jobs.salary || 'Unpaid'}</p>
+                                <p className="text-gray-600">{'$ ' + data?.jobs.salary || 'Unpaid'}</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">

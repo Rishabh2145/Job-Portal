@@ -18,13 +18,14 @@ export default function Login() {
       email: "",
       password: ""
     },
+    enableReinitialize: true,
     onSubmit: async (values, { resetForm }) => {
       try {
         const validity = await user(values).unwrap()
         try {
           const res = await signin(values).unwrap()
           handleSuccess("User Logged In! Redirecting to Dashboard")
-          resetForm()
+          
           if (res) {
             router.replace('/dashboard')
           }
