@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useFormik } from "formik";
+import {  useLoginMutation } from "@/store/api/baseApi";
 import { useCheckVerificationMutation, useSigninMutation } from "@/store/api/auth";
 import { ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -10,7 +11,7 @@ import { handleError, handleSuccess } from "../../utils";
 export default function Login() {
 
   const router = useRouter()
-  const [signin, { isLoading }] = useSigninMutation()
+  const [signin, { isLoading }] = useLoginMutation()
   const [user] = useCheckVerificationMutation()
 
   const cred = useFormik({
@@ -24,11 +25,9 @@ export default function Login() {
         const validity = await user(values).unwrap()
         try {
           const res = await signin(values).unwrap()
+          localStorage.setItem('token', res.token)
           handleSuccess("User Logged In! Redirecting to Dashboard")
-          
-          if (res) {
-            router.replace('/dashboard')
-          }
+          router.replace('/dashboard')
         } catch (err) {
           handleError(err.data.message)
           console.log(err)

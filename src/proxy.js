@@ -4,8 +4,8 @@ import jwt from 'jsonwebtoken'
 
 
 export async function proxy(req) {
+    const token = req.cookies.get("token")?.value;
     const path = req.nextUrl.pathname
-    const token = req.cookies.get('token')?.value
     const protectedPath = path.startsWith('/dashboard') || path.startsWith('/job/');
     const logoutPath = path.startsWith('/logout')
     const isAuth = path.startsWith('/auth')
@@ -24,7 +24,7 @@ export async function proxy(req) {
 
     if (!token) {
         if (protectedPath || verifyPath) {
-            return NextResponse.redirect(new URL('/auth/login', req.url))
+            return NextResponse.redirect(new URL('/logout', req.url))
         }
         return NextResponse.next()
     }
@@ -32,11 +32,10 @@ export async function proxy(req) {
 
     try {
         const user = await jwt.verify(token, process.env.JWT_SECRET)
-
         const isVerify = user.user?.isVerified
 
-        
-        if(isAuth){
+
+        if (isAuth) {
             return NextResponse.redirect(new URL('/dashboard', req.url))
         }
 
@@ -49,11 +48,11 @@ export async function proxy(req) {
 
         return NextResponse.next()
     } catch (err) {
-        const res = NextResponse.redirect(new URL('/auth/login', req.url))
+        const res = NextResponse.redirect(new URL('/logout', req.url))
         res.cookies.delete('token')
         return res
     }
-    
+
 }
 
 export const config = {

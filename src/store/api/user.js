@@ -1,11 +1,16 @@
-import { baseApi } from "./baseApi";
+import { baseApi , frontendApi} from "./baseApi";
+
+const getUserApi = frontendApi.injectEndpoints({
+    endpoints: (builder) => ({
+        user: builder.query({
+            query: () => '/api/user',
+            providesTags: ['UPDATE_USER']
+        })
+    })
+})
 
 const userApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        user: builder.query({
-            query: () => '/user/profile',
-            providesTags: ['UPDATE_USER']
-        }),
         subscribe : builder.mutation({
             query: ({email}) => ({
                 url: '/subscribe',
@@ -58,5 +63,7 @@ const editUser = baseApi.injectEndpoints({
     })
 })
 
-export const { useUserQuery, useSubscribeMutation, useReviewMutation, useGetReviewQuery } = userApi
+export const { useSubscribeMutation, useReviewMutation, useGetReviewQuery } = userApi
 export const { useEditUserMutation } = editUser
+
+export const { useUserQuery } = getUserApi

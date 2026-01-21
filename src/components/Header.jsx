@@ -16,6 +16,7 @@ export default function Header(props) {
         refetchOnMountOrArgChange: true,
         refetchOnFocus: true
     })
+    console.log(user)
     const router = useRouter()
     return (
         <div className="flex justify-between p-6 w-4/5 items-center max-md:w-full">
@@ -35,7 +36,7 @@ export default function Header(props) {
                 <a className={`hover:scale-105 transition-all ${props.page == 'contact' ? "text-white" : "text-white/70"} `} href="/contact">Contact Us</a>
             </div>
             <div className={`flex gap-6 items-center `}>
-                {(user?.status === 'rejected') ? <><a href="/auth/login" className={`hover:scale-105 transition-all ${props.theme == 'dark' ? "text-white/70" : "text-black/70"}`}>Login</a>
+                {(!user?.data?.user ) ? <><a href="/auth/login" className={`hover:scale-105 transition-all ${props.theme == 'dark' ? "text-white/70" : "text-black/70"}`}>Login</a>
                     <a className="bg-[#309689] p-2 rounded-lg px-4 hover:scale-105 transition-all text-white" href="/auth/signup">Register</a> </> : <div className={`flex justify-center items-center gap-4  ${props.theme == 'dark' ? "text-white" : "text-black"}`}>
 
                     <a href='/dashboard'>Dashboard</a>
@@ -81,7 +82,6 @@ export function Dashboard() {
     const [search, setSearch] = useState(false)
     const [onTab, setTab] = useState(false)
     const name = user?.data?.user?.fullName
-    console.log(data)
     const toggleSearch = () => setSearch(!search)
 
     return (
