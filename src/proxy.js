@@ -31,7 +31,7 @@ export async function proxy(req) {
 
 
     try {
-        const user = await jwt.verify(token, process.env.NEXT_PUBLIC_SECRET_KEY)
+        const user = await jwt.verify(token, process.env.JWT_SECRET)
 
         const isVerify = user.user?.isVerified
 
