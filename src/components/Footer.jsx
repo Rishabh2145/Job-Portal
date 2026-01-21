@@ -1,13 +1,15 @@
 import { handleError, handleSuccess } from "@/app/utils";
+import { useGetCategoryQuery } from "@/store/api/dashboard";
 import { useSubscribeMutation, useUserQuery } from "@/store/api/user";
 import { useFormik } from "formik";
 import Image from "next/image";
 export default function Footer() {
     const [subscribe, { isLoading }] = useSubscribeMutation()
     const user = useUserQuery()
+    const category = useGetCategoryQuery().data?.jobDetails
     const subscription = useFormik({
         initialValues: {
-            email: user?.data?.user?.email || ''
+            email: ''
         },
         enableReinitialize: true,
         onSubmit: async (values) => {
@@ -46,18 +48,14 @@ export default function Footer() {
                         <a href="/contact">Contact Us</a>
                         <a>Our Teams</a>
                         <a>Partners</a>
-                        <a>For Candidates</a>
-                        <a>For Employees</a>
                     </div>
                 </div>
                 <div className="flex flex-col gap-5 max-md:items-center">
                     <h2 className="font-bold text-xl ">Job Categories</h2>
                     <div className="flex flex-col cursor-pointer max-md:items-center">
-                        <a>Telecomunications</a>
-                        <a>Hotels & Tourism</a>
-                        <a>Construction</a>
-                        <a>Education</a>
-                        <a>Financial Services</a>
+                        {category && category.slice(0,6).map((item,index) => (
+                            <a key={index}>{item._id}</a>
+                        ))}
                     </div>
                 </div>
                 <div className="flex flex-col gap-5 w-1/4 max-md:w-1/1">

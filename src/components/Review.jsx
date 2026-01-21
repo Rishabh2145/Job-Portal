@@ -29,11 +29,12 @@ export default function Review(props) {
             <div className="flex items-center mb-4">
                 <div>
                     <Image
-                        src={props.photo}
+                        src={`${process.env.NEXT_PUBLIC_API}/${props.photo}`}
                         alt={props.name}
                         width={50}
                         height={50}
                         className="rounded-full mr-4"
+                        unoptimized
                     />
                 </div>
                 <div>

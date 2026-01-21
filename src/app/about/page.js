@@ -122,23 +122,7 @@ export default function Jobs() {
                     </div>
                 </div>
             </div>
-            <div className="w-screen flex flex-col items-center p-12 text-black gap-4 max-md:px-0 max-md:pb-0 max-md:m-0">
-                <div className="flex w-10/10 flex-col">
-                    <div className="flex flex-col w-1/1 gap-4 text-center">
-                        <h1 className="text-5xl font-bold max-md:text-3xl max-md:text-center">News and Blogs</h1>
-                        <div className="flex w-1/1 justify-between max-md:text-center">
-                            <p className="w-full">Metus faucibus sed turpis lectus feugiat tincidunt. Rhoncus sed tristique in dolor</p>
-
-                        </div>
-                    </div>
-                    <div className="flex max-md:overflow-x-auto max-md:w-screen max-md:m-0 max-md:whitespace-nowrap ">
-                        {newsBlog.map((item, index) => (
-                            <News key={index} type={item.type} thumb={item.thumb} date={item.date} title={item.title} height={item.height} width={item.width} />
-                        ))}
-                    </div>
-
-                </div>
-            </div>
+            
             <Footer />
         </main>
     )

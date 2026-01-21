@@ -3,13 +3,14 @@ import Image from "next/image"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import { useFormik } from "formik"
-import { useContactMutation } from "@/store/api/contact"
+import { useContactMutation, useGetAboutQuery } from "@/store/api/contact"
 import { handleSuccess, handleError, contactValidation } from "../utils"
 
 
 export default function Contact() {
-
+    const details = useGetAboutQuery()?.data?.data
     const [contact, { isLoading }] = useContactMutation()
+    console.log(details)
     const contactForm = useFormik({
         initialValues: {
             firstName: "",
@@ -47,22 +48,22 @@ export default function Contact() {
                         <div className="flex flex-col gap-2">
                             <Image src="/images/contact/call_24dp_309689_FILL0_wght400_GRAD0_opsz24.svg" alt="Address Icon" width={40} height={40} />
                             <span className="font-bold text-xl">Call for inquiry</span>
-                            <a href="tel:1234567890" >+257 388-6895</a>
+                            <a href="tel:1234567890" >{details && details.call || []}</a>
                         </div>
                         <div className="flex flex-col gap-2">
                             <Image src="/images/contact/mail_24dp_309689_FILL0_wght400_GRAD0_opsz24.svg" alt="Email Icon" width={40} height={40} />
                             <span className="font-bold text-xl">Send us email</span>
-                            <a href="mailto:example@example.com">kramulous@sbcglobal.net</a>
+                            <a href="mailto:example@example.com">{details && details.email || []}</a>
                         </div>
                         <div className="flex flex-col gap-2">
                             <Image src="/images/contact/clock.svg" alt="Work" width={40} height={40} />
                             <span className="font-bold text-xl">Work Hours</span>
-                            <p >Mon-Fri: 10:00 AM - 10:00 PM</p>
+                            <p >{details && details.hours || []}</p>
                         </div>
                         <div className="flex flex-col gap-2">
                             <Image src="/images/contact/apartment_24dp_309689_FILL0_wght400_GRAD0_opsz24.svg" alt="Address" width={40} height={40} />
                             <span className="font-bold text-xl">Address</span>
-                            <p >123 Main Street, City, Country</p>
+                            <p >{details && details.address || []}</p>
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,9 @@
 "use client"
-import { removeInfo } from '@/app/utils'
+import { useLazyFilterQuery } from '@/store/api/job'
 import { useUserQuery } from '@/store/api/user'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useSearchParams , usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 const theme = {
@@ -11,7 +12,7 @@ const theme = {
 }
 
 export default function Header(props) {
-    const user = useUserQuery( undefined, {
+    const user = useUserQuery(undefined, {
         refetchOnMountOrArgChange: true,
         refetchOnFocus: true
     })
@@ -36,8 +37,8 @@ export default function Header(props) {
             <div className={`flex gap-6 items-center `}>
                 {(user?.status === 'rejected') ? <><a href="/auth/login" className={`hover:scale-105 transition-all ${props.theme == 'dark' ? "text-white/70" : "text-black/70"}`}>Login</a>
                     <a className="bg-[#309689] p-2 rounded-lg px-4 hover:scale-105 transition-all text-white" href="/auth/signup">Register</a> </> : <div className={`flex justify-center items-center gap-4  ${props.theme == 'dark' ? "text-white" : "text-black"}`}>
-                        
-                        <a href='/dashboard'>Dashboard</a>
+
+                    <a href='/dashboard'>Dashboard</a>
                     <button className={`bg-[#309689] p-2 rounded-lg px-4 hover:scale-105 transition-all text-white`} onClick={
                         () => {
                             router.replace('/logout')
@@ -55,18 +56,66 @@ export function MenuExpand() {
 }
 
 export function Dashboard() {
-    const router = useRouter()
+    const [filterJob, { isLoading, data }] = useLazyFilterQuery(
+        undefined, {
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true
+    })
     const user = useUserQuery()
+    const searchParams = useSearchParams()
+    const path = usePathname()
+    const queryParams = {
+        job: searchParams.get('job') || null,
+        category: searchParams.get('category') || null,
+        type: searchParams.get('type') || null,
+        experience: searchParams.get('experience') || null,
+        dates: searchParams.get('dates') || null,
+        salary: Number(searchParams.get('salary')) || 0,
+        location: searchParams.get('location') || null,
+        page: Number(searchParams.get('pages')) || 1
+    }
+    useEffect(() => {
+        filterJob(queryParams)
+    }, [searchParams])
+    const router = useRouter()
+    const [search, setSearch] = useState(false)
+    const [onTab, setTab] = useState(false)
     const name = user?.data?.user?.fullName
-    
-    return (
-        <div className='flex justify-between gap-5 sticky top-2 backdrop-blur-sm bg-white/5 z-100 m-2 rounded-full p-4 shadow-sm '>
+    console.log(data)
+    const toggleSearch = () => setSearch(!search)
 
-            <input
-                type='text'
-                placeholder='Search your job'
-                className='border rounded-full px-5 border-gray-500/50 w-full bg-white/70'
-            />
+    return (
+        <div className='relative flex justify-between gap-5 sticky top-2 backdrop-blur-sm bg-white/5 z-100 m-2 rounded-xl p-4 shadow-sm '>
+            <div className=' w-full flex flex-col gap'>
+                <input
+                    type='text'
+                    placeholder='Search your job'
+                    onFocusCapture={toggleSearch}
+                    onBlur={toggleSearch}
+                    className=' relative border h-12 rounded-xl px-5 border-gray-500/50 w-full bg-white/70'
+                    value={queryParams?.job || ''}
+                    onChange={(e) => {
+                        const params = new URLSearchParams();
+                        const job = params.get('job')
+                        if (job) {
+                            params.delete('job')
+                        }
+                        params.set('job', e.target.value)
+                        if (e.target.value.length === 0) {
+                            params.delete('job')
+                        }
+                        router.replace(`${path}?${params.toString()}`, { scroll: false })
+                    }}
+                />
+                <div className={`absolute top-16 flex flex-col p-4 left-0 bg-white w-full gap-6 mt-6 rounded-lg mr-4 overflow-hidden ${(search) ? 'block' : 'hidden'}`}>
+                    {data && data?.jobs.slice(0,5).map((items, index) => (
+                        <div className='flex justify-between items-center cursor-pointer' key={index} onMouseDown={() => router.push(`/job/${items._id}`)}>
+                            <a className='text-xl flex gap-4 items-center font-bold'>{items.title}</a>
+                            <a className='text-blue-700 underline'>Check Job</a>
+                        </div>
+                    ))}
+                </div>
+            </div>
             <p className='border-l border-gray-500' />
             <div className='flex justify-center items-center gap-4 ml-5'>
                 <Image

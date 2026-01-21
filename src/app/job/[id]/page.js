@@ -15,6 +15,7 @@ import { useUserQuery } from "@/store/api/user"
 import { handleSuccess, handleError } from "@/app/utils"
 import 'reactjs-popup/dist/index.css';
 import { useApplyJobMutation } from "@/store/api/upload"
+import moment from "moment"
 
 export default function Details() {
     const [job, { data }] = useJobDetailMutation()
@@ -121,7 +122,7 @@ export default function Details() {
                 <div className="flex flex-col justify-between  gap-6 p-6 rounded-xl w-full px-10 bg-white">
                     <div className="flex w-full justify-between">
                         <p className="bg-[#309689]/20 text-[#309689] px-2 py-1 rounded-lg text-sm">
-                            {time} {hour ? 'hr' : 'min'} ago
+                            {moment(data?.jobs.createdAt).fromNow()}
                         </p>
                         <Image src={isBookmarked ? '/images/jobs/icons8-bookmark-90.svg' : "/images/jobs/icon.svg"} alt="Job Logo" width={20} height={20} onClick={() => handleBookmark(data?.jobs?._id)} />
                     </div>

@@ -4,7 +4,7 @@ import { useGetApplicantQuery, useUpdateStatusMutation } from "@/store/api/job"
 import { useRouter } from "next/navigation"
 import Popup from "reactjs-popup"
 import Image from "next/image"
-
+import moment from "moment"
 export default function Applicant() {
     const applicants = useGetApplicantQuery()
     const [updateStatus, { isLoading }] = useUpdateStatusMutation()
@@ -37,9 +37,9 @@ export default function Applicant() {
             {jobs ? jobs.map((item, index) => (
                 <div className="border border-gray-500 rounded-lg p-6" key={index}>
                     <div className="flex justify-between items-center px-4">
-                        <div className="flex items-end gap-4">
+                        <div className="flex items-center gap-4">
                             <p className="font-bold text-xl">{item.title}</p>
-                            <p className="text-sm">Posted On : {new Date(item.createdAt).toLocaleString()}</p>
+                            <p className="text-sm buttonColor p-1">{moment(item.createdAt).fromNow()}</p>
                         </div>
                         <button className="bg-blue-500/90 text-white rounded-lg p-2 px-4" onClick={() => router.push(`/job/${item._id}`)}>Details</button>
                     </div>

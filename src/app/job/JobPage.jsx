@@ -2,12 +2,13 @@
 import Header from "@/components/Header"
 import { useLazyFilterQuery, useGetJobQuery } from "@/store/api/job"
 import Job from "@/components/Job"
-import { cat } from "../page"
+// import { cat } from "../page"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import Footer from "@/components/Footer"
 import Cards from "@/components/Cards"
 import { useRouter, useSearchParams } from "next/navigation"
+import { useGetCategoryQuery } from "@/store/api/dashboard"
 
 
 
@@ -27,8 +28,9 @@ export default function Jobs() {
         undefined, {
         refetchOnFocus: true,
         refetchOnMountOrArgChange: true
-    }
-    )
+    })
+    const category = useGetCategoryQuery().data?.jobDetails
+    
     const searchParams = useSearchParams()
     const queryParams = {
         job: searchParams.get('job') || null,
@@ -44,13 +46,13 @@ export default function Jobs() {
         filterJob(queryParams)
 
     }, [searchParams])
-    
+
     const router = useRouter()
     const [salary, setSalary] = useState(Number(queryParams.salary) || 5000)
     const [location, setLocation] = useState(queryParams.location || 'All')
     const [date, setDate] = useState(queryParams.dates || 'All')
     const [page, setPage] = useState(queryParams.page || 1)
-    
+
     const jobs = data?.jobs || []
     console.log(data)
     const pages = data?.pages;
@@ -124,10 +126,10 @@ export default function Jobs() {
                         </div>
                         <div className="flex flex-col gap-2">
                             <p className="font-bold text-lg">Category</p>
-                            {cat.map((item, index) => (
+                            {category && category.map((item, index) => (
                                 <div className="flex gap-4" key={index}>
-                                    <input type="checkbox" checked={queryParams.category?.includes(item.name) || false} value={item.name} className="rounded-xl p-5" onChange={(e) => toggleQuery('category', item.name)} />
-                                    <p>{item.name}</p>
+                                    <input type="checkbox" checked={queryParams.category?.includes(item._id) || false} value={item._id} className="rounded-xl p-5" onChange={(e) => toggleQuery('category', item._id)} />
+                                    <p>{item._id}</p>
                                 </div>
                             ))}
                         </div>
@@ -210,24 +212,24 @@ export default function Jobs() {
                         <Job key={index} time={String(item.createdAt)} logo={item.companyImage} title={item.title} company={item.company} category={item.category} type={item.jobType} salary={item.salary} location={item.location} id={item._id} isHome={true} />
                     )) : <h2>No Job Found</h2>}
                     <div className="flex self-center justify-self-center gap-4 mt-4">
-                        <button className={`p-2 px-4 border border-gray-500 text-gray-700 rounded-lg ${queryParams.page <= 1 ? 'hidden' : 'block'}`}
-                        onClick={() => {
+                        <button className={`p-2 px-4 border border-gray-500 text-gray-700 rounded-lg cursor-pointer ${queryParams.page <= 1 ? 'hidden' : 'block'}`}
+                            onClick={() => {
                                 const params = new URLSearchParams(searchParams);
-                                params.set('pages', page-1)
-                                router.replace(`/job?${params.toString()}`, {scroll: false})
+                                params.set('pages', page - 1)
+                                router.replace(`/job?${params.toString()}`, { scroll: false })
                             }}>Prev</button>
                         {Array.from({ length: pages }, (_, i) => (
-                            <button key={i} className="p-2 px-4 border border-gray-500 text-gray-700 rounded-lg" onClick={() => {
+                            <button key={i} className="p-2 px-4 border border-gray-500 text-gray-700 rounded-lg cursor-pointer" onClick={() => {
                                 const params = new URLSearchParams(searchParams);
-                                params.set('pages', i+1)
-                                router.replace(`/job?${params.toString()}`, {scroll: false})
+                                params.set('pages', i + 1)
+                                router.replace(`/job?${params.toString()}`, { scroll: false })
                             }}>{i + 1}</button>
                         ))}
-                        <button className={`p-2 px-4 border border-gray-500 text-gray-700 rounded-lg ${queryParams.page >= pages ? 'hidden' : 'block'}`} onClick={() => {
-                                const params = new URLSearchParams(searchParams);
-                                params.set('pages', page+1)
-                                router.replace(`/job?${params.toString()}`, {scroll: false})
-                            }}>Next</button>
+                        <button className={`p-2 px-4 border border-gray-500 text-gray-700 rounded-lg cursor-pointer ${queryParams.page >= pages ? 'hidden' : 'block'}`} onClick={() => {
+                            const params = new URLSearchParams(searchParams);
+                            params.set('pages', page + 1)
+                            router.replace(`/job?${params.toString()}`, { scroll: false })
+                        }}>Next</button>
                     </div>
 
                 </div>

@@ -38,10 +38,27 @@ const getContactApi = baseApi.injectEndpoints({
         getContact: builder.query({
             query: () => '/message',
             providesTags: ['CONTACT_UPDATE']
+        }),
+        getAbout: builder.query({
+            query: () => '/show/about',
+            providesTags: ['UPDATE_ABOUT']
+        }),
+        updateAbout: builder.mutation({
+            query: ({ call, email, hours, address }) => ({
+                url: '/about',
+                method: "POST",
+                body: {
+                    call,
+                    email,
+                    hours,
+                    address
+                }
+            }),
+            invalidatesTags: ['UPDATE_ABOUT']
         })
 
     })
 })
 
 export const { useContactMutation, useDelContactMutation, useJobMessageQuery } = contactApi
-export const { useGetContactQuery } = getContactApi
+export const { useGetContactQuery, useGetAboutQuery, useUpdateAboutMutation } = getContactApi

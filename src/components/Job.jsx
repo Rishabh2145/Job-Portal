@@ -2,18 +2,10 @@
 import { handleError, handleSuccess } from "@/app/utils";
 import { useBookmarkMutation } from "@/store/api/job";
 import Image from "next/image";
+import moment from "moment";
 
 export default function Job(props) {
     const [bookmark, { isLoading }] = useBookmarkMutation();
-    const now = new Date()
-    const created = new Date(props.time)
-    let time = Math.floor((now - created) / (1000 * 60))
-    let hour = false
-
-    if (time > 60) {
-        time = Math.floor(time / 60)
-        hour = true
-    }
 
     const handleBookmark = async (jobId) => {
         try {
@@ -29,7 +21,7 @@ export default function Job(props) {
         <div className="flex flex-col justify-between h-fit mt-8 gap-6 shadow-lg p-6 rounded-xl hover:shadow-xl hover:scale-102 transition-all cursor-pointer bg-white w-full">
             <div className="flex w-full justify-between">
                 <p className="bg-[#309689]/20 text-[#309689] px-2 py-1 rounded-lg text-sm">
-                    {time} {hour ? 'hr' : 'min'} ago
+                    { moment(props.time).fromNow() }
                 </p>
                 <Image src={props.bookmark ? '/images/jobs/icons8-bookmark-90.svg' : "/images/jobs/icon.svg"} alt="Job Logo" width={20} height={20} onClick={() => handleBookmark(props.id)} className={props.isHome ? `hidden` : 'block'}/>
             </div>

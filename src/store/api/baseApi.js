@@ -11,7 +11,7 @@ export const baseApi = createApi({
             return headers
         },
     }),
-    tagTypes:["CONTACT_UPDATE", 'JOB_UPDATE', 'UPDATE_USER', 'APPLIED_JOB'],
+    tagTypes:["CONTACT_UPDATE", 'JOB_UPDATE', 'UPDATE_USER', 'APPLIED_JOB', 'UPDATE_ABOUT'],
     endpoints: () => ({})
 })
 

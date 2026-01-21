@@ -14,6 +14,22 @@ const userApi = baseApi.injectEndpoints({
                     email
                 }
             })
+        }),
+        review : builder.mutation({
+            query : ({name, star, title, email, desc}) => ({
+                url: '/dashboard/review',
+                method: 'POST',
+                body:{
+                    name,
+                    star,
+                    title,
+                    email,
+                    desc
+                }
+            })
+        }),
+        getReview : builder.query({
+            query: () => '/dashboard/show/review'
         })
     })
 })
@@ -42,5 +58,5 @@ const editUser = baseApi.injectEndpoints({
     })
 })
 
-export const { useUserQuery, useSubscribeMutation } = userApi
+export const { useUserQuery, useSubscribeMutation, useReviewMutation, useGetReviewQuery } = userApi
 export const { useEditUserMutation } = editUser

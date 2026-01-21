@@ -22,7 +22,7 @@ export default function SideBar() {
     return (
         <div id="sidebar" className="h-screen overflow-y-auto gap-5 flex flex-col p-5 px-7 py-8 shadow-lg">
             <div>
-                <a href="/dashboard" className="flex items-center gap-2 cursor-pointer">
+                <a href="/" className="flex items-center gap-2 cursor-pointer">
                     <Image
                         src='/images/jobs/briefcase(2) 2 (1).svg'
                         alt="Logo"
@@ -54,6 +54,12 @@ export default function SideBar() {
                 </button>
                 <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.role !== 'Candidate' ? `block` : 'hidden'}`} onClick={() => router.replace('/dashboard/query')}>
                     Job Query
+                </button>
+                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer`} onClick={() => router.replace('/dashboard/review')}>
+                    Feedback
+                </button>
+                <button className={`w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer ${user?.data?.user?.role === 'Admin' ? `block` : 'hidden'}`} onClick={() => router.replace('/dashboard/editabout')}>
+                    Edit About
                 </button>
                 <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={
                     () => {
