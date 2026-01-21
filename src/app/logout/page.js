@@ -1,5 +1,12 @@
+'use client'
+
+import { useEffect } from "react"
+
 export default function Logout() {
-    localStorage.removeItem('token')
+    useEffect(() => {
+        localStorage.removeItem('token')
+        window.location.href = '/auth/login'
+    }, [])
     return (
         <div>Logged Out</div>
     )
