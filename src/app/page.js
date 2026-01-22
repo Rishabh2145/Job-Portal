@@ -165,7 +165,7 @@ export default function HomePage() {
                             Good Life Begins With A Good Company
                         </h1>
                         <p className="line-clamp-4 max-md:text-center">
-                            Ultricies purus dolor viverra mi laoreet at cursus justo. Ultrices purus diam egestas amet faucibus tempor blandit. Elit velit mauris aliquam est diam. Leo sagittis consectetur diam morbi erat aenean. Vulputate praesent congue faucibus in euismod feugiat euismod volutpat. Adipiscing risus amet phasellus imperdiet eget vel pulvinar. Risus in felis faucibus sit. Scelerisque consequat iaculis mauris amet vel felis id tincidunt nunc.
+                            A good company does more than offer a job—it helps you grow, learn, and build a stable future. When you're surrounded by supportive teams, fair leadership, and meaningful opportunities, your career and personal life both move in a positive direction.
                         </p>
                         <div className="flex items-center gap-6 mt-8">
                             <a href="/job" className="bg-[#309689] p-2 rounded-lg px-4 text-white hover:scale-105 transition-all shadow-xl max-md:w-full max-md:p-4 max-md:text-center">
