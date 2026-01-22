@@ -88,12 +88,6 @@ export default function HomePage() {
                                     {category && category.map((item, index) => (
                                         <option key={index} value={item._id}>{item._id}</option>
                                     ))}
-                                    {/* <option value='Remote'>Remote</option>
-                                    <option value='Lucknow'>Lucknow</option>
-                                    <option value='New Delhi'>New Delhi</option>
-                                    <option value='New York'>New York</option>
-                                    <option value='Canada'>Canada</option>
-                                    <option value='London'>London</option> */}
                                 </select>
                                 <select className="rounded-lg text-black/30 h-full text-center basis-1/1 max-md:w-4/5 max-md:border-b max-md:rounded-none" name="category" id="category" onChange={search.handleChange} value={search.values.category}>
                                     
@@ -141,7 +135,7 @@ export default function HomePage() {
                 </h1>
 
                 <div className="flex w-full justify-between mt-4 ">
-                    <div className="truncate basis-1/2 max-md:basis-1/1">At eu lobortis pretium tincidunt amet lacus ut aenean aliquet. Blandit a massa elementum id scelerisque rhoncus. Lectus dolor blandit massa pretium id ultrices phasellus tortor. Risus risus lectus augue justo lacus viverra sit. Ultricies purus dolor viverra mi laoreet at cursus justo. Ultrices purus diam egestas amet faucibus tempor blandit. Elit velit mauris aliquam est diam. Leo sagittis consectetur diam morbi erat aenean. Vulputate praesent congue faucibus in euismod feugiat euismod volutpat. Adipiscing risus amet phasellus imperdiet eget vel pulvinar. Risus in felis faucibus sit. Scelerisque consequat iaculis mauris amet vel felis id tincidunt nunc.</div>
+                    <div className="truncate basis-1/2 max-md:basis-1/1">Browse the freshest job openings and apply to positions that fit your profile.</div>
                     <a href="/job" className="basis-1/2 flex justify-end text-[#309689] underline max-md:hidden">View All</a>
                 </div>
 
@@ -154,7 +148,7 @@ export default function HomePage() {
                 <h1 className="text-5xl text-black font-bold max-md:text-center max-md:text-3xl">
                     Browse by Category
                 </h1>
-                <p className="truncate w-1/2 max-md:w-1/1">{sample}</p>
+                <p className="truncate w-1/2 max-md:w-1/1">Find what you're looking for faster. Explore all our categories and jump straight into the content that matters to you.</p>
 
                 <div className="grid grid-cols-4 gap-8 mt-8 w-6/7 justify-around items-center max-md:grid-cols-1 max-md:w-1/1">
                     {category && category.map((item, index) => (
@@ -187,23 +181,23 @@ export default function HomePage() {
                     <div className="flex flex-col gap-4">
                         <p className="text-4xl font-bold text-[#309689] ">{totalClient > 1e6 ? totalClient + 'M+' : totalCandidates > 1e3 ? totalCandidates + 'k+' : totalCandidates}</p>
                         <p className="text-xl font-bold">Clients worldwide</p>
-                        <p className="line-clamp-3">{sample}</p>
+                        <p className="line-clamp-3">{`Trusted by over ${totalClient > 1e6 ? totalClient + 'M+' : totalCandidates > 1e3 ? totalCandidates + 'k+' : totalCandidates} clients across the globe, our platform has grown into a reliable name in the industry. We take pride in providing consistent quality, unmatched support, and services that deliver real results.`}</p>
                     </div>
                     <div className="flex flex-col gap-4">
                         <p className="text-4xl font-bold text-[#309689] ">{activeResume > 1e6 ? activeResume + 'M+' : activeResume > 1e3 ? activeResume + 'k+' : activeResume}</p>
                         <p className="text-xl font-bold">Active Resume</p>
-                        <p className="line-clamp-3">{sample}</p>
+                        <p className="line-clamp-3">{`Our platform features ${activeResume > 1e6 ? activeResume + 'M+' : activeResume > 1e3 ? activeResume + 'k+' : activeResume} active resumes from job-ready candidates. Each resume is up-to-date, validated, and designed to help employers connect with the right talent instantly.`}</p>
                     </div>
                     <div className="flex flex-col gap-4">
                         <p className="text-4xl font-bold text-[#309689] ">{companyData?.company[0]?.totalCategory > 1e6 ? companyData?.company[0]?.totalCategory + 'M+' : companyData?.company[0]?.totalCategory > 1e3 ? companyData?.company[0]?.totalCategory + 'k+' : companyData?.company[0]?.totalCategory}</p>
                         <p className="text-xl font-bold">Companies</p>
-                        <p className="line-clamp-3">{sample}</p>
+                        <p className="line-clamp-3">{`Browse job openings and career opportunities from ${companyData?.company[0]?.totalCategory > 1e6 ? companyData?.company[0]?.totalCategory + 'M+' : companyData?.company[0]?.totalCategory > 1e3 ? companyData?.company[0]?.totalCategory + 'k+' : companyData?.company[0]?.totalCategory} verified companies. Each organization is carefully selected to provide reliable and high-quality employment options.`}</p>
                     </div>
                 </div>
                 <div className="bg-black h-96 w-11/12 rounded-3xl flex justify-center items-center text-white max-md:flex-col-reverse max-md:w-1/1 max-md:h-126 max-md:text-center max-md:py-10">
                     <div className="w-3/4 p-12 gap-2 flex flex-col max-md:w-1/1 max-md:p-4 ">
                         <div className="text-5xl font-bold max-md:text-3xl"> Create a Better <br /> Future for Yourself</div>
-                        <div className="line-clamp-2 mt-2">{sample}</div>
+                        <div className="line-clamp-2 mt-2">Take control of your career and open the door to new opportunities. With the right guidance, resources, and support, you can build a future that reflects your ambitions and strengths.</div>
                         <a className="p-4 bg-[#309689] rounded-lg text-white mt-6 size-fit flex justify-center items-center hover:scale-105 transition-all shadow-xl max-md:w-full" href="/job">
                             Search Job
                         </a>
@@ -215,7 +209,7 @@ export default function HomePage() {
                 <h1 className="text-5xl mt-6 font-bold max-md:text-4xl max-md:text-center">
                     Testimonials from Our Customers
                 </h1>
-                <p className="text-sm w-1/2 truncate max-md:w-1/1">{sample}</p>
+                <p className="text-sm w-1/2 truncate max-md:w-1/1">Hear what real users have to say about their experience. Their stories reflect the trust and value we strive to deliver every day.</p>
 
                 <div className="flex justify-center grid gap-6 p-6 mt-12 items-center justify-items-center grid-cols-3 max-md:grid-cols-1 max-md:p-2">
                     {testimony ? testimony.map((item, index) => (

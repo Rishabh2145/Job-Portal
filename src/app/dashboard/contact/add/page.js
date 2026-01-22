@@ -32,7 +32,7 @@ export default function Contact() {
             <form onSubmit={contactForm.handleSubmit} className="flex flex-col items-between m-4 p-4 my-0 bg-white shadow-md rounded-xl">
                 <div className="flex flex-col h-24 justify-center gap-2">
                     <h2 className="text-3xl font-bold">Sends a Message</h2>
-                    <p className="text-black/70 text-sm">Nibh dis faucibus proin lacus tristique</p>
+                    <p className="text-black/70 text-sm">Reach out to us anytime for support, inquiries, or assistance. We’re here to help.</p>
                 </div>
                 <div className="flex flex-col ">
                     <div className={`grid ${contactForm.errors?.firstName || contactForm.errors?.lastName ? 'grid-cols-2' : 'grid-cols-2'}`}>

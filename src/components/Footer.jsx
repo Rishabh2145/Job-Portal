@@ -38,7 +38,7 @@ export default function Footer() {
                         <p className="font-bold text-white text-xl text-center">Job</p>
                     </div>
                     <h3 className="line-clamp-3 text-white font-bold max-md:text-center">
-                        Quis enim pellentesque viverra tellus eget malesuada facilisis. Congue nibh vivamus aliquet nunc mauris dui nullam et.
+                        Explore thousands of job openings and apply instantly to the roles that match your skills.
                     </h3>
                 </div>
                 <div className="flex flex-col gap-5 max-md:items-center">
@@ -61,7 +61,7 @@ export default function Footer() {
                 <div className="flex flex-col gap-5 w-1/4 max-md:w-1/1">
                     <h2 className="font-bold text-xl">Newsletter</h2>
                     <form onSubmit={subscription.handleSubmit} className="flex flex-col gap-4 ">
-                        <p className="text-gray-400 text-sm">Eu nunc pretium vitae platea. Non netus elementum vulputate </p>
+                        <p className="text-gray-400 text-sm">Get the latest updates and job alerts. Subscribe now.</p>
                         <input
                             type="email"
                             placeholder="Email Address"

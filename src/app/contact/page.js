@@ -43,7 +43,7 @@ export default function Contact() {
             <div className="grid grid-cols-2 flex w-full h-full flex-col items-center my-5 justify-center p-10 max-md:grid-cols-1 max-md:px-0 max-md:gap-10">
                 <div className="flex flex-col gap-6 px-6 max-md:mb-10 max-md:items-center">
                     <h1 className="text-5xl font-bold max-md:text-center max-md:text-2xl">You Will Grow, You Will Succeed. We Promise That</h1>
-                    <p className="max-md:text-center max-md:truncate w-9/10">Pellentesque arcu facilisis nunc mi proin. Dignissim mattis in lectus tincidunt tincidunt ultrices. Diam convallis morbi pellentesque adipiscing </p>
+                    <p className="max-md:text-center max-md:truncate w-9/10">We’re dedicated to connecting you with opportunities that help you grow, improve your skills, and move closer to your goals. Your success is our commitment.</p>
                     <div className="grid grid-cols-2 gap-10 mt-10 max-md:grid-cols-1">
                         <div className="flex flex-col gap-2">
                             <Image src="/images/contact/call_24dp_309689_FILL0_wght400_GRAD0_opsz24.svg" alt="Address Icon" width={40} height={40} />
@@ -71,7 +71,7 @@ export default function Contact() {
                     <form onSubmit={contactForm.handleSubmit} className="flex flex-col items-between">
                         <div className="flex flex-col items-center h-32 justify-center gap-2">
                             <h2 className="text-2xl font-bold">Contact info</h2>
-                            <p className="text-black/70">Nibh dis faucibus proin lacus tristique</p>
+                            <p className="text-black/70">Reach out to us anytime for support, inquiries, or assistance. We’re here to help.</p>
                         </div>
                         <div className="flex flex-col">
                             <div className="grid grid-cols-2">

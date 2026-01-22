@@ -8,18 +8,18 @@ import Cards from "./Cards"
 import FAQ from "./FAQ"
 
 const works = [
-    { logo: '/Clip path group.svg', title: 'Create Account', desc: 'Nunc sed a nisl purus. Nibh dis faucibus proin lacus ' },
-    { logo: '/Group.svg', title: 'Upload Resume', desc: 'Felis eu ultrices a sed massa. Commodo fringilla sed tempor ' },
-    { logo: '/briefcase(3) 1.svg', title: 'Find Jobs', desc: ' Commodo fringilla sed tempor risus laoreet ultricies ipsum' },
-    { logo: '/check-mark 1.svg', title: 'Apply Job', desc: ' Nisi enim feugiat enim volutpat. Sem quis viverra ' }
+    { logo: '/Clip path group.svg', title: 'Create Account', desc: 'Sign up with your basic details to get started. It takes less than a minute to join our platform. ' },
+    { logo: '/Group.svg', title: 'Upload Resume', desc: 'Add your resume to showcase your experience and skills. This helps employers review your profile faster.' },
+    { logo: '/briefcase(3) 1.svg', title: 'Find Jobs', desc: ' Search through verified openings and filter by role, location, or industry to find your ideal job.' },
+    { logo: '/check-mark 1.svg', title: 'Apply Job', desc: ' Found the right role? Apply quickly and track your application in real time.' }
 ]
 
 const faq = [
-    {index: 1, ques: 'Can I Upload a CV?', ans: 'Nunc sed a nisl purus. Nibh dis faucibus proin lacus tristique. Sit congue non vitae odio sit erat in. Felis eu ultrices a sed massa. Commodo fringilla sed tempor risus laoreet ultricies ipsum. Habitasse morbi faucibus in iaculis lectus. Nisi enim feugiat enim volutpat. Sem quis viverra viverra odio mauris nunc'},
-    {index: 2, ques: 'How long will the recruitment process take?', ans: 'Nunc sed a nisl purus. Nibh dis faucibus proin lacus tristique. Sit congue non vitae odio sit erat in. Felis eu ultrices a sed massa. Commodo fringilla sed tempor risus laoreet ultricies ipsum. Habitasse morbi faucibus in iaculis lectus. Nisi enim feugiat enim volutpat. Sem quis viverra viverra odio mauris nunc'},
-    {index: 3, ques: 'Do you recruit for Graduates, Apprentices and Students?', ans: 'Nunc sed a nisl purus. Nibh dis faucibus proin lacus tristique. Sit congue non vitae odio sit erat in. Felis eu ultrices a sed massa. Commodo fringilla sed tempor risus laoreet ultricies ipsum. Habitasse morbi faucibus in iaculis lectus. Nisi enim feugiat enim volutpat. Sem quis viverra viverra odio mauris nunc'},
-    {index: 4, ques: 'What does the recruitment and selection process involve?', ans: 'Nunc sed a nisl purus. Nibh dis faucibus proin lacus tristique. Sit congue non vitae odio sit erat in. Felis eu ultrices a sed massa. Commodo fringilla sed tempor risus laoreet ultricies ipsum. Habitasse morbi faucibus in iaculis lectus. Nisi enim feugiat enim volutpat. Sem quis viverra viverra odio mauris nunc'},
-    {index: 5, ques: 'Can I receive notifications for any future jobs that may interest me?', ans: 'Nunc sed a nisl purus. Nibh dis faucibus proin lacus tristique. Sit congue non vitae odio sit erat in. Felis eu ultrices a sed massa. Commodo fringilla sed tempor risus laoreet ultricies ipsum. Habitasse morbi faucibus in iaculis lectus. Nisi enim feugiat enim volutpat. Sem quis viverra viverra odio mauris nunc'},
+    {index: 1, ques: 'Can I Upload a CV?', ans: 'Yes, you can upload your CV on our platform. After creating an account, simply upload your resume to complete your profile. This allows employers to view your qualifications and consider you for relevant jobs.'},
+    {index: 2, ques: 'How long will the recruitment process take?', ans: 'The recruitment process length depends on the company, role, and number of applications. Most employers respond within a few days to a couple of weeks, and you’ll receive updates as soon as your application moves to the next stage'},
+    {index: 3, ques: 'Do you recruit for Graduates, Apprentices and Students?', ans: 'Yes, we recruit for graduates, apprentices, and students. Our platform is designed to support job seekers at all career stages.'},
+    {index: 4, ques: 'What does the recruitment and selection process involve?', ans: 'The recruitment and selection process involves reviewing applications, conducting interviews, and evaluating candidates based on their qualifications and fit for the role.'},
+    {index: 5, ques: 'Can I receive notifications for any future jobs that may interest me?', ans: 'Yes, you can set up job alerts to receive notifications about new job openings that match your preferences.'},
 
 ]
 
@@ -31,15 +31,14 @@ export default function Jobs() {
                 <h1 className="font-bold text-5xl text-white">About Us</h1>
             </div>
             <div className="flex grid grid-cols-2 gap-6 p-4 my-4 w-8/9 items-center max-md:grid-cols-1">
-                <h1 className="text-4xl font-bold ">Et nunc ut tempus duis nisl sed massa</h1>
-                <p className="">Nunc sed a nisl purus. Nibh dis faucibus proin lacus tristique. Sit congue non vitae odio sit erat in. Felis eu ultrices a sed massa. Commodo fringilla sed tempor risus laoreet ultricies ipsum. Habitasse morbi faucibus in iaculis lectus. Nisi enim feugiat enim volutpat. Sem quis viverra viverra odio mauris nunc. </p>
+                <h1 className="text-4xl font-bold justify-self-end mr-12">About Our Platform</h1>
+                <p className="">We are a dynamic job portal committed to reshaping the hiring experience for both candidates and employers. By offering real-time job listings, verified companies, and powerful search tools, we make it easier for applicants to find the right role and for businesses to discover top talent. Our goal is to support your career journey every step of the way.</p>
             </div>
             <div className="aboutTop"></div>
             <div className="flex flex-col items-center my-8">
                 <div className="flex flex-col w-1/2 text-center gap-6 max-md:w-3/4">
                     <h1 className="text-3xl font-bold">How it works</h1>
-                    <p className="line-clamp-2">At eu lobortis pretium tincidunt amet lacus ut aenean aliquet. Blandit a massa elementum id scelerisque rhoncus
-                        . Lectus dolor blandit massa pretium id ultrices phasellus tortor. Risus risus lectus augue justo lacus viverra sit. Ultricies purus dolor viverra mi laoreet at cursus justo. Ultrices purus diam egestas amet faucibus tempor blandit. Elit velit mauris aliquam est diam. Leo sagittis consectetur diam morbi erat aenean. Vulputate praesent congue faucibus in euismod feugiat euismod volutpat. Adipiscing risus amet phasellus imperdiet eget vel pulvinar. Risus in felis faucibus sit. Scelerisque consequat iaculis mauris amet vel felis id tincidunt nunc.</p>
+                    <p className="line-clamp-2">Our platform is built for simplicity. Create a profile, browse verified job listings, and apply with a single click. Employers can post jobs, manage applications, and connect with candidates seamlessly.</p>
                 </div>
                 <div className="flex justify-around w-full my-8 max-md:flex-col max-md:items-center">
                     {works.map((items, index) => (
@@ -59,23 +58,22 @@ export default function Jobs() {
                     <div className="flex p-6 gap-4">
                         <h1 className="index">1</h1>
                         <div>
-                            <p className="text-xl">Elit gravida lorem amet porta risus vitae at</p>
-                            <a className="text-[#309689]">Learn more</a>
+                            <p className="text-xl">Build skills and advance your career.</p>
+                            {/* <a className="text-[#309689]">Learn more</a> */}
                         </div>
                     </div>
                     <div className="flex justify-between p-6 gap-4">
                         <h1 className="index">2</h1>
                         <div>
-                            <p className="text-xl line-clamp-2 ">Volutpat dui lacus mattis urna platea
-                                consequat sagittis. Nulla feugiat nec massa egestas pellentesque platea. Elementum faucibus netus gravida lacus lorem sed quam cursus penatibus. Fringilla quam sed porta phasellus faucibus vitae. Elit gravida lorem amet porta risus vitae at. Pretium massa sit massa egestas pellentesque neque ultrices enim nunc. Nunc sodales tortor tristique aenean a ultrices felis non. Eu eleifend suscipit semper nulla in morbi aliquet feugiat. Ut in facilisi eu venenatis est tincidunt. Malesuada risus fringilla elementum elementum scelerisque mi integer.</p>
-                            <a className="text-[#309689]">Learn more</a>
+                            <p className="text-xl line-clamp-2 ">Feel motivated, valued, and supported.</p>
+                            {/* <a className="text-[#309689]">Learn more</a> */}
                         </div>
                     </div>
                     <div className="flex p-6 gap-4">
                         <h1 className="index">3</h1>
                         <div>
-                            <p className="text-xl">Elit gravida lorem amet porta risus vitae at</p>
-                            <a className="text-[#309689]">Learn more</a>
+                            <p className="text-xl">Work that matches your goals and passion.</p>
+                            {/* <a className="text-[#309689]">Learn more</a> */}
                         </div>
                     </div>
                 </div>
@@ -84,7 +82,7 @@ export default function Jobs() {
                 <div className="flex flex-col gap-4 text-center">
                     <h1 className="text-3xl font-bold max-md:text-3xl max-md:text-center">Frequently Asked Questions</h1>
                     <div className="flex w-1/1 justify-between max-md:text-center">
-                        <p className="w-full">At eu lobortis pretium tincidunt amet lacus ut aenean aliquet</p>
+                        <p className="w-full">Find quick answers to the most commonly asked questions.</p>
                     </div>
                 </div>
                 { faq.map((items, index) => (

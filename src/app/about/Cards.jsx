@@ -5,7 +5,7 @@ export default function Cards (props) {
            <Image src={`/images/about/${props.logo}`} height={40} width={40} alt="account" />
            <div className="text-center flex items-center flex-col gap-4">
                 <h3 className="font-bold">{props.title}</h3>
-                <p className="text-sm text-gray-500 w-4/5">{props.desc}</p>
+                <p className="text-sm text-gray-500 w-4/5 line-clamp-2">{props.desc}</p>
            </div>
         </main>
     )
