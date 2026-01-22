@@ -10,7 +10,7 @@ import { handleSuccess, handleError, contactValidation } from "../utils"
 export default function Contact() {
     const details = useGetAboutQuery()?.data?.data
     const [contact, { isLoading }] = useContactMutation()
-    console.log(details)
+
     const contactForm = useFormik({
         initialValues: {
             firstName: "",

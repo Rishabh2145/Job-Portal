@@ -16,7 +16,6 @@ export default function Header(props) {
         refetchOnMountOrArgChange: true,
         refetchOnFocus: true
     })
-    console.log(user)
     const router = useRouter()
     return (
         <div className="flex justify-between p-6 w-4/5 items-center max-md:w-full">

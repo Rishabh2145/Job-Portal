@@ -21,7 +21,6 @@ export default function Applicant() {
                 const res = await updateStatus(values).unwrap();
                 handleSuccess(res.message)
             }
-            console.log(values)
         } catch (err) {
             console.log(err);
             handleError(err?.data?.message)
@@ -53,7 +52,7 @@ export default function Applicant() {
                         </div>
                         {item ? item.Applied.map((applicant, ind) => (
                             <div className="grid grid-cols-5 text-center flex justify-between items-center" key={ind}>
-                                {console.log(applicant)}
+                                
                                 <p>{applicant ? applicant.Applicants[0].fullName : ''}</p>
                                 <p>{applicant ? applicant.Applicants[0].email : ''}</p>
                                 {<Popup trigger={<a className="text-blue-700 underline cursor-pointer">View Profile</a>}

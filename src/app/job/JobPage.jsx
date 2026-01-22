@@ -54,7 +54,6 @@ export default function Jobs() {
     const [page, setPage] = useState(queryParams.page || 1)
 
     const jobs = data?.jobs || []
-    console.log(data)
     const pages = data?.pages;
 
     const [toggle, setToggle] = useState(false)

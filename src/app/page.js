@@ -85,12 +85,15 @@ export default function HomePage() {
                                     value={search.values.title}
                                 />
                                 <select className="rounded-lg text-black/30 text-center basis-1/1 h-full max-md:w-4/5 max-md:border-b max-md:rounded-none" name="location" id="location" onChange={search.handleChange} value={search.values.location}>
-                                    
+                                    {category && category.map((item, index) => (
+                                        <option key={index} value={item._id}>{item._id}</option>
+                                    ))}
+                                    {/* <option value='Remote'>Remote</option>
                                     <option value='Lucknow'>Lucknow</option>
                                     <option value='New Delhi'>New Delhi</option>
                                     <option value='New York'>New York</option>
                                     <option value='Canada'>Canada</option>
-                                    <option value='London'>London</option>
+                                    <option value='London'>London</option> */}
                                 </select>
                                 <select className="rounded-lg text-black/30 h-full text-center basis-1/1 max-md:w-4/5 max-md:border-b max-md:rounded-none" name="category" id="category" onChange={search.handleChange} value={search.values.category}>
                                     
