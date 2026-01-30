@@ -6,6 +6,11 @@ import { useFormik } from "formik"
 import { useContactMutation, useGetAboutQuery } from "@/store/api/contact"
 import { handleSuccess, handleError, contactValidation } from "../utils"
 
+import dynamic from "next/dynamic";
+
+const MapComponent = dynamic(() => import("@/components/MapComponent"), {
+  ssr: false,
+});
 
 export default function Contact() {
     const details = useGetAboutQuery()?.data?.data
@@ -104,6 +109,9 @@ export default function Contact() {
 
                 </div>
             </div>
+            <div className="flex justify-center mb-10">
+                <MapComponent />
+            </div>
             <div className="h-1/6 flex justify-around items-center px-20 max-md:flex max-md:whitespace-nowrap max-md:overflow-auto max-md:justify-start max-md:px-6 max-md:gap-12">
                 <Image src="/images/contact/logos.svg" alt="slack" width={150} height={200} className="h-full" />
                 <Image src="/images/contact/logos (1).svg" alt="slack" width={150} height={200} className="h-full" />
@@ -112,7 +120,6 @@ export default function Contact() {
             </div>
             <div className="text-white mt-4">
                 <Footer />
-
             </div>
         </main>
     )

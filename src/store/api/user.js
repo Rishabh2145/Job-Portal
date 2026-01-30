@@ -35,6 +35,9 @@ const userApi = baseApi.injectEndpoints({
         }),
         getReview : builder.query({
             query: () => '/dashboard/show/review'
+        }),
+        getUsers : builder.query({
+            query: () => '/user'
         })
     })
 })
@@ -63,7 +66,7 @@ const editUser = baseApi.injectEndpoints({
     })
 })
 
-export const { useSubscribeMutation, useReviewMutation, useGetReviewQuery } = userApi
+export const { useSubscribeMutation, useReviewMutation, useGetReviewQuery, useGetUsersQuery } = userApi
 export const { useEditUserMutation } = editUser
 
 export const { useUserQuery } = getUserApi

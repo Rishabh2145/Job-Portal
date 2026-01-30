@@ -1,9 +1,9 @@
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/store/providers";
-import 'react-toastify/ReactToastify.css';
+import "react-toastify/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-
+import { SocketProvider } from "@/context/socketContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -22,11 +22,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <Providers>
-            {children}
-          </Providers>
-          <ToastContainer/>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <Providers>
+          <SocketProvider>{children}</SocketProvider>
+        </Providers>
+        <ToastContainer />
       </body>
     </html>
   );

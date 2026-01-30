@@ -100,6 +100,9 @@ body {
 .faq{
   color: #309689;
 }
+.bg{
+  background-color: #309689;
+}
 
 @media screen and (max-width : 600px) {
   .aboutTop{

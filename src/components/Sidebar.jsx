@@ -40,6 +40,9 @@ export default function SideBar() {
                 <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={() => router.replace('/dashboard/profile')}>
                     My Profile
                 </button>
+                <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={() => router.replace('/chat')}>
+                    Chats
+                </button>
                 <button className="w-1/1 h-10 flex items-center font-bold hover:scale-105 transition-all cursor-pointer" onClick={() => router.replace('/dashboard/job')}>
                     Jobs Applied
                 </button>

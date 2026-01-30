@@ -1,11 +1,11 @@
 "use client"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
-import News from "@/components/News"
-import { newsBlog } from "../page"
 import Image from "next/image"
 import Cards from "./Cards"
 import FAQ from "./FAQ"
+
+
 
 const works = [
     { logo: '/Clip path group.svg', title: 'Create Account', desc: 'Sign up with your basic details to get started. It takes less than a minute to join our platform. ' },
@@ -120,7 +120,6 @@ export default function Jobs() {
                     </div>
                 </div>
             </div>
-            
             <Footer />
         </main>
     )
