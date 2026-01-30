@@ -51,14 +51,14 @@ export default function AddJob() {
     return (
         <div className="bg-white p-12 flex flex-col gap-8 m-4 rounded-xl items-center">
             <h1 className="text-3xl font-bold text-center">Add a Job</h1>
-            <form onSubmit={jobData.handleSubmit} className="flex w-5/6 justify-center items-center gap-6 grid grid-cols-4">
+            <form onSubmit={jobData.handleSubmit} className="flex w-5/6 justify-center items-center gap-6 grid grid-cols-4 max-md:grid-cols-1 max-md:w-full max-md:gap-4">
                 <p>Company Logo: </p>
                 <input
                     type="file"
                     name='companyImage'
                     accept="image/*"
                     id="companyImage"
-                    className="border rounded-md h-10 px-2 col-span-3 flex justify-center items-center"
+                    className="border rounded-md h-10 px-2 col-span-3 max-md:col-span-1 max-md:flex max-md:justify-center max-md:items-center"
                     onChange={(e) => jobData.setFieldValue('companyImage', e.target.files[0])}
                 />
                 <p>Job Title: </p>
@@ -148,7 +148,7 @@ export default function AddJob() {
                     name='description'
                     id="description"
                     placeholder="Enter Description of the Job"
-                    className="border rounded-md h-10 px-2 col-span-3"
+                    className="border rounded-md h-10 px-2 col-span-3 max-md:col-span-1"
                     onChange={jobData.handleChange}
                     value={jobData.values.description}
                 />
@@ -157,7 +157,7 @@ export default function AddJob() {
                     name='responsibility'
                     id="responsibility"
                     placeholder="Enter Key Responsibility of the Job"
-                    className="border rounded-md h-10 px-2 col-span-3"
+                    className="border rounded-md h-10 px-2 col-span-3 max-md:col-span-1"
                     onChange={jobData.handleChange}
                     value={jobData.values.responsibility}
                 />
@@ -166,12 +166,12 @@ export default function AddJob() {
                     name='skill'
                     id="skill"
                     placeholder="Enter Skill Required of the Job"
-                    className="border rounded-md h-10 px-2 col-span-3"
+                    className="border rounded-md h-10 px-2 col-span-3 max-md:col-span-1"
                     onChange={jobData.handleChange}
                     value={jobData.values.skill}
                 />
 
-                <div className="flex justify-center gap-6 w-full col-span-4">
+                <div className="flex justify-center gap-6 w-full col-span-4 max-md:col-span-1">
                     <input type="submit" disabled={isLoading} value={isLoading ? "Loading..." : "Add Job"} className="border-green-500 border px-4 rounded-lg text-green-500 p-2 hover:bg-green-500 cursor-pointer hover:text-white transition-all" />
                     <button className="border-red-500 border px-4 rounded-lg text-red-500 p-2 hover:bg-red-500 cursor-pointer hover:text-white transition-all">Discard</button>
                 </div>

@@ -8,11 +8,9 @@ const SocketContext = createContext(null);
 export const SocketProvider = ({ children }) => {
   useEffect(() => {
     if (!socket.connected) {
-      console.log("User connected!");
       socket.connect();
     }
     return () => {
-      console.log("User Disconnected!");
       socket.disconnect();
     };
   }, []);

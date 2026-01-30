@@ -3,11 +3,13 @@ import { useGetBookmarkQuery, useGetJobQuery } from "@/store/api/job";
 import { jobs, sample } from "../page";
 import { useState } from "react";
 import Job from "@/components/Job";
+import { useDashBoardContext } from "@/context/dashboardContext";
 export default function HomePage() {
     const jobData = useGetJobQuery(undefined, {
         refetchOnMountOrArgChange: true,
         refetchOnFocus: true
     })
+    const {side, showSide} = useDashBoardContext()
     const bookmark = useGetBookmarkQuery()
     let data = []
     data = jobData?.data?.jobs || []

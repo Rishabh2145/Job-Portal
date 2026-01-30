@@ -42,37 +42,73 @@ export default function Contact() {
     }
 
     return (
-        <main className="bg-white shadow-md m-4 rounded-xl p-8 flex flex-col gap-6">
-            <div className="flex justify-between">
-                <h1 className="text-3xl font-bold">Contacts</h1>
-                <a href="/dashboard/contact/add" className="bg-[#309689] text-white p-2  rounded-xl"> + Add a message</a>
-            </div>
-            <p>Messages Recieved:</p>
-            <table className="w-full rounded-lg overflow-hidden">
-                <thead>
-                    <tr className="bg-gray-200">
-                        <th className="p-2 text-left">First Name</th>
-                        <th className=" p-2 text-left">Last Name</th>
-                        <th className=" p-2 text-left">Email</th>
-                        <th className="p-2 text-left">Message</th>
-                        <th className=" p-2 text-left">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {(message.data == null) ? <tr><td colSpan={4} className="text-center text-xl">Loading...</td></tr> : message.data.data.filter(u => u.sentTo === null).map((msg, index) => (
-                        <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                            <td className=" p-2">{msg.firstName}</td>
-                            <td className=" p-2">{msg.lastName}</td>
-                            <td className=" p-2">{msg.email}</td>
-                            <td className=" p-2">{msg.message}</td>
-                            <td className=" p-2">
-                                <input type="button" value={isLoading ? `Loading...` : 'Delete'} disabled={isLoading || isSuccess} className="text-sm bg-red-500 text-white p-1 m-1 rounded-lg cursor-pointer hover:bg-red-600 w-fit p-3 transition-all duration-300" onClick={() => handleDelete(msg._id)} />
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <main className="bg-white shadow-md m-4 rounded-xl p-6 sm:p-8 flex flex-col gap-6">
 
-        </main>
+  {/* Header */}
+  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+    <h1 className="text-2xl sm:text-3xl font-bold">Contacts</h1>
+
+    <a
+      href="/dashboard/contact/add"
+      className="bg-[#309689] text-white px-4 py-2 rounded-xl text-center"
+    >
+      + Add a message
+    </a>
+  </div>
+
+  <p className="text-lg font-medium">Messages Received:</p>
+
+  {/* Responsive Table Wrapper */}
+  <div className="w-full overflow-x-auto rounded-lg border border-gray-200">
+    <table className="w-full">
+      <thead>
+        <tr className="bg-gray-200">
+          <th className="p-2 text-left whitespace-nowrap">First Name</th>
+          <th className="p-2 text-left whitespace-nowrap">Last Name</th>
+          <th className="p-2 text-left whitespace-nowrap">Email</th>
+          <th className="p-2 text-left whitespace-nowrap">Message</th>
+          <th className="p-2 text-left whitespace-nowrap">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {message.data == null ? (
+          <tr>
+            <td
+              colSpan={5}
+              className="text-center text-xl p-4"
+            >
+              Loading...
+            </td>
+          </tr>
+        ) : (
+          message.data.data
+            .filter((u) => u.sentTo === null)
+            .map((msg, index) => (
+              <tr
+                key={index}
+                className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+              >
+                <td className="p-2 whitespace-nowrap">{msg.firstName}</td>
+                <td className="p-2 whitespace-nowrap">{msg.lastName}</td>
+                <td className="p-2 whitespace-nowrap">{msg.email}</td>
+                <td className="p-2 min-w-[250px]">{msg.message}</td>
+                <td className="p-2">
+                  <button
+                    disabled={isLoading || isSuccess}
+                    className="text-sm bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition-all disabled:opacity-50"
+                    onClick={() => handleDelete(msg._id)}
+                  >
+                    {isLoading ? "Loading..." : "Delete"}
+                  </button>
+                </td>
+              </tr>
+            ))
+        )}
+      </tbody>
+    </table>
+  </div>
+</main>
+
     )
 }

@@ -60,14 +60,14 @@ export default function Profile() {
     })
 
     return (
-        <main className="grid grid-cols-2 p-5 m-5 bg-white rounded-xl shadow-sm max-md:grid-cols-1">
-            <div className="flex flex-col w-full p-4 justify-around">
+        <main className="grid grid-cols-2 flex p-5 m-5 bg-white rounded-xl shadow-sm max-md:grid-cols-1">
+            <div className="flex flex-col w-full p-4 justify-around max-md:order-2">
                 <h1 className="text-2xl font-bold mb-6">My Profile</h1>
                 <table className="h-3/4 max-md:mt-4 min-h-72">
                     <tbody className="p-4 w-full">
-                        <tr>
+                        <tr className="max-md:grid max-md:grid-cols-2 max-md:gap-2">
                             <th>Role: </th>
-                            <td colSpan={3}>{profile?.role}</td>
+                            <td className="col-span-3 max-md:col-span-1">{profile?.role}</td>
                         </tr>
                         <tr className="max-md:grid max-md:grid-cols-2 max-md:gap-2">
                             <th>Name:</th>
@@ -104,7 +104,7 @@ export default function Profile() {
                     <a href="/dashboard/edit" className="h-12 flex border w-1/3 justify-center items-center rounded-xl border-gray-400 text-gray-700 max-md:w-2/3 max-md:mt-4">Edit Profile</a>
                 </div>
             </div>
-            <div className="flex flex-col justify-center items-center gap-6 p-4">
+            <div className="flex flex-col justify-center items-center gap-6 p-4 max-md:order-1">
                 <Image
                     src={`${process.env.NEXT_PUBLIC_API}/${users?.data?.user?.avatar}`}
                     alt='Profile'
@@ -112,17 +112,17 @@ export default function Profile() {
                     width={300}
                     unoptimized
                 />
-                <form className={`flex gap-4 ${edit ? 'hidden' : 'block'}`} onSubmit={file.handleSubmit}>
+                <form className={`flex justify-center items-center gap-4 ${edit ? 'hidden' : 'block'}`} onSubmit={file.handleSubmit}>
                     <input type="file" accept="image/*" className={`border rounded-lg px-4 p-1 max-md:w-1/3`} id="avatar" name='avatar'
                         onChange={(e) => file.setFieldValue('avatar', e.target.files[0])} required />
                     <button type="submit" className="bg-green-400 text-white p-2 px-6 rounded-lg" disabled={isLoading || isSuccess}>{isLoading ? "Loading..." : "Submit"}</button>
                 </form>
                 <button className="h-12 flex border w-1/3 justify-center items-center rounded-xl border-gray-400 text-gray-700 cursor-pointer max-md:w-2/3" onClick={toggleEdit}>Edit Photo</button>
             </div>
-            <div className="flex col-span-2 justify-between items-center gap-6 p-4">
+            <div className="flex col-span-2 justify-between items-center w-full gap-6 p-4 max-md:col-span-1 max-md:order-3 max-md:flex-col">
                 <h1 className="text-xl font-bold ">Resume Upload</h1>
                 { users?.data?.user?.resume ? <a className="text-blue-700 underline cursor-pointer" href={`${process.env.NEXT_PUBLIC_API}/${users?.data?.user?.resume}`} target="_blank">View Resume</a> : <p>No resume uploaded</p>}
-                <form className={`flex gap-4 ${editResume ? 'hidden' : 'block'}`} onSubmit={resume.handleSubmit}>
+                <form className={`flex justify-center items-center gap-4 ${editResume ? 'hidden' : 'block'} `} onSubmit={resume.handleSubmit}>
                     <input type="file" accept=".pdf" className={`border rounded-lg px-4 p-1 max-md:w-1/3`} id="resume" name='resume'
                         onChange={(e) => resume.setFieldValue('resume', e.target.files[0])} required />
                     <button type="submit" className="bg-green-400 text-white p-2 px-6 rounded-lg max-w-fit" disabled={isLoading || isSuccess}>{isLoading ? "Loading..." : "Submit"}</button>

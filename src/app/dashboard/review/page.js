@@ -34,7 +34,7 @@ export default function Review(){
                 <h1 className="text-3xl font-bold">What you says is matter to us.</h1>
                 <p>We value your feedback! Please share your experience with our service</p>
             </div>
-            <form onSubmit={reviewForm.handleSubmit} className="flex grid grid-cols-4 justify-between gap-8 text-center items-center mt-10">
+            <form onSubmit={reviewForm.handleSubmit} className="flex grid grid-cols-4 justify-between gap-8 text-center items-center mt-10 max-md:grid-cols-1">
                 <label htmlFor="name" className="font-bold">Enter Name: </label>
                 <input 
                     type="text"
@@ -88,10 +88,10 @@ export default function Review(){
                     name="desc"
                     value={reviewForm.values.desc}
                     onChange={reviewForm.handleChange}
-                    className="border border-gray-500 rounded-lg p-2 col-span-3"
+                    className="border border-gray-500 rounded-lg p-2 col-span-3 max-md:col-span-1"
                     required
                 />
-                <button type="submit" className="buttonColor p-2 w-fit col-span-4 self-center justify-self-center cursor-pointer px-4">Submit Review</button>
+                <button type="submit" className="buttonColor p-2 w-fit col-span-4 self-center justify-self-center cursor-pointer px-4 max-md:col-span-2">Submit Review</button>
             </form>
         </main>
     )

@@ -37,7 +37,6 @@ export default function Contact() {
             }
         }
     })
-    // console.log(contactForm.errors)
 
     return (
         <main className="w-full flex h-full bg-white flex-col text-black">

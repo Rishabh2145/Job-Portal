@@ -25,7 +25,6 @@ export default function ChatSide() {
     const [userData, setUserData] = useState([]);
 
     const searchParams = useSearchParams();
-    console.log(usersAvailable);
     useEffect(() => {
         socket.on("users", (data) => {
             setUserData(data);

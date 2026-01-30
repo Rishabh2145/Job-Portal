@@ -31,7 +31,7 @@ export default function Edit() {
                 <h1 className="text-3xl font-bold text-center">Office Details</h1>
                 <p>Edit the details of the office for the about page.</p>
             </div>
-            <form onSubmit={updateForm.handleSubmit} className="flex grid grid-cols-4 items-center justify-center gap-4">
+            <form onSubmit={updateForm.handleSubmit} className="flex grid grid-cols-4 items-center justify-center gap-4 max-md:grid-cols-1">
                 <label htmlFor="call" className="self-center justify-self-center font-bold">Phone Number: </label>
                 <input
                     type="text"
@@ -76,7 +76,7 @@ export default function Edit() {
                     className="border border-gray-500 rounded-lg p-2"
                     required
                 />
-                <button type="submit" className="col-span-4 buttonColor w-fit justify-self-center p-2 px-4" disabled={isLoading}>
+                <button type="submit" className="col-span-4 buttonColor w-fit justify-self-center p-2 px-4 max-md:col-span-2" disabled={isLoading}>
                     {isLoading ? "Loading..." : 'Submit'}
                 </button>
             </form>

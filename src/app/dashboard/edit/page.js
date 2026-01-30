@@ -47,70 +47,70 @@ export default function Edit() {
             <h1 className="text-3xl font-bold">Edit My Profile</h1>
             <form onSubmit={editForm.handleSubmit} method="post" className="grid grid-cols-2 flex justify-center items-center gap-6 max-md:grid-cols-1">
                 <div className="flex w-full gap-4 grid grid-cols-2 max-md:grid-cols-1">
-                    <label htmlFor="fullName" className="flex items-center justify-end">Enter Full Name:</label>
+                    <label htmlFor="fullName" className="flex items-center max-md:justify-center max-md:flex justify-end">Enter Full Name:</label>
                     <input id="fullName" name="fullName" type="text" onBlur={editForm.handleBlur} className="border rounded-md h-10 px-2" value={editForm.values.fullName} onChange={editForm.handleChange} />
                     {editForm.touched.fullName && editForm.errors.fullName && (
-                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2">{editForm.errors.fullName}</p>
+                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2 max-md:col-span-1">{editForm.errors.fullName}</p>
                     )}
                 </div>
                 <div className="flex w-full gap-4 grid grid-cols-2 max-md:grid-cols-1">
-                    <label htmlFor="contact" className="flex items-center justify-end">Enter Contact Number:</label>
+                    <label htmlFor="contact" className="flex items-center max-md:justify-center max-md:flex justify-end">Enter Contact Number:</label>
                     <input id="contact" name="contact" type="number" onBlur={editForm.handleBlur} className="border rounded-md h-10 px-2" value={editForm.values.contact} onChange={editForm.handleChange} />
                     {editForm.touched.contact && editForm.errors.contact && (
-                        <p className="text-red-500 text-sm px-2 mx-2 grid-cols-2 flex items-center">{editForm.errors.contact}</p>
+                        <p className="text-red-500 text-sm px-2 mx-2 grid-cols-2 max-md:col-span-1 flex items-center">{editForm.errors.contact}</p>
                     )}
                 </div>
                 <div className="flex w-full gap-4 grid grid-cols-2 max-md:grid-cols-1">
-                    <label htmlFor="email" className="flex items-center justify-end">Enter Email Address:</label>
+                    <label htmlFor="email" className="flex items-center max-md:justify-center max-md:flex justify-end">Enter Email Address:</label>
                     <input id="email" name='email' type="email" className="border rounded-md h-10 px-2" onBlur={editForm.handleBlur} value={editForm.values.email} onChange={editForm.handleChange} />
                     {editForm.touched.email && editForm.errors.email && (
-                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2">{editForm.errors.email}</p>
+                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2 max-md:col-span-1">{editForm.errors.email}</p>
                     )}
                 </div>
                 <div className="flex w-full gap-4 grid grid-cols-2 max-md:grid-cols-1">
-                    <label htmlFor="mobile" className="flex items-center justify-end">Enter Mobile Number:</label>
+                    <label htmlFor="mobile" className="flex items-center max-md:justify-center max-md:flex justify-end">Enter Mobile Number:</label>
                     <input id="mobile" name="mobile" type="number" className="border rounded-md h-10 px-2" onBlur={editForm.handleBlur} value={editForm.values.mobile} onChange={editForm.handleChange} />
                     {editForm.errors.mobile && (
-                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2">{editForm.errors.mobile}</p>
+                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2 max-md:col-span-1">{editForm.errors.mobile}</p>
                     )}
                 </div>
                 <div className="flex w-full gap-4 grid grid-cols-2 max-md:grid-cols-1">
-                    <label htmlFor="institute" className="flex items-center justify-end">Enter Institute Name:</label>
+                    <label htmlFor="institute" className="flex items-center max-md:justify-center max-md:flex justify-end">Enter Institute Name:</label>
                     <input id="institute" name="institute" type="text" className="border rounded-md h-10 px-2" onBlur={editForm.handleBlur} value={editForm.values.institute} onChange={editForm.handleChange} />
                     {editForm.touched.institute && editForm.errors.institute && (
-                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2">{editForm.errors.institute}</p>
+                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2 max-md:col-span-1">{editForm.errors.institute}</p>
                     )}
                 </div>
                 <div className="flex w-full gap-4 grid grid-cols-2 max-md:grid-cols-1">
-                    <label htmlFor="instituteGrade" className="flex items-center justify-end">Enter Grade (CGPA/Percent):</label>
+                    <label htmlFor="instituteGrade" className="flex items-center max-md:justify-center max-md:flex justify-end">Enter Grade (CGPA/Percent):</label>
                     <input id="instituteGrade" name="instituteGrade" type="number" onBlur={editForm.handleBlur} className="border rounded-md h-10 px-2" value={editForm.values.instituteGrade} onChange={editForm.handleChange} />
                     {editForm.touched.instituteGrade && editForm.errors.instituteGrade && (
-                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2">{editForm.errors.instituteGrade}</p>
+                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2 max-md:col-span-1">{editForm.errors.instituteGrade}</p>
                     )}
                 </div>
                 <div className="flex w-full gap-4 grid grid-cols-2 max-md:grid-cols-1">
-                    <label htmlFor="school" className="flex items-center justify-end">Enter School Name:</label>
+                    <label htmlFor="school" className="flex items-center justify-end max-md:justify-center max-md:flex">Enter School Name:</label>
                     <input id="school" name="school" type="text" className="border rounded-md h-10 px-2" onBlur={editForm.handleBlur} value={editForm.values.school} onChange={editForm.handleChange} />
                     {editForm.touched.school && editForm.errors.school && (
-                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2">{editForm.errors.school}</p>
+                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2 max-md:col-span-1">{editForm.errors.school}</p>
                     )}
                 </div>
                 <div className="flex w-full gap-4 grid grid-cols-2 max-md:grid-cols-1">
-                    <label htmlFor="sGrade" className="flex items-center justify-end">Enter Grade (CGPA/Percent):</label>
+                    <label htmlFor="sGrade" className="flex items-center justify-end max-md:justify-center max-md:flex">Enter Grade (CGPA/Percent):</label>
                     <input id="schoolGrade" name='schoolGrade' type="number" className="border rounded-md h-10 px-2" onBlur={editForm.handleBlur} value={editForm.values.schoolGrade} onChange={editForm.handleChange} />
                     {editForm.touched.schoolGrade && editForm.errors.schoolGrade && (
-                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2">{editForm.errors.schoolGrade}</p>
+                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2 max-md:col-span-1">{editForm.errors.schoolGrade}</p>
                     )}
                 </div>
                 <div className="flex w-full  gap-4 grid grid-cols-2 max-md:grid-cols-1">
-                    <label htmlFor="address" className="flex items-center justify-end">Enter Address:</label>
+                    <label htmlFor="address" className="flex items-center justify-end max-md:justify-center max-md:flex">Enter Address:</label>
                     <textarea id="address" name="address" type="text" className="border rounded-md h-10 px-2" onBlur={editForm.handleBlur} value={editForm.values.address} onChange={editForm.handleChange} />
                     {editForm.touched.address && editForm.errors.address && (
-                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2">{editForm.errors.address}</p>
+                        <p className="text-red-500 text-sm px-2 mx-2 col-span-2 max-md:col-span-1">{editForm.errors.address}</p>
                     )}
                 </div>
                 <br />
-                <div className="flex gap-6 col-span-2 items-center justify-center">
+                <div className="flex gap-6 col-span-2 max-md:col-span-1 items-center justify-center">
                     <a href="/dashboard" className="border-red-500 border px-4 rounded-lg text-red-500 p-2 hover:bg-red-500 cursor-pointer hover:text-white transition-all">Discard</a>
                     <input type="submit" value="Save Details" className="border-green-500 border px-4 rounded-lg text-green-500 p-2 hover:bg-green-500 cursor-pointer hover:text-white transition-all" />
                 </div>
