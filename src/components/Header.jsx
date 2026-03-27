@@ -19,7 +19,7 @@ export default function Header(props) {
     });
     const router = useRouter();
     return (
-        <div className="flex justify-between p-6 w-4/5 items-center max-md:w-full">
+        <div className="flex justify-between p-6 w-4/5 items-center max-md:w-full max-w-screen">
             <div className="flex items-center gap-2 cursor-pointer justify-center">
                 <Image
                     src={
@@ -32,7 +32,7 @@ export default function Header(props) {
                 <span
                     className={`font-bold ml-2 text-lg ${props.theme == "dark" ? "text-white" : "text-black"}`}
                 >
-                    Job <span className="max-md:hidden">Portal</span>
+                    HireHub
                 </span>
             </div>
             <div
