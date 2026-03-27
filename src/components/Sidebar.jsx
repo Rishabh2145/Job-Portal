@@ -32,7 +32,7 @@ export default function SideBar() {
                         width={30}
                         height={30}
                     />
-                    <span className="font-bold ml-2 text-lg">Job Portal</span>
+                    <span className="font-bold ml-2 text-lg">HireHub</span>
                 </a>
                 <p
                     className="text-2xl font-bold min-md:hidden cursor-pointer"

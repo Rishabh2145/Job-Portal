@@ -30,7 +30,7 @@ export default function Login() {
             width={30}
             height={30}
           />
-          <p className="font-bold">MyJob</p>
+          <p className="font-bold">HireHub</p>
         </a>
         <form onSubmit={emailForgot.handleSubmit} className="w-2/3 gap-4 flex flex-col text-[14px] max-md:w-9/10 ">
           <div className="flex justify-between items-center gap-4">
@@ -54,27 +54,7 @@ export default function Login() {
           <button type="submit" disabled={isLoading} className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700">
             {isLoading ? "Loading..." : "Reset Password"} <Image src="/images/fi_arrow-right.png" alt="Arrow Side" width={20} height={10} className="ml-2" />
           </button>
-          <p className="self-center text-gray-500">or</p>
-          <div className="flex gap-2 text-gray-700 max-md:flex-col">
-            <div className="flex basis-1/2 items-center justify-center gap-2 border-1 border-gray-300 border-solid rounded-lg p-2 cursor-pointer hover:bg-gray-100">
-              <Image
-                src="/images/Vector.svg"
-                alt="Facebook Sign Up"
-                width={10}
-                height={10}
-              />
-              <span> Sign up with Facebook</span>
-            </div>
-            <div className="flex basis-1/2 items-center justify-center gap-2 border-1 border-gray-300 border-solid rounded-lg p-2 cursor-pointer hover:bg-gray-100">
-              <Image
-                src="/images/Employers Logo.svg"
-                alt="Google Sign Up"
-                width={20}
-                height={20}
-              />
-              <span> Sign up with Google</span>
-            </div>
-          </div>
+          
 
         </form>
         <br />

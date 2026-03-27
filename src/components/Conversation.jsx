@@ -29,7 +29,7 @@ export default function Conversation(props) {
                         unoptimized
                         className="rounded-full p-1"
                     />
-                    <span className={`h-3 w-3 rounded-full bottom-0 left-13 absolute bg shadow shadow-cyan-500/90 ${props.lastSeen.filter((u) => u.user === props.id)[0].seen === null ? 'block' : 'hidden'}`}></span>
+                    <span className={`h-3 w-3 rounded-full bottom-0 left-11 absolute bg shadow shadow-cyan-500/90 ${props.lastSeen.filter((u) => u.user === props.id)[0].seen === null ? 'block' : 'hidden'}`}></span>
                     <div className="flex flex-col item-center justify-center">
                         <p className="text-sm font-bold">{props.name}</p>
                         <p className="text-xs ">{props.role}</p>

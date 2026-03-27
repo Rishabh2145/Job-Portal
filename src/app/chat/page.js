@@ -259,7 +259,7 @@ export default function ChatPage() {
                                 />
                                 <h2 className="w-3/4 text-center text-base font-bold text-gray-500">
                                     Start Chatting with Candidates from all over
-                                    the World with Job Portal.
+                                    the World with HireHub .
                                 </h2>
                             </div>
                         )}
@@ -327,7 +327,7 @@ export default function ChatPage() {
                             height={40}
                         />
                         <span className={`font-bold ml-2 text-xl text-black`}>
-                            Job Portal
+                            HireHub
                         </span>
                     </div>
                     <Lottie
@@ -338,7 +338,7 @@ export default function ChatPage() {
                     />
                     <h2 className="w-3/4 text-center text-base font-bold text-gray-500">
                         Start Chatting with Candidates from all over the World
-                        with Job Portal.
+                        with HireHub.
                     </h2>
                     <h2
                         className={`buttonColor text-base p-2 px-3 cursor-pointer min-md:hidden`}
