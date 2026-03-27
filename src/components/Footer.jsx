@@ -25,8 +25,8 @@ export default function Footer() {
 
 
     return (
-        <div className="pt-12 bg-black w-screen flex flex-col justify-center items-center gap-6 text-white">
-            <div className="flex justify-between w-6/7 max-md:flex-col max-md:items-center max-md:gap-8">
+        <div className="pt-12 bg-black w-screen flex flex-col justify-center items-center gap-6 text-white overflow-y-hidden">
+            <div className="flex justify-between max-md:flex-col max-md:items-center max-md:gap-8">
                 <div className="flex flex-col gap-5 basis-1/4 max-md:items-center">
                     <div className="flex gap-2 items-center">
                         <Image
@@ -35,7 +35,7 @@ export default function Footer() {
                             height={25}
                             width={25}
                         />
-                        <p className="font-bold text-white text-xl text-center">Job</p>
+                        <p className="font-bold text-white text-xl text-center">HireHub</p>
                     </div>
                     <h3 className="line-clamp-3 text-white font-bold max-md:text-center">
                         Explore thousands of job openings and apply instantly to the roles that match your skills.
@@ -77,7 +77,7 @@ export default function Footer() {
             </div>
             <div className="w-7/8 flex justify-between text-sm mt-4 max-md:flex-col-reverse max-md:items-center max-md:gap-2">
                 <p className="text-gray-500">
-                    © Copyright Job Portal  2024. Designed by Figma.guru
+                    © Copyright HireHub  2024. Designed by Figma.guru
                 </p>
                 <div className="flex gap-4 underline cursor-pointer">
                     <a>Privacy Policy</a>

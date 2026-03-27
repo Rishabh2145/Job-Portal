@@ -40,11 +40,11 @@ export default function Verify() {
                     width={30}
                     height={30}
                 />
-                <p className="font-bold">MyJob</p>
+                <p className="font-bold">HireHub</p>
             </a>
             <form onSubmit={resetData.handleSubmit} className="h-screen absolute w-1/4 flex flex-col items-center justify-center gap-4 max-md:w-9/10">
                 <div className="text-[24px] font-bold mt-10">Reset Password</div>
-                <div className="text-gray-600  text-center text-[14px]">Duis luctus interdum metus, ut consectetur ante consectetur sed. Suspendisse euismod viverra massa sit amet mollis.</div>
+                <div className="text-gray-600  text-center text-[14px]">Enter New Password to Change the Previous One.</div>
                 <input
                     type="password"
                     id="password"

@@ -4,7 +4,6 @@ import Image from "next/image";
 import Job from "@/components/Job";
 import Category from "@/components/Category";
 import Review from "@/components/Review";
-import News from "@/components/News";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useRouter } from "next/navigation";
@@ -65,7 +64,7 @@ export default function HomePage() {
 
     return (
         <main className="bg-white w-screen max-w-screen flex flex-col items-center">
-            <div className="h-screen w-screen">
+            <div className="h-screen w-screen m-0 p-0">
                 <div className="bg-[url('/images/home/bg.png')] bg-cover h-5/6 flex flex-col text-white items-center w-full" >
                     <div className="h-full w-full flex flex-col items-center bg-black/70">
                         <Header theme='dark' page='home' />
@@ -121,7 +120,7 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-                <div className="h-1/6 bg-black flex justify-between items-center px-20 max-md:flex max-md:whitespace-nowrap max-md:overflow-auto max-md:justify-start max-md:px-6 max-md:gap-12">
+                <div className=" max-w-screen h-1/6 bg-black flex justify-between items-center px-20 max-md:flex max-md:whitespace-nowrap max-md:overflow-auto max-md:justify-start max-md:px-6 max-md:gap-12">
                     <Image src="/images/home/logo (3).svg" alt="slack" width={150} height={200} className="h-full" />
                     <Image src="/images/home/logos.svg" alt="slack" width={150} height={200} className="h-full" />
                     <Image src="/images/home/logo.svg" alt="slack" width={150} height={200} className="h-full" />

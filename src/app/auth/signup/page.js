@@ -59,7 +59,7 @@ export default function HomePage() {
             width={30}
             height={30}
           />
-          <p className="font-bold">MyJob</p>
+          <p className="font-bold">HireHub</p>
         </a>
 
         <div className="max-h-screen text-black flex flex-col items-start justify-center gap-4 max-md:basis-1/1 w-2/3">
@@ -124,27 +124,7 @@ export default function HomePage() {
               <span className="text-gray-500 text-sm">I've read and agree with your <span className="text-indigo-500 ">Terms of Service</span></span>
             </div>
             <input type="submit" disabled={isLoading || notMatch(details.values.password, confirm)} id='signup' value={isLoading ? "Loading..." : 'Create Account'} className="flex bg-indigo-600 text-white justify-center text-center p-3 rounded-sm cursor-pointer hover:bg-indigo-700" />
-            <p className="self-center text-gray-500">or</p>
-            <div className="flex gap-2 text-gray-700 max-md:flex-col">
-              <div className="flex basis-1/2 items-center justify-center gap-2 border-1 border-gray-300 border-solid rounded-lg p-2 cursor-pointer hover:bg-gray-100">
-                <Image
-                  src="/images/Vector.svg"
-                  alt="Facebook Sign Up"
-                  width={10}
-                  height={10}
-                />
-                <span> Sign up with Facebook</span>
-              </div>
-              <div className="flex basis-1/2 items-center justify-center gap-2 border-1 border-gray-300 border-solid rounded-lg p-2 cursor-pointer hover:bg-gray-100">
-                <Image
-                  src="/images/Employers Logo.svg"
-                  alt="Google Sign Up"
-                  width={20}
-                  height={20}
-                />
-                <span> Sign up with Google</span>
-              </div>
-            </div>
+            
 
           </form>
         </div>
